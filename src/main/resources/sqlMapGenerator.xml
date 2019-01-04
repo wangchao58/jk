@@ -15,7 +15,7 @@
 
         <!-- 数据源 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-        connectionURL="jdbc:mysql://localhost:3306/litte"
+        connectionURL="jdbc:mysql://localhost:3306/jkkj"
         userId="root"
         password="root" />
         <!--<jdbcConnection driverClass="oracle.jdbc.OracleDriver"
@@ -24,13 +24,13 @@
                         password="123456"/>-->
 
         <!-- 所生成的bean的位置默认资源包src E:\ztgj\CreditDYServer\src\main\java\com\jusfoun\domain\jncredit -->
-        <javaModelGenerator targetPackage="com.litte.entity.reception" targetProject="litte"/>
+        <javaModelGenerator targetPackage="com.jk.entity.reception" targetProject="jk"/>
         <!-- 所生成的xml的影射文件的位置,默认资源包src -->
-        <sqlMapGenerator targetPackage="mapper.reception"  targetProject="litte"/>
+        <sqlMapGenerator targetPackage="mapper.reception"  targetProject="jk"/>
         <!-- 生成Dao类存放位置 -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.litte.mapper.reception" targetProject="litte"/>
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.jk.mapper.reception" targetProject="jk"/>
         <!-- 为哪些表生成代码 tableName:表名 schema:不用填写,其余属性是禁用例子查询的生成 -->
-        <table schema="" tableName="user" enableCountByExample="false"
+        <table schema="" tableName="t_personage" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="true" selectByExampleQueryId="false"
         >
