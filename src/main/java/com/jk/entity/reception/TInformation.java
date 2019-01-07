@@ -1,6 +1,9 @@
 package com.jk.entity.reception;
 
-public class TInformation {
+import com.github.pagehelper.PageHelper;
+import com.jk.util.Page;
+
+public class TInformation extends Page {
     private String tId;
 
     private String tContent;

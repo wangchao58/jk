@@ -11,7 +11,7 @@ public interface TInformationMapper {
 
     int insertSelective(TInformation record);
 
-    List<TInformation> selectByExample(TInformationExample example);
+    List<TInformation> selectByExample(TInformation tInformation);
 
     TInformation selectByPrimaryKey(String tId);
 

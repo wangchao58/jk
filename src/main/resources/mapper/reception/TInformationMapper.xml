@@ -41,27 +41,22 @@
   <sql id="Base_Column_List">
     t_id, t_content, t_img, t_coordinate, t_praise, p_id
   </sql>
-  <select id="selectByExample" parameterType="com.jk.entity.reception.TInformationExample" resultMap="BaseResultMap">
+
+  <!-- 资讯列表数据查询 -->
+  <select id="selectByExample" parameterType="com.jk.entity.reception.TInformation" resultMap="BaseResultMap">
     select
-    <if test="distinct">
-      distinct
-    </if>
-    'false' as QUERYID,
     <include refid="Base_Column_List" />
     from t_information
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
   </select>
+
+    <!-- 资讯编辑查询数据 -->
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from t_information
     where t_id = #{tId,jdbcType=VARCHAR}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from t_information
     where t_id = #{tId,jdbcType=VARCHAR}
