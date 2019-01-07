@@ -39,7 +39,7 @@
     id, picture,create_time
   </sql>
 
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.litte.entity.reception.TSlideshow" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TSlideshow" >
     select
     <include refid="Base_Column_List" />
     from t_slideshow order by create_time desc
@@ -65,11 +65,11 @@
       '${ids}'
     </foreach>
   </delete>
-  <insert id="insert" parameterType="com.litte.entity.reception.TSlideshow" >
+  <insert id="insert" parameterType="com.jk.entity.reception.TSlideshow" >
     insert into t_slideshow (id, picture)
     values (#{id,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.litte.entity.reception.TSlideshow" >
+  <insert id="insertSelective" parameterType="com.jk.entity.reception.TSlideshow" >
     insert into t_slideshow
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -94,7 +94,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.litte.entity.reception.TSlideshow" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.jk.entity.reception.TSlideshow" >
     update t_slideshow
     <set >
       <if test="picture != null" >
@@ -103,7 +103,7 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.litte.entity.reception.TSlideshow" >
+  <update id="updateByPrimaryKey" parameterType="com.jk.entity.reception.TSlideshow" >
     update t_slideshow
     set picture = #{picture,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
