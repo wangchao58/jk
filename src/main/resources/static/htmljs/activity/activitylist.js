@@ -8,15 +8,16 @@ jQuery(function($) {
         datatype: "json",
         mtype: "post",
         colModel:[
-            {label:'id',name:'id', editable:false,hidden:true },
+            {label:'id',name:'tId', editable:false,hidden:true },
             {label:'标题',name:'tHeadline', editable: true},
             {label:'内容',name:'tContent', editable: true},
             {label:'发布人',name:'', editable: true},
             {label:'手机号',name:'tPhone', editable: true},
             {label:'微信号',name:'tWeixing', editable: true},
             {label:'地点',name:'tSite', editable: true},
-            {label:'时间',name:'tTime',  editable: true, width:50 ,formatter: openupd},
-            {label:'是否免费',name:'tCharge', editable: true, width:60}
+            {label:'时间',name:'tTime',  editable: true, formatter: formatDatebox},
+            {label:'是否免费',name:'tCharge', editable: true, width:60},
+            {label:'时间',name:'tTime',  editable: true, width:50 ,formatter: openupd}
         ],
         viewrecords : true,//定义是否要显示总记录数
         rowNum:10,//每页显示的条数
@@ -47,7 +48,7 @@ jQuery(function($) {
     function openupd(cellvalue, options, rowObject) {
         var htmlstr = "<div class='visible-md visible-lg hidden-sm hidden-xs btn-group'>"
             + "<button class='btn btn-xs btn-info' onclick=openUpdDiag('"
-            + rowObject.id
+            + rowObject.tId
             + "')><i class='icon-edit bigger-120'></i></button></div>";
         return htmlstr;
     }
