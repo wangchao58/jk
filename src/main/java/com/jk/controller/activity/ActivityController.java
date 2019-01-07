@@ -108,9 +108,6 @@ public class ActivityController extends BaseController {
     @ResponseBody
     public int delActivity(String ids){
         List<String> idlist = Arrays.asList(ids.split(","));
-//        int delCoupon = tCouponService.deleteByPrimaryKey(idlist);
-        activityService.deleteByPrimaryKey(idlist);
-        return 0;
-
+        return activityService.deleteByPrimaryKey(idlist);
     }
 }
