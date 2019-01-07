@@ -1,6 +1,8 @@
 package com.jk.entity.reception;
 
-public class TActivity {
+import com.jk.util.Page;
+
+public class TActivity extends Page {
     private String tId;
 
     private String tHeadline;

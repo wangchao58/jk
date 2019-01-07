@@ -14,61 +14,36 @@
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
     </where>
   </sql>
+
   <sql id="Base_Column_List">
     t_id, t_headline, t_content, t_time, t_site, t_charge, p_id, t_phone, t_weixing
   </sql>
-  <select id="selectByExample" parameterType="com.jk.entity.reception.TActivityExample" resultMap="BaseResultMap">
+
+  <!-- 查询活动列表数据 -->
+  <select id="selectByExample" parameterType="com.jk.entity.reception.TActivity" resultMap="BaseResultMap">
     select
-    <if test="distinct">
-      distinct
-    </if>
-    'false' as QUERYID,
     <include refid="Base_Column_List" />
     from t_activity
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
   </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from t_activity
     where t_id = #{tId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+
+  <!-- 删除活动信息 -->
+  <delete id="deleteByPrimaryKey" parameterType="java.util.List" >
     delete from t_activity
-    where t_id = #{tId,jdbcType=VARCHAR}
+    where t_id in
+    <foreach collection="list" item="ids" separator="," open="(" close=")">
+      '${ids}'
+    </foreach>
   </delete>
+
   <insert id="insert" parameterType="com.jk.entity.reception.TActivity">
     insert into t_activity (t_id, t_headline, t_content, 
       t_time, t_site, t_charge, 
