@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @MapperScan("com.jk.mapper")
-@EnableAutoConfiguration
 @EnableScheduling
 @SpringBootApplication
 public class JkApplication {
