@@ -14,73 +14,48 @@
 <br>
 <form class="form-horizontal" id="activity">
     <div class="form-group">
-        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="tHeadline">标题:</label>
-        <div class="col-xs-12 col-sm-5">
-            <span class="block input-icon input-icon-right">
-                <input type="hidden" id="id" name="id" th:value="${tActivity.tId}" class="width-100" />
-                <input type="text" id="tHeadline" name="tHeadline" th:value="${tActivity.tHeadline}" class="width-100" />
-            </span>
-        </div>
-    </div>
-    <div class="form-group">
         <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="tContent">内容:</label>
         <div class="col-xs-12 col-sm-5">
             <span class="block input-icon input-icon-right">
-                <input type="text" id="tContent" name="tContent" th:value="${tActivity.tContent}" class="width-100">
+                <input type="text" id="tContent" name="tContent" th:value="${tInformation.tContent}" class="width-100">
             </span>
 
         </div>
     </div>
     <div class="form-group">
-        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="">发布人:</label>
+        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="tImg">图片:</label>
         <div class="col-xs-12 col-sm-5">
             <span class="block input-icon input-icon-right">
-                <input type="text" id="" name="" th:value="${tActivity.tPhone}" class="width-100">
+                <input type="text" id="tImg" name="tImg" th:value="${tInformation.tImg}" class="width-100">
             </span>
 
         </div>
     </div>
     <div class="form-group">
-        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="tPhone">手机号:</label>
+        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="tCoordinate">坐标:</label>
         <div class="col-xs-12 col-sm-5">
             <span class="block input-icon input-icon-right">
-                <input type="text" id="tPhone" name="tPhone" th:value="${tActivity.tPhone}" class="width-100">
+                <input type="text" id="tCoordinate" name="tCoordinate" th:value="${tInformation.tCoordinate}" class="width-100">
             </span>
 
         </div>
     </div>
     <div class="form-group">
-        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="tWeixing">微信号:</label>
+        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="tPraise">赞:</label>
         <div class="col-xs-12 col-sm-5">
             <span class="block input-icon input-icon-right">
-                <input type="text" id="tWeixing" name="tWeixing" th:value="${tActivity.tWeixing}" class="width-100">
+                <input type="text" id="tPraise" name="tPraise" th:value="${tInformation.tPraise}" class="width-100">
             </span>
 
         </div>
     </div>
     <div class="form-group">
-        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="tSite">地点:</label>
-
+        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="tPraise">发布人:</label>
         <div class="col-xs-12 col-sm-5">
-            <input type="text" id="tSite" name="tSite" th:value="${tActivity.tSite}" class="width-100">
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="tTime">时间:</label>
+            <span class="block input-icon input-icon-right">
+                <input type="text" id="" name="tPraise" th:value="${tInformation.tPraise}" class="width-100">
+            </span>
 
-        <div class="col-xs-12 col-sm-5">
-            <input type="text" id="tTime" name="tTime" th:value="${tActivity.tTime}" class="width-100">
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="tCharge">是否免费:</label>
-
-        <div class="col-xs-12 col-sm-5">
-            <select id="tCharge" name="tCharge" class="select2" data-placeholder="Click to Choose...">
-                <option>请选择</option>
-                <option th:value="0">否</option>
-                <option th:value="1">是</option>
-            </select>
         </div>
     </div>
 </form>
