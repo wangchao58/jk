@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.List;
 
@@ -110,4 +111,32 @@ public class ActivityController extends BaseController {
         List<String> idlist = Arrays.asList(ids.split(","));
         return activityService.deleteByPrimaryKey(idlist);
     }
+
+    /**
+     * 前端获取活动列表信息（接口）
+     * @param tActivity
+     * @return
+     */
+    @RequestMapping(value = "/getActivityList")
+    @ResponseBody
+    public List<TActivity> getActivityList(TActivity tActivity) {
+        List<TActivity> ActivitytList = activityService.selectByExample(tActivity);
+        return ActivitytList;
+    }
+
+    /**
+     * 前端活动详情查看（接口）
+     * @return
+     */
+    @RequestMapping(value = "/getActivityByTid")
+    @ResponseBody
+    public TActivity getActivityByTid(HttpServletRequest request, String tId){
+        TActivity tActivity = new TActivity();
+        tActivity.settId(tId);
+//        TUser user = (TUser) request.getSession().getAttribute("user");//用户查询自己所发的活动信息
+        TActivity activityByTid = activityService.getActivityByTid(tActivity);
+        return activityByTid;
+    }
+
+
 }

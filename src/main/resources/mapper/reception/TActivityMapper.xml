@@ -250,4 +250,20 @@
       t_collection_num = #{tCollectionNum,jdbcType=INTEGER}
     where t_id = #{tId,jdbcType=VARCHAR}
   </update>
+
+
+  <!--  前端活动详情查看（接口） getActivityByTid -->
+  <select id="getActivityByTid" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TActivity" >
+    select
+    <include refid="Base_Column_List" />
+    from t_activity
+    <where>
+      <if test="tId != null and tId !=''" >
+        and t_id = #{tId,jdbcType=VARCHAR}
+      </if>
+      <if test="pId != null and pId !=''" >
+        and p_id = #{pId,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
 </mapper>
