@@ -125,7 +125,7 @@ function selText() {
 }
 
 /**
- * 编辑活动信息
+ * 编辑资讯信息
  * @param uuid
  */
 function openUpdDiag(uuid) {
