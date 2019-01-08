@@ -118,7 +118,6 @@ function deletes() {
  * @param uuid
  */
 function openUpdDiag(uuid) {
-    alert(uuid);
     //页面层
     var indext = layer.open({
         type: 2,
