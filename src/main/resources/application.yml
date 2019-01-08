@@ -8,7 +8,7 @@ spring:
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/jkkj
     username: root
-    password: root
+    password: kaixuan
 #    url: jdbc:mysql://120.27.11.164:3306/litte
 #    username: estate
 #    password: estate123
