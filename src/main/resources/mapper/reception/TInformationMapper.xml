@@ -58,10 +58,15 @@
     from t_information
     where t_id = #{tId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+
+  <delete id="deleteByPrimaryKey" parameterType="java.util.List" >
     delete from t_information
-    where t_id = #{tId,jdbcType=VARCHAR}
+    where t_id in
+    <foreach collection="list" item="ids" separator="," open="(" close=")">
+      '${ids}'
+    </foreach>
   </delete>
+
   <insert id="insert" parameterType="com.jk.entity.reception.TInformation" >
     insert into t_information (t_id, t_content, t_img, 
       t_coordinate, t_praise, p_id, 

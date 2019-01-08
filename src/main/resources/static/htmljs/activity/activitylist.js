@@ -88,7 +88,7 @@ function deletes() {
     //遍历访问这个集合
     $(ids).each(function (index, id){
         //由id获得对应数据行
-        var name= jQuery('#grid-table').jqGrid('getCell',id,'id');//id是colModel中的一属性
+        var name= jQuery('#grid-table').jqGrid('getCell',id,'tId');//id是colModel中的一属性
         row += name+",";
     });
     row=row.substr(0,row.length-1);
@@ -117,6 +117,17 @@ function deletes() {
     }
 }
 
+/**
+ * 查询\刷新
+ */
+function selText() {
+    // 使用jqgrid中的方法
+    $("#grid-table").jqGrid('setGridParam',{
+        postData:{
+            'realName' : $("#realName").val()
+        }
+    }).trigger("reloadGrid"); //重新载入
+}
 
 /**
  * 编辑活动信息

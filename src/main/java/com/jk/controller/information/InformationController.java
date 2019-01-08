@@ -75,14 +75,14 @@ public class InformationController {
     }
 
     /**
-     * 删除卡券
+     * 删除资讯信息
      * @param ids
      * @return
      */
-    @RequestMapping(value = "/delActivity")
+    @RequestMapping(value = "/delInformation")
     @ResponseBody
-    public int delActivity(String ids){
+    public int delInformation(String ids){
         List<String> idlist = Arrays.asList(ids.split(","));
-        return activityService.deleteByPrimaryKey(idlist);
+        return informationService.deleteByPrimaryKey(idlist);
     }
 }

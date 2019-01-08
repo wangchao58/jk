@@ -32,4 +32,14 @@ public class InformationServiceImpl implements InformationService {
     public TInformation selectByPrimaryKey(String id) {
         return tInformationMapper.selectByPrimaryKey(id);
     }
+
+    /**
+     * 删除资讯信息
+     * @param idlist
+     * @return
+     */
+    @Override
+    public int deleteByPrimaryKey(List<String> idlist) {
+        return tInformationMapper.deleteByPrimaryKey(idlist);
+    }
 }

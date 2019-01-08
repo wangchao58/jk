@@ -5,7 +5,7 @@ import com.jk.entity.reception.TInformationExample;
 import java.util.List;
 
 public interface TInformationMapper {
-    int deleteByPrimaryKey(String tId);
+    int deleteByPrimaryKey(List<String> ids);
 
     int insert(TInformation record);
 

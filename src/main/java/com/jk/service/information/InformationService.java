@@ -9,4 +9,5 @@ public interface InformationService {
 
     TInformation selectByPrimaryKey(String id);
 
+    int deleteByPrimaryKey(List<String> idlist);
 }

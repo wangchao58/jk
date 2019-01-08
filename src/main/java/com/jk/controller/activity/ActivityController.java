@@ -100,7 +100,7 @@ public class ActivityController extends BaseController {
     }
 
     /**
-     * 删除卡券
+     * 删除活动信息
      * @param ids
      * @return
      */
