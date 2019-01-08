@@ -1,4 +1,4 @@
-package com.jk.controller;
+package com.jk;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;

@@ -1,4 +1,4 @@
-package com.jk.controller;
+package com.jk;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -58,7 +58,9 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
                         "/projects/listProjectsByPort",
                         "/trecruitInfo/trecruitInfoData",
                         "/trecruitInfo/updTrecruitInfo",
-                        "/evaluate/listEvaluateCountByPort");
+                        "/evaluate/listEvaluateCountByPort",
+                        "/activity/getActivityList",
+                        "/activity/getActivityByTid");
 
     }
 }
