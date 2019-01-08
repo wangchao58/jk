@@ -51,31 +51,28 @@
     t_id, t_headline, t_content, t_start_time, t_end_time, t_create_time, t_site, t_charge, 
     p_id, t_phone, t_weixing, t_per_num, t_apply_num, t_views_num, t_collection_num
   </sql>
+
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TActivityExample" >
     select
-    <if test="distinct" >
-      distinct
-    </if>
-    'false' as QUERYID,
     <include refid="Base_Column_List" />
     from t_activity
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
   </select>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from t_activity
     where t_id = #{tId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+
+  <delete id="deleteByPrimaryKey" parameterType="java.util.List" >
     delete from t_activity
-    where t_id = #{tId,jdbcType=VARCHAR}
+    where t_id in
+    <foreach collection="list" item="ids" separator="," open="(" close=")">
+      '${ids}'
+    </foreach>
   </delete>
+
   <insert id="insert" parameterType="com.jk.entity.reception.TActivity" >
     insert into t_activity (t_id, t_headline, t_content, 
       t_start_time, t_end_time, t_create_time, 

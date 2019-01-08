@@ -1,8 +1,10 @@
 package com.jk.entity.reception;
 
+import com.jk.util.Page;
+
 import java.util.Date;
 
-public class TInformation {
+public class TInformation extends Page {
     private String tId;
 
     private String tContent;
