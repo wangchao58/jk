@@ -15,7 +15,8 @@ jQuery(function($) {
             {label:'手机号',name:'tPhone', editable: true},
             {label:'微信号',name:'tWeixing', editable: true},
             {label:'地点',name:'tSite', editable: true},
-            {label:'时间',name:'tTime',  editable: true, formatter: formatDatebox},
+            {label:'开始时间',name:'tStartTime',  editable: true, formatter: formatDatebox},
+            {label:'结束时间',name:'tEndTime',  editable: true, formatter: formatDatebox},
             {label:'是否免费',name:'tCharge', editable: true, width:60},
             {label:'时间',name:'tTime',  editable: true, width:50 ,formatter: openupd}
         ],
@@ -126,7 +127,7 @@ function openUpdDiag(uuid) {
     var indext = layer.open({
         type: 2,
         title:'活动信息编辑',
-        area: ['70%', '80%'],
+        area: ['70%', '90%'],
         fixed: false, //不固定
         maxmin: true,
         content: '/activity/updActivityView?id='+uuid,

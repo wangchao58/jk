@@ -87,7 +87,7 @@ public class ActivityController extends BaseController {
     }
 
     /**
-     * 进入修改卡券页面
+     * 进入活动编辑页面
      * @return
      */
     @RequestMapping(value = "/updActivityView")
