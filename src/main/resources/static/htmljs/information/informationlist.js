@@ -147,6 +147,28 @@ function openUpdDiag(uuid) {
 }
 
 /**
+ * 资讯新增、编辑提交
+ */
+function mySubmit(){
+    $.ajax({
+        url: '/information/addInformation',
+        data:$("#information").serialize(),
+        type: "POST",
+        async: true,
+        dataType: "json",
+        success: function (result) {
+            if (result == "1") {
+                layer.alert('操作成功！',function () {
+                    parent.location.reload(); // 父页面刷新
+                });
+            } else {
+                layer.msg('对不起，操作失败！');
+            }
+        }
+    });
+}
+
+/**
  * 时间格式
  * @param Value
  * @param options

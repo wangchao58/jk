@@ -152,27 +152,6 @@ function openUpdDiag(uuid) {
 }
 
 /**
- * 活动增加
- */
-function openAddDiag() {
-    //页面层
-    var indext = layer.open({
-        type: 2,
-        title:'活动增加',
-        area: ['70%', '80%'],
-        fixed: false, //不固定
-        maxmin: true,
-        content: '/activity/addActivityView',
-        btn:['确定','取消'],
-        yes: function (layero, index) {
-            var iframeWin = window[index.find('iframe')[0]['name']]; //得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
-            //调用授权提交方法
-            iframeWin.mySubmit();
-        } ,
-    });
-}
-
-/**
  * 活动新增提交
  */
 function mySubmit(){

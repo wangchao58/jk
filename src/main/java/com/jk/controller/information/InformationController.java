@@ -75,6 +75,23 @@ public class InformationController {
     }
 
     /**
+     * 资讯增加/修改
+     * @param tInformation
+     * @return
+     */
+    @RequestMapping(value = "/addInformation")
+    @ResponseBody
+    public int addInformation(TInformation tInformation) {
+        int i = 0;
+        if (StringUtil.isEmpty(tInformation.gettId())) {
+            i = informationService.insertInformation(tInformation);
+        } else {
+            i = informationService.updateInformation(tInformation);
+        }
+        return i;
+    }
+
+    /**
      * 删除资讯信息
      * @param ids
      * @return

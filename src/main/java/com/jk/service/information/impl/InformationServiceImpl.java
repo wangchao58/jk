@@ -42,4 +42,14 @@ public class InformationServiceImpl implements InformationService {
     public int deleteByPrimaryKey(List<String> idlist) {
         return tInformationMapper.deleteByPrimaryKey(idlist);
     }
+
+    @Override
+    public int insertInformation(TInformation tInformation) {
+        return tInformationMapper.insertSelective(tInformation);
+    }
+
+    @Override
+    public int updateInformation(TInformation tInformation) {
+        return tInformationMapper.updateByPrimaryKeySelective(tInformation);
+    }
 }
