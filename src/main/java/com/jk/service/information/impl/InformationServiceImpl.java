@@ -52,4 +52,14 @@ public class InformationServiceImpl implements InformationService {
     public int updateInformation(TInformation tInformation) {
         return tInformationMapper.updateByPrimaryKeySelective(tInformation);
     }
+
+    /**
+     * 获取资讯详情（接口）
+     * @param tInformation
+     * @return
+     */
+    @Override
+    public TInformation getInformationByTid(TInformation tInformation) {
+        return tInformationMapper.getInformationByTid(tInformation);
+    }
 }

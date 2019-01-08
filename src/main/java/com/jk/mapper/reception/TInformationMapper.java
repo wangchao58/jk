@@ -1,7 +1,7 @@
 package com.jk.mapper.reception;
 
 import com.jk.entity.reception.TInformation;
-import com.jk.entity.reception.TInformationExample;
+
 import java.util.List;
 
 public interface TInformationMapper {
@@ -18,4 +18,6 @@ public interface TInformationMapper {
     int updateByPrimaryKeySelective(TInformation record);
 
     int updateByPrimaryKey(TInformation record);
+
+    TInformation getInformationByTid(TInformation tInformation);
 }

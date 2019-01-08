@@ -180,4 +180,19 @@
       t_collection_num = #{tCollectionNum,jdbcType=INTEGER}
     where t_id = #{tId,jdbcType=VARCHAR}
   </update>
+
+  <!-- 获取资讯详情（接口） -->
+  <select id="getInformationByTid" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TInformation" >
+    select
+    <include refid="Base_Column_List" />
+    from t_information
+    <where>
+      <if test="tId != null and tId !=''" >
+        and t_id = #{tId,jdbcType=VARCHAR}
+      </if>
+      <if test="pId != null and pId !=''" >
+        and p_id = #{pId,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
 </mapper>

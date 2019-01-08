@@ -3,7 +3,6 @@ package com.jk.controller.information;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.github.pagehelper.StringUtil;
-import com.jk.entity.reception.TActivity;
 import com.jk.entity.reception.TInformation;
 import com.jk.service.activity.ActivityService;
 import com.jk.service.information.InformationService;
@@ -14,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.List;
 
@@ -101,5 +101,32 @@ public class InformationController {
     public int delInformation(String ids){
         List<String> idlist = Arrays.asList(ids.split(","));
         return informationService.deleteByPrimaryKey(idlist);
+    }
+
+    /**
+     * 前端获取资讯列表数据（接口）
+     * @param tInformation
+     * @return
+     */
+    @RequestMapping(value = "/getInformationList")
+    @ResponseBody
+    public List<TInformation> getInformationList(TInformation tInformation) {
+        List<TInformation> tInformationList = informationService.selectByExample(tInformation);
+        return tInformationList;
+    }
+
+    /**
+     * 前端查询咨询详情（接口）
+     * @param request
+     * @param tId
+     * @return
+     */
+    @RequestMapping("/getInformationByTid")
+    @ResponseBody
+    public TInformation getInformationByTid(HttpServletRequest request, String tId){
+        TInformation tInformation = new TInformation();
+        tInformation.settId(tId);
+        TInformation informationByTid = informationService.getInformationByTid(tInformation);
+        return informationByTid;
     }
 }
