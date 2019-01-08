@@ -28,8 +28,10 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
                         "/trecruitInfo/updTrecruitInfo",
                         "/activity/getActivityList",
                         "/activity/getActivityByTid",
+                        "/activity/collectionActivity",
                         "/information/getInformationList",
-                        "/information/getInformationByTid");
+                        "/information/getInformationByTid"
+                        );
 
     }
 }

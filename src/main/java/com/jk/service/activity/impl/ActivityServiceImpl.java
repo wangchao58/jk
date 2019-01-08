@@ -1,18 +1,23 @@
 package com.jk.service.activity.impl;
 
 import com.jk.entity.reception.TActivity;
+import com.jk.entity.reception.TEnshrine;
 import com.jk.mapper.reception.TActivityMapper;
+import com.jk.mapper.reception.TEnshrineMapper;
 import com.jk.service.activity.ActivityService;
 import com.jk.util.UUIDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
 public class ActivityServiceImpl implements ActivityService {
     @Autowired
-    TActivityMapper tActivityMapper;
+    TActivityMapper tActivityMapper;// 活动
+    @Autowired
+    TEnshrineMapper tEnshrineMapper;// 收藏
 
     /**
      * 活动列表数据查询
@@ -74,5 +79,38 @@ public class ActivityServiceImpl implements ActivityService {
     @Override
     public TActivity getActivityByTid(TActivity tActivity) {
         return tActivityMapper.getActivityByTid(tActivity);
+    }
+
+    /**
+     * 活动收藏（接口）
+     * @param tActivity
+     * @return
+     */
+    @Override
+    public int collectionActivity(TActivity tActivity) {
+        int i = 0;
+        TEnshrine tEnshrine = new TEnshrine();
+        tEnshrine.sethId(tActivity.gettId());
+        tEnshrine.setpId(tActivity.getpId());
+        TEnshrine enshrine = tEnshrineMapper.selEnshrine(tEnshrine);
+        // 判断此活动用户是否收藏
+        if(null != enshrine){
+
+        }else{
+            TActivity activityByTid = tActivityMapper.getActivityByTid(tActivity);
+            activityByTid.gettCollectionNum();
+
+            tEnshrine.settId(UUIDUtil.getUUID());
+            tEnshrine.sethId(activityByTid.gettId());
+            tEnshrine.setpId(activityByTid.getpId());
+            tEnshrine.settTime(new Date());
+            // 收藏类型，0：拼车，1：店铺；2：活动；3：资讯
+            tEnshrine.settType("2");
+            i = tEnshrineMapper.insertSelective(tEnshrine);
+        }
+
+
+
+        return tEnshrineMapper.insertSelective(tEnshrine);
     }
 }

@@ -134,4 +134,6 @@
       t_type = #{tType,jdbcType=VARCHAR}
     where t_id = #{tId,jdbcType=VARCHAR}
   </update>
+
+  <!-- selEnshrine -->
 </mapper>
