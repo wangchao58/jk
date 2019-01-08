@@ -106,7 +106,6 @@ function deletes() {
                     }
                 }
             });
-
         });
     } else {
         layer.msg("请选择要操作的数据!");
