@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.mapper.reception.TCarGroupMapper" >
+  <resultMap id="BaseResultMap" type="com.jk.entity.reception.TCarGroup" >
+    <id column="t_id" property="tId" jdbcType="VARCHAR" />
+    <result column="t_group_name" property="tGroupName" jdbcType="VARCHAR" />
+    <result column="t_sort" property="tSort" jdbcType="VARCHAR" />
+    <result column="t_group_lord" property="tGroupLord" jdbcType="VARCHAR" />
+    <result column="t_group_code" property="tGroupCode" jdbcType="VARCHAR" />
+    <result column="t_create_time" property="tCreateTime" jdbcType="TIMESTAMP" />
+    <result column="t_attribution" property="tAttribution" jdbcType="VARCHAR" />
+    <result column="t_claim" property="tClaim" jdbcType="VARCHAR" />
+    <result column="t_introduction" property="tIntroduction" jdbcType="VARCHAR" />
+    <result column="t_explain" property="tExplain" jdbcType="VARCHAR" />
+    <result column="t_payment" property="tPayment" jdbcType="VARCHAR" />
+    <result column="t_money" property="tMoney" jdbcType="REAL" />
+    <result column="t_views_num" property="tViewsNum" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    t_id, t_group_name, t_sort, t_group_lord, t_group_code, t_create_time, t_attribution, 
+    t_claim, t_introduction, t_explain, t_payment, t_money, t_views_num
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TCarGroupExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_car_group
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_car_group
+    where t_id = #{tId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_car_group
+    where t_id = #{tId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.jk.entity.reception.TCarGroup" >
+    insert into t_car_group (t_id, t_group_name, t_sort, 
+      t_group_lord, t_group_code, t_create_time, 
+      t_attribution, t_claim, t_introduction, 
+      t_explain, t_payment, t_money, 
+      t_views_num)
+    values (#{tId,jdbcType=VARCHAR}, #{tGroupName,jdbcType=VARCHAR}, #{tSort,jdbcType=VARCHAR}, 
+      #{tGroupLord,jdbcType=VARCHAR}, #{tGroupCode,jdbcType=VARCHAR}, #{tCreateTime,jdbcType=TIMESTAMP}, 
+      #{tAttribution,jdbcType=VARCHAR}, #{tClaim,jdbcType=VARCHAR}, #{tIntroduction,jdbcType=VARCHAR}, 
+      #{tExplain,jdbcType=VARCHAR}, #{tPayment,jdbcType=VARCHAR}, #{tMoney,jdbcType=REAL}, 
+      #{tViewsNum,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jk.entity.reception.TCarGroup" >
+    insert into t_car_group
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tId != null" >
+        t_id,
+      </if>
+      <if test="tGroupName != null" >
+        t_group_name,
+      </if>
+      <if test="tSort != null" >
+        t_sort,
+      </if>
+      <if test="tGroupLord != null" >
+        t_group_lord,
+      </if>
+      <if test="tGroupCode != null" >
+        t_group_code,
+      </if>
+      <if test="tCreateTime != null" >
+        t_create_time,
+      </if>
+      <if test="tAttribution != null" >
+        t_attribution,
+      </if>
+      <if test="tClaim != null" >
+        t_claim,
+      </if>
+      <if test="tIntroduction != null" >
+        t_introduction,
+      </if>
+      <if test="tExplain != null" >
+        t_explain,
+      </if>
+      <if test="tPayment != null" >
+        t_payment,
+      </if>
+      <if test="tMoney != null" >
+        t_money,
+      </if>
+      <if test="tViewsNum != null" >
+        t_views_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tId != null" >
+        #{tId,jdbcType=VARCHAR},
+      </if>
+      <if test="tGroupName != null" >
+        #{tGroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="tSort != null" >
+        #{tSort,jdbcType=VARCHAR},
+      </if>
+      <if test="tGroupLord != null" >
+        #{tGroupLord,jdbcType=VARCHAR},
+      </if>
+      <if test="tGroupCode != null" >
+        #{tGroupCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tCreateTime != null" >
+        #{tCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tAttribution != null" >
+        #{tAttribution,jdbcType=VARCHAR},
+      </if>
+      <if test="tClaim != null" >
+        #{tClaim,jdbcType=VARCHAR},
+      </if>
+      <if test="tIntroduction != null" >
+        #{tIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="tExplain != null" >
+        #{tExplain,jdbcType=VARCHAR},
+      </if>
+      <if test="tPayment != null" >
+        #{tPayment,jdbcType=VARCHAR},
+      </if>
+      <if test="tMoney != null" >
+        #{tMoney,jdbcType=REAL},
+      </if>
+      <if test="tViewsNum != null" >
+        #{tViewsNum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jk.entity.reception.TCarGroup" >
+    update t_car_group
+    <set >
+      <if test="tGroupName != null" >
+        t_group_name = #{tGroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="tSort != null" >
+        t_sort = #{tSort,jdbcType=VARCHAR},
+      </if>
+      <if test="tGroupLord != null" >
+        t_group_lord = #{tGroupLord,jdbcType=VARCHAR},
+      </if>
+      <if test="tGroupCode != null" >
+        t_group_code = #{tGroupCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tCreateTime != null" >
+        t_create_time = #{tCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tAttribution != null" >
+        t_attribution = #{tAttribution,jdbcType=VARCHAR},
+      </if>
+      <if test="tClaim != null" >
+        t_claim = #{tClaim,jdbcType=VARCHAR},
+      </if>
+      <if test="tIntroduction != null" >
+        t_introduction = #{tIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="tExplain != null" >
+        t_explain = #{tExplain,jdbcType=VARCHAR},
+      </if>
+      <if test="tPayment != null" >
+        t_payment = #{tPayment,jdbcType=VARCHAR},
+      </if>
+      <if test="tMoney != null" >
+        t_money = #{tMoney,jdbcType=REAL},
+      </if>
+      <if test="tViewsNum != null" >
+        t_views_num = #{tViewsNum,jdbcType=INTEGER},
+      </if>
+    </set>
+    where t_id = #{tId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jk.entity.reception.TCarGroup" >
+    update t_car_group
+    set t_group_name = #{tGroupName,jdbcType=VARCHAR},
+      t_sort = #{tSort,jdbcType=VARCHAR},
+      t_group_lord = #{tGroupLord,jdbcType=VARCHAR},
+      t_group_code = #{tGroupCode,jdbcType=VARCHAR},
+      t_create_time = #{tCreateTime,jdbcType=TIMESTAMP},
+      t_attribution = #{tAttribution,jdbcType=VARCHAR},
+      t_claim = #{tClaim,jdbcType=VARCHAR},
+      t_introduction = #{tIntroduction,jdbcType=VARCHAR},
+      t_explain = #{tExplain,jdbcType=VARCHAR},
+      t_payment = #{tPayment,jdbcType=VARCHAR},
+      t_money = #{tMoney,jdbcType=REAL},
+      t_views_num = #{tViewsNum,jdbcType=INTEGER}
+    where t_id = #{tId,jdbcType=VARCHAR}
+  </update>
+</mapper>

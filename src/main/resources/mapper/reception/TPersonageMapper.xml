@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.mapper.reception.TPersonageMapper" >
+  <resultMap id="BaseResultMap" type="com.jk.entity.reception.TPersonage" >
+    <id column="t_id" property="tId" jdbcType="VARCHAR" />
+    <result column="openid" property="openid" jdbcType="VARCHAR" />
+    <result column="avatarUrl" property="avatarurl" jdbcType="VARCHAR" />
+    <result column="nickName" property="nickname" jdbcType="VARCHAR" />
+    <result column="t_phone" property="tPhone" jdbcType="VARCHAR" />
+    <result column="t_create_time" property="tCreateTime" jdbcType="TIMESTAMP" />
+    <result column="t_update_time" property="tUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="t_sex" property="tSex" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    t_id, openid, avatarUrl, nickName, t_phone, t_create_time, t_update_time, t_sex
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TPersonageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_personage
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_personage
+    where t_id = #{tId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_personage
+    where t_id = #{tId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.jk.entity.reception.TPersonage" >
+    insert into t_personage (t_id, openid, avatarUrl, 
+      nickName, t_phone, t_create_time, 
+      t_update_time, t_sex)
+    values (#{tId,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, #{avatarurl,jdbcType=VARCHAR}, 
+      #{nickname,jdbcType=VARCHAR}, #{tPhone,jdbcType=VARCHAR}, #{tCreateTime,jdbcType=TIMESTAMP}, 
+      #{tUpdateTime,jdbcType=TIMESTAMP}, #{tSex,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jk.entity.reception.TPersonage" >
+    insert into t_personage
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tId != null" >
+        t_id,
+      </if>
+      <if test="openid != null" >
+        openid,
+      </if>
+      <if test="avatarurl != null" >
+        avatarUrl,
+      </if>
+      <if test="nickname != null" >
+        nickName,
+      </if>
+      <if test="tPhone != null" >
+        t_phone,
+      </if>
+      <if test="tCreateTime != null" >
+        t_create_time,
+      </if>
+      <if test="tUpdateTime != null" >
+        t_update_time,
+      </if>
+      <if test="tSex != null" >
+        t_sex,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tId != null" >
+        #{tId,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null" >
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="avatarurl != null" >
+        #{avatarurl,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="tPhone != null" >
+        #{tPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="tCreateTime != null" >
+        #{tCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tUpdateTime != null" >
+        #{tUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tSex != null" >
+        #{tSex,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jk.entity.reception.TPersonage" >
+    update t_personage
+    <set >
+      <if test="openid != null" >
+        openid = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="avatarurl != null" >
+        avatarUrl = #{avatarurl,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        nickName = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="tPhone != null" >
+        t_phone = #{tPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="tCreateTime != null" >
+        t_create_time = #{tCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tUpdateTime != null" >
+        t_update_time = #{tUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tSex != null" >
+        t_sex = #{tSex,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where t_id = #{tId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jk.entity.reception.TPersonage" >
+    update t_personage
+    set openid = #{openid,jdbcType=VARCHAR},
+      avatarUrl = #{avatarurl,jdbcType=VARCHAR},
+      nickName = #{nickname,jdbcType=VARCHAR},
+      t_phone = #{tPhone,jdbcType=VARCHAR},
+      t_create_time = #{tCreateTime,jdbcType=TIMESTAMP},
+      t_update_time = #{tUpdateTime,jdbcType=TIMESTAMP},
+      t_sex = #{tSex,jdbcType=VARCHAR}
+    where t_id = #{tId,jdbcType=VARCHAR}
+  </update>
+</mapper>
