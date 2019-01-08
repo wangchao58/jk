@@ -45,31 +45,28 @@
     t_id, t_content, t_img, t_coordinate, t_praise, p_id, t_create_time, t_views_num, 
     t_collection_num
   </sql>
+
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TInformationExample" >
     select
-    <if test="distinct" >
-      distinct
-    </if>
-    'false' as QUERYID,
     <include refid="Base_Column_List" />
     from t_information
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
   </select>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from t_information
     where t_id = #{tId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+
+  <delete id="deleteByPrimaryKey" parameterType="java.util.List" >
     delete from t_information
-    where t_id = #{tId,jdbcType=VARCHAR}
+    where t_id in
+    <foreach collection="list" item="ids" separator="," open="(" close=")">
+      '${ids}'
+    </foreach>
   </delete>
+
   <insert id="insert" parameterType="com.jk.entity.reception.TInformation" >
     insert into t_information (t_id, t_content, t_img, 
       t_coordinate, t_praise, p_id, 
@@ -183,4 +180,19 @@
       t_collection_num = #{tCollectionNum,jdbcType=INTEGER}
     where t_id = #{tId,jdbcType=VARCHAR}
   </update>
+
+  <!-- 获取资讯详情（接口） -->
+  <select id="getInformationByTid" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TInformation" >
+    select
+    <include refid="Base_Column_List" />
+    from t_information
+    <where>
+      <if test="tId != null and tId !=''" >
+        and t_id = #{tId,jdbcType=VARCHAR}
+      </if>
+      <if test="pId != null and pId !=''" >
+        and p_id = #{pId,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
 </mapper>

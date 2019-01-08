@@ -84,7 +84,7 @@ function deletes() {
     //遍历访问这个集合
     $(ids).each(function (index, id){
         //由id获得对应数据行
-        var name= jQuery('#grid-table').jqGrid('getCell',id,'id');//id是colModel中的一属性
+        var name= jQuery('#grid-table').jqGrid('getCell',id,'tId');//id是colModel中的一属性
         row += name+",";
     });
     row=row.substr(0,row.length-1);
@@ -94,7 +94,7 @@ function deletes() {
             btn: ['继续','取消'] //按钮
         }, function(){
             $.ajax({
-                url: '/activity/delActivity',
+                url: '/information/delInformation',
                 data: {'ids':row},
                 type: "POST",
                 success: function (result) {
@@ -106,7 +106,6 @@ function deletes() {
                     }
                 }
             });
-
         });
     } else {
         layer.msg("请选择要操作的数据!");
@@ -114,11 +113,22 @@ function deletes() {
 }
 
 /**
- * 编辑活动信息
+ * 查询\刷新
+ */
+function selText() {
+    // 使用jqgrid中的方法
+    $("#grid-table").jqGrid('setGridParam',{
+        postData:{
+            'realName' : $("#realName").val()
+        }
+    }).trigger("reloadGrid"); //重新载入
+}
+
+/**
+ * 编辑资讯信息
  * @param uuid
  */
 function openUpdDiag(uuid) {
-    alert(uuid);
     //页面层
     var indext = layer.open({
         type: 2,
@@ -133,6 +143,28 @@ function openUpdDiag(uuid) {
             //调用授权提交方法
             iframeWin.mySubmit();
         } ,
+    });
+}
+
+/**
+ * 资讯新增、编辑提交
+ */
+function mySubmit(){
+    $.ajax({
+        url: '/information/addInformation',
+        data:$("#information").serialize(),
+        type: "POST",
+        async: true,
+        dataType: "json",
+        success: function (result) {
+            if (result == "1") {
+                layer.alert('操作成功！',function () {
+                    parent.location.reload(); // 父页面刷新
+                });
+            } else {
+                layer.msg('对不起，操作失败！');
+            }
+        }
     });
 }
 

@@ -65,4 +65,14 @@ public class ActivityServiceImpl implements ActivityService {
     public int deleteByPrimaryKey(List<String> idlist) {
         return tActivityMapper.deleteByPrimaryKey(idlist);
     }
+
+    /**
+     * 前端活动详情查看（接口）
+     * @param tActivity
+     * @return
+     */
+    @Override
+    public TActivity getActivityByTid(TActivity tActivity) {
+        return tActivityMapper.getActivityByTid(tActivity);
+    }
 }

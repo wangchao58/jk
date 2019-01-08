@@ -15,4 +15,6 @@ public interface ActivityService {
     TActivity selectByPrimaryKey(String id);
 
     int deleteByPrimaryKey(List<String> idlist);
+
+    TActivity getActivityByTid(TActivity tActivity);
 }

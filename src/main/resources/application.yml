@@ -6,12 +6,9 @@ mybatis:
 
 spring:
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/jkkj
+    url: jdbc:mysql://127.0.0.1:3306/jkkj?serverTimezone=GMT%2B8
     username: root
-    password: kaixuan
-#    url: jdbc:mysql://120.27.11.164:3306/litte
-#    username: estate
-#    password: estate123
+    password: root
     driver-class-name: com.mysql.jdbc.Driver
   servlet:
     multipart:

@@ -15,7 +15,8 @@ jQuery(function($) {
             {label:'手机号',name:'tPhone', editable: true},
             {label:'微信号',name:'tWeixing', editable: true},
             {label:'地点',name:'tSite', editable: true},
-            {label:'时间',name:'tTime',  editable: true, formatter: formatDatebox},
+            {label:'开始时间',name:'tStartTime',  editable: true, formatter: formatDatebox},
+            {label:'结束时间',name:'tEndTime',  editable: true, formatter: formatDatebox},
             {label:'是否免费',name:'tCharge', editable: true, width:60},
             {label:'时间',name:'tTime',  editable: true, width:50 ,formatter: openupd}
         ],
@@ -87,7 +88,7 @@ function deletes() {
     //遍历访问这个集合
     $(ids).each(function (index, id){
         //由id获得对应数据行
-        var name= jQuery('#grid-table').jqGrid('getCell',id,'id');//id是colModel中的一属性
+        var name= jQuery('#grid-table').jqGrid('getCell',id,'tId');//id是colModel中的一属性
         row += name+",";
     });
     row=row.substr(0,row.length-1);
@@ -116,6 +117,17 @@ function deletes() {
     }
 }
 
+/**
+ * 查询\刷新
+ */
+function selText() {
+    // 使用jqgrid中的方法
+    $("#grid-table").jqGrid('setGridParam',{
+        postData:{
+            'realName' : $("#realName").val()
+        }
+    }).trigger("reloadGrid"); //重新载入
+}
 
 /**
  * 编辑活动信息
@@ -126,31 +138,10 @@ function openUpdDiag(uuid) {
     var indext = layer.open({
         type: 2,
         title:'活动信息编辑',
-        area: ['70%', '80%'],
+        area: ['70%', '90%'],
         fixed: false, //不固定
         maxmin: true,
         content: '/activity/updActivityView?id='+uuid,
-        btn:['确定','取消'],
-        yes: function (layero, index) {
-            var iframeWin = window[index.find('iframe')[0]['name']]; //得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
-            //调用授权提交方法
-            iframeWin.mySubmit();
-        } ,
-    });
-}
-
-/**
- * 活动增加
- */
-function openAddDiag() {
-    //页面层
-    var indext = layer.open({
-        type: 2,
-        title:'活动增加',
-        area: ['70%', '80%'],
-        fixed: false, //不固定
-        maxmin: true,
-        content: '/activity/addActivityView',
         btn:['确定','取消'],
         yes: function (layero, index) {
             var iframeWin = window[index.find('iframe')[0]['name']]; //得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
