@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.mapper.reception.TEvaluateMapper" >
+  <resultMap id="BaseResultMap" type="com.jk.entity.reception.TEvaluate" >
+    <id column="t_id" property="tId" jdbcType="VARCHAR" />
+    <result column="p_id" property="pId" jdbcType="VARCHAR" />
+    <result column="t_other_id" property="tOtherId" jdbcType="VARCHAR" />
+    <result column="t_content" property="tContent" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="t_picture" property="tPicture" jdbcType="VARCHAR" />
+    <result column="t_anonymity" property="tAnonymity" jdbcType="VARCHAR" />
+    <result column="t_type" property="tType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    t_id, p_id, t_other_id, t_content, create_time, t_picture, t_anonymity, t_type
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TEvaluateExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_evaluate
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_evaluate
+    where t_id = #{tId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_evaluate
+    where t_id = #{tId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.jk.entity.reception.TEvaluate" >
+    insert into t_evaluate (t_id, p_id, t_other_id, 
+      t_content, create_time, t_picture, 
+      t_anonymity, t_type)
+    values (#{tId,jdbcType=VARCHAR}, #{pId,jdbcType=VARCHAR}, #{tOtherId,jdbcType=VARCHAR}, 
+      #{tContent,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{tPicture,jdbcType=VARCHAR}, 
+      #{tAnonymity,jdbcType=VARCHAR}, #{tType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jk.entity.reception.TEvaluate" >
+    insert into t_evaluate
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tId != null" >
+        t_id,
+      </if>
+      <if test="pId != null" >
+        p_id,
+      </if>
+      <if test="tOtherId != null" >
+        t_other_id,
+      </if>
+      <if test="tContent != null" >
+        t_content,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="tPicture != null" >
+        t_picture,
+      </if>
+      <if test="tAnonymity != null" >
+        t_anonymity,
+      </if>
+      <if test="tType != null" >
+        t_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tId != null" >
+        #{tId,jdbcType=VARCHAR},
+      </if>
+      <if test="pId != null" >
+        #{pId,jdbcType=VARCHAR},
+      </if>
+      <if test="tOtherId != null" >
+        #{tOtherId,jdbcType=VARCHAR},
+      </if>
+      <if test="tContent != null" >
+        #{tContent,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tPicture != null" >
+        #{tPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="tAnonymity != null" >
+        #{tAnonymity,jdbcType=VARCHAR},
+      </if>
+      <if test="tType != null" >
+        #{tType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jk.entity.reception.TEvaluate" >
+    update t_evaluate
+    <set >
+      <if test="pId != null" >
+        p_id = #{pId,jdbcType=VARCHAR},
+      </if>
+      <if test="tOtherId != null" >
+        t_other_id = #{tOtherId,jdbcType=VARCHAR},
+      </if>
+      <if test="tContent != null" >
+        t_content = #{tContent,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tPicture != null" >
+        t_picture = #{tPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="tAnonymity != null" >
+        t_anonymity = #{tAnonymity,jdbcType=VARCHAR},
+      </if>
+      <if test="tType != null" >
+        t_type = #{tType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where t_id = #{tId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jk.entity.reception.TEvaluate" >
+    update t_evaluate
+    set p_id = #{pId,jdbcType=VARCHAR},
+      t_other_id = #{tOtherId,jdbcType=VARCHAR},
+      t_content = #{tContent,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      t_picture = #{tPicture,jdbcType=VARCHAR},
+      t_anonymity = #{tAnonymity,jdbcType=VARCHAR},
+      t_type = #{tType,jdbcType=VARCHAR}
+    where t_id = #{tId,jdbcType=VARCHAR}
+  </update>
+</mapper>
