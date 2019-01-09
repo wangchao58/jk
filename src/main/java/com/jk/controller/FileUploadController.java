@@ -31,16 +31,11 @@ public class FileUploadController extends BaseController {
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
     public String uploadFile( @RequestParam( value = "file", required = false ) MultipartFile file) {
 
-       /* Properties prop = new Properties();
-        InputStream in = Object.class.getResourceAsStream("/fileupload.properties");*/
         JSONObject result = new JSONObject();
         // 方式一:保存文件目录
         if (!file.isEmpty()) {
             try {
-                //prop.load(in);
-                //String path =  FileUploadUtil.uploadpath;// 文件保存目录
-                String path = fileUploadUtil.getUploadpath();
-                //String path =  "E:"+File.separator+"uploadfiles";// 文件保存目录
+                String path = fileUploadUtil.getUploadpath();// 文件保存目录
                 String fileName = file.getOriginalFilename();// getOriginalFilename和getName是不一样的哦
                 //3新名称(uuid随机数加上后缀名)
                 String newfileName=UUIDUtil.getUUID() +fileName.substring(fileName.lastIndexOf("."));
@@ -85,22 +80,9 @@ public class FileUploadController extends BaseController {
         BufferedInputStream bis = null;
         OutputStream os = null;
         FileInputStream fileInputStream = null;
-//        Properties prop = new Properties();
-//        InputStream in = Object.class.getResourceAsStream("/fileupload.properties");
 
         try {
-            //prop.load(in);
-            //String path = FileUploadUtil.uploadpath;// 文件保存目录
-            String path = fileUploadUtil.getUploadpath();
-            System.out.println(path);
-            System.out.println(path);
-            System.out.println(path);
-            System.out.println(path);
-            System.out.println(path);
-            System.out.println(path);
-            System.out.println(path);
-//            String path =  prop.getProperty("uploadpath").trim();// 文件保存目录
-           // String path =  "E:"+File.separator+"uploadfiles";// 文件保存目录
+            String path = fileUploadUtil.getUploadpath();// 文件保存目录
             fileInputStream = new FileInputStream(new File(path+File.separator+fileName));
         } catch (FileNotFoundException e) {
         } catch (IOException e) {
@@ -110,9 +92,7 @@ public class FileUploadController extends BaseController {
         byte[] buffer = new byte[512];
         response.reset();
         response.setCharacterEncoding("UTF-8");
-
         //不同类型的文件对应不同的MIME类型
-
         response.setContentType("image/png");
         try {
             response.setContentLength(bis.available());
