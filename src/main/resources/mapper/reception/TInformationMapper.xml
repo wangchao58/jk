@@ -49,20 +49,26 @@
 
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TInformationExample" >
     select
-    <include refid="Base_Column_List" />
-    from t_information
+    i.t_id, i.t_content, i.t_img, i.t_coordinate, i.t_praise, i.t_evaluate, i.t_create_time,
+    i.t_views_num, i.t_collection_num, p.nickName as p_id
+    from t_information i
+    LEFT JOIN t_personage p
+    ON i.p_id = p.openid
     <where>
       <if test="pId != null and pId !=''" >
-        and p_id = #{pId,jdbcType=VARCHAR}
+        and i.p_id = #{pId,jdbcType=VARCHAR}
       </if>
     </where>
   </select>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
-    <include refid="Base_Column_List" />
-    from t_information
-    where t_id = #{tId,jdbcType=VARCHAR}
+    select
+      i.t_id, i.t_content, i.t_img, i.t_coordinate, i.t_praise, i.t_evaluate, i.t_create_time,
+      i.t_views_num, i.t_collection_num, p.nickName as p_id
+    from t_information i
+           LEFT JOIN t_personage p
+                     ON i.p_id = p.openid
+    where i.t_id = #{tId,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from t_information
@@ -195,8 +201,11 @@
   <!--  前端资讯详情查看（接口） getInformationByTid -->
   <select id="getInformationByTid" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TInformation" >
     select
-    <include refid="Base_Column_List" />
-    from t_information
-    where t_id = #{tId,jdbcType=VARCHAR}
+      i.t_id, i.t_content, i.t_img, i.t_coordinate, i.t_praise, i.t_evaluate, i.t_create_time,
+      i.t_views_num, i.t_collection_num, p.nickName as p_id
+    from t_information i
+    LEFT JOIN t_personage p
+    ON i.p_id = p.openid
+    where i.t_id = #{tId,jdbcType=VARCHAR}
   </select>
 </mapper>

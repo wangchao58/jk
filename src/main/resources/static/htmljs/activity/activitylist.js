@@ -11,7 +11,7 @@ jQuery(function($) {
             {label:'id',name:'tId', editable:false,hidden:true },
             {label:'标题',name:'tHeadline', editable: true},
             {label:'内容',name:'tContent', editable: true},
-            {label:'发布人',name:'', editable: true},
+            {label:'发布人',name:'pId', editable: true},
             {label:'手机号',name:'tPhone', editable: true},
             {label:'微信号',name:'tWeixing', editable: true},
             {label:'地点',name:'tSite', editable: true},

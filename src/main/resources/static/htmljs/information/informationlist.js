@@ -11,9 +11,9 @@ jQuery(function($) {
             {label:'id',name:'tId', editable:false,hidden:true },
             {label:'内容',name:'tContent', editable: true},
             {label:'图片',name:'tImg', editable: true},
-            {label:'座标',name:'tCoordinate', editable: true},
+            {label:'坐标',name:'tCoordinate', editable: true},
             {label:'赞',name:'tPraise', editable: true},
-            {label:'发布人',name:'tWeixing', editable: true},
+            {label:'发布人',name:'pId', editable: true},
             {label:'操作',name:'state', editable: true ,formatter: openupd}
         ],
         viewrecords : true,//定义是否要显示总记录数

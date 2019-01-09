@@ -52,22 +52,31 @@
     p_id, t_phone, t_weixing, t_per_num, t_apply_num, t_views_num, t_collection_num
   </sql>
 
+  <sql id="getActivityList" >
+    a.t_id, a.t_headline, a.t_content, a.t_start_time, a.t_end_time, a.t_create_time, a.t_site, a.t_charge,
+    p.nickName as p_id, a.t_phone, a.t_weixing, a.t_per_num, a.t_apply_num, a.t_views_num, a.t_collection_num
+  </sql>
+
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TActivityExample" >
     select
-    <include refid="Base_Column_List" />
-    from t_activity
+    <include refid="getActivityList" />
+    from t_activity a
+    LEFT JOIN t_personage p
+    ON a.p_id = p.openid
     <where>
       <if test="pId != null and pId !=''" >
-        and p_id = #{pId,jdbcType=VARCHAR}
+        and a.p_id = #{pId,jdbcType=VARCHAR}
       </if>
     </where>
   </select>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
-    <include refid="Base_Column_List" />
-    from t_activity
-    where t_id = #{tId,jdbcType=VARCHAR}
+    select
+    <include refid="getActivityList" />
+    from t_activity a
+    LEFT JOIN t_personage p
+    ON a.p_id = p.openid
+    where a.t_id = #{tId,jdbcType=VARCHAR}
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.util.List" >
@@ -260,8 +269,10 @@
   <!--  前端活动详情查看（接口） getActivityByTid -->
   <select id="getActivityByTid" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TActivity" >
     select
-    <include refid="Base_Column_List" />
-    from t_activity
-    where t_id = #{tId,jdbcType=VARCHAR}
+      <include refid="getActivityList" />
+      from t_activity a
+      LEFT JOIN t_personage p
+      ON a.p_id = p.openid
+    where a.t_id = #{tId,jdbcType=VARCHAR}
   </select>
 </mapper>
