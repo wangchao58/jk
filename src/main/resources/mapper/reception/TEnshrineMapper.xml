@@ -135,5 +135,12 @@
     where t_id = #{tId,jdbcType=VARCHAR}
   </update>
 
-  <!-- selEnshrine -->
+  <!-- 根据用户id和活动id查询收藏信息 -->
+  <select id="selEnshrine" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TEnshrine" >
+    select
+    <include refid="Base_Column_List" />
+    from t_enshrine
+    where h_id = #{hId,jdbcType=VARCHAR} and p_id = #{pId,jdbcType=VARCHAR} and t_type = '2'
+  </select>
+
 </mapper>

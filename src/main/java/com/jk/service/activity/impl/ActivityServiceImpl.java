@@ -89,17 +89,25 @@ public class ActivityServiceImpl implements ActivityService {
     @Override
     public int collectionActivity(TActivity tActivity) {
         int i = 0;
+        // 根据活动id查询活动信息
+        TActivity activityByTid = tActivityMapper.getActivityByTid(tActivity);
+
         TEnshrine tEnshrine = new TEnshrine();
-        tEnshrine.sethId(tActivity.gettId());
-        tEnshrine.setpId(tActivity.getpId());
+        tEnshrine.sethId(activityByTid.gettId());
+        tEnshrine.setpId(activityByTid.getpId());
         TEnshrine enshrine = tEnshrineMapper.selEnshrine(tEnshrine);
         // 判断此活动用户是否收藏
         if(null != enshrine){
-
+            // 取消收藏
+            i = tEnshrineMapper.deleteByPrimaryKey(enshrine.gettId());
+            if(i>0){
+                // 收藏活动，修改收藏次数
+                TActivity activityData = new TActivity();
+                activityData.settId(activityByTid.gettId());
+                activityData.settCollectionNum(activityByTid.gettCollectionNum()-1);
+                tActivityMapper.updateByPrimaryKeySelective(activityData);
+            }
         }else{
-            TActivity activityByTid = tActivityMapper.getActivityByTid(tActivity);
-            activityByTid.gettCollectionNum();
-
             tEnshrine.settId(UUIDUtil.getUUID());
             tEnshrine.sethId(activityByTid.gettId());
             tEnshrine.setpId(activityByTid.getpId());
@@ -107,10 +115,14 @@ public class ActivityServiceImpl implements ActivityService {
             // 收藏类型，0：拼车，1：店铺；2：活动；3：资讯
             tEnshrine.settType("2");
             i = tEnshrineMapper.insertSelective(tEnshrine);
+            if(i>0){
+                // 收藏活动，修改收藏次数
+                TActivity activityData = new TActivity();
+                activityData.settId(activityByTid.gettId());
+                activityData.settCollectionNum(activityByTid.gettCollectionNum()+1);
+                tActivityMapper.updateByPrimaryKeySelective(activityData);
+            }
         }
-
-
-
-        return tEnshrineMapper.insertSelective(tEnshrine);
+        return i;
     }
 }
