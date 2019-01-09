@@ -31,12 +31,8 @@ public class LoginController {
     @RequestMapping(value="/session/loginSession")
     @ResponseBody
     public TUser loginSession(HttpServletRequest request) {
-
         TUser user = (TUser) request.getSession().getAttribute("user");
-
         return user;
     }
-
-
 
 }
