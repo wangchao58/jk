@@ -25,6 +25,8 @@ public class TInformation extends Page {
 
     private Integer tCollectionNum;
 
+    private String url;
+
     public String gettId() {
         return tId;
     }
@@ -103,5 +105,13 @@ public class TInformation extends Page {
 
     public void settCollectionNum(Integer tCollectionNum) {
         this.tCollectionNum = tCollectionNum;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

@@ -26,9 +26,11 @@
         <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="tImg">图片:</label>
         <div class="col-xs-12 col-sm-5">
             <span class="block input-icon input-icon-right">
-                <input type="text" id="tImg" name="tImg" th:value="${tInformation.tImg}" class="width-100">
+                <input type="hidden" id="tImg" name="tImg" th:value="${tInformation.tImg}" class="width-100">
+                <input type="file" id="uploadClick" name="file"  class="width-100" />
+                <img id="previewImg" th:src="${tInformation.url}"
+                     style="width:200px;height:auto;margin-left: 15px;margin-top: 15px;margin-bottom: 20px;"/>
             </span>
-
         </div>
     </div>
     <div class="form-group">
