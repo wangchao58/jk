@@ -3,6 +3,7 @@ package com.jk.controller.information;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.github.pagehelper.StringUtil;
+import com.jk.entity.reception.TEvaluate;
 import com.jk.entity.reception.TInformation;
 import com.jk.service.activity.ActivityService;
 import com.jk.service.information.InformationService;
@@ -75,7 +76,19 @@ public class InformationController {
     }
 
     /**
-     * 资讯增加/修改
+     * 删除资讯信息
+     * @param ids
+     * @return
+     */
+    @RequestMapping(value = "/delInformation")
+    @ResponseBody
+    public int delInformation(String ids){
+        List<String> idlist = Arrays.asList(ids.split(","));
+        return informationService.deleteByPrimaryKey(idlist);
+    }
+
+    /**
+     * 资讯增加/修改（接口）
      * @param tInformation
      * @return
      */
@@ -89,18 +102,6 @@ public class InformationController {
             i = informationService.updateInformation(tInformation);
         }
         return i;
-    }
-
-    /**
-     * 删除资讯信息
-     * @param ids
-     * @return
-     */
-    @RequestMapping(value = "/delInformation")
-    @ResponseBody
-    public int delInformation(String ids){
-        List<String> idlist = Arrays.asList(ids.split(","));
-        return informationService.deleteByPrimaryKey(idlist);
     }
 
     /**
@@ -128,5 +129,39 @@ public class InformationController {
         tInformation.settId(tId);
         TInformation informationByTid = informationService.getInformationByTid(tInformation);
         return informationByTid;
+    }
+
+    /**
+     * 资讯点赞（接口）
+     * @param tInformation
+     * @param index 1:点赞 0：取消赞
+     * @return
+     */
+    @RequestMapping("/prais")
+    @ResponseBody
+    public int prais(TInformation tInformation, String index){
+        return informationService.prais(tInformation, index);
+    }
+
+    /**
+     * 资讯评论（接口）
+     * @param tEvaluate
+     * @return
+     */
+    @RequestMapping("/addEvaluate")
+    @ResponseBody
+    public int addEvaluate(TEvaluate tEvaluate){
+        return informationService.addEvaluate(tEvaluate);
+    }
+
+    /**
+     * 查询资讯评论信息（接口）
+     * @param tEvaluate
+     * @return
+     */
+    @RequestMapping("/selTEvaluateList")
+    @ResponseBody
+    public List<TEvaluate> selTEvaluateList(TEvaluate tEvaluate){
+        return informationService.selTEvaluateList(tEvaluate);
     }
 }

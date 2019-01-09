@@ -26,12 +26,17 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
                         "/dept/selDeptByIdPort",
                         "/trecruitInfo/trecruitInfoData",
                         "/trecruitInfo/updTrecruitInfo",
+                        "/activity/addActivity",
                         "/activity/getActivityList",
                         "/activity/getActivityByTid",
                         "/activity/collectionActivity",
                         "/activity/activityApply",
+                        "/information/addInformation",
                         "/information/getInformationList",
-                        "/information/getInformationByTid"
+                        "/information/getInformationByTid",
+                        "/information/prais",
+                        "/information/addEvaluate",
+                        "/information/selTEvaluateList"
                         );
 
     }

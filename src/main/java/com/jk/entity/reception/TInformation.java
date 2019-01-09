@@ -15,6 +15,8 @@ public class TInformation extends Page {
 
     private Integer tPraise;
 
+    private Integer tEvaluate;
+
     private String pId;
 
     private Date tCreateTime;
@@ -61,6 +63,14 @@ public class TInformation extends Page {
 
     public void settPraise(Integer tPraise) {
         this.tPraise = tPraise;
+    }
+
+    public Integer gettEvaluate() {
+        return tEvaluate;
+    }
+
+    public void settEvaluate(Integer tEvaluate) {
+        this.tEvaluate = tEvaluate;
     }
 
     public String getpId() {

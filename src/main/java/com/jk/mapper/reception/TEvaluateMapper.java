@@ -11,7 +11,7 @@ public interface TEvaluateMapper {
 
     int insertSelective(TEvaluate record);
 
-    List<TEvaluate> selectByExample(TEvaluateExample example);
+    List<TEvaluate> selectByExample(TEvaluate tEvaluate);
 
     TEvaluate selectByPrimaryKey(String tId);
 

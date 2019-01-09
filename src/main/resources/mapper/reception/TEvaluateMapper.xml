@@ -43,21 +43,14 @@
   <sql id="Base_Column_List" >
     t_id, p_id, t_other_id, t_content, create_time, t_picture, t_anonymity, t_type
   </sql>
+
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TEvaluateExample" >
     select
-    <if test="distinct" >
-      distinct
-    </if>
-    'false' as QUERYID,
     <include refid="Base_Column_List" />
     from t_evaluate
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
+    where t_other_id = #{pId,jdbcType=VARCHAR}
   </select>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
