@@ -73,23 +73,6 @@ public class ActivityController extends BaseController {
     }
 
     /**
-     * 活动增加/修改
-     * @param tActivity
-     * @return
-     */
-    @RequestMapping(value = "/addActivity")
-    @ResponseBody
-    public int addActivity(TActivity tActivity) {
-        int i = 0;
-        if (StringUtil.isEmpty(tActivity.gettId())) {
-            i = activityService.insertActivity(tActivity);
-        } else {
-            i = activityService.updateActivity(tActivity);
-        }
-        return i;
-    }
-
-    /**
      * 进入活动编辑页面
      * @return
      */
@@ -112,6 +95,23 @@ public class ActivityController extends BaseController {
     public int delActivity(String ids){
         List<String> idlist = Arrays.asList(ids.split(","));
         return activityService.deleteByPrimaryKey(idlist);
+    }
+
+    /**
+     * 活动增加/修改（接口）
+     * @param tActivity
+     * @return
+     */
+    @RequestMapping(value = "/addActivity")
+    @ResponseBody
+    public int addActivity(TActivity tActivity) {
+        int i = 0;
+        if (StringUtil.isEmpty(tActivity.gettId())) {
+            i = activityService.insertActivity(tActivity);
+        } else {
+            i = activityService.updateActivity(tActivity);
+        }
+        return i;
     }
 
     /**
