@@ -48,7 +48,11 @@
     select
     <include refid="Base_Column_List" />
     from t_evaluate
-    where t_other_id = #{pId,jdbcType=VARCHAR}
+    <where>
+      <if test="tOtherId != null and tOtherId !=''" >
+        and t_other_id = #{tOtherId,jdbcType=VARCHAR}
+      </if>
+    </where>
   </select>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >

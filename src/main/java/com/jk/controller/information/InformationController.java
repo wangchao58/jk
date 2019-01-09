@@ -118,15 +118,12 @@ public class InformationController {
 
     /**
      * 前端查询咨询详情（接口）
-     * @param request
-     * @param tId
+     * @param tInformation
      * @return
      */
     @RequestMapping("/getInformationByTid")
     @ResponseBody
-    public TInformation getInformationByTid(HttpServletRequest request, String tId){
-        TInformation tInformation = new TInformation();
-        tInformation.settId(tId);
+    public TInformation getInformationByTid(TInformation tInformation){
         TInformation informationByTid = informationService.getInformationByTid(tInformation);
         return informationByTid;
     }

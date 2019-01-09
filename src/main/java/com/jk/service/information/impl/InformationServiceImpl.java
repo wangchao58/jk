@@ -81,13 +81,12 @@ public class InformationServiceImpl implements InformationService {
     @Override
     public int prais(TInformation tInformation, String index) {
         TInformation informationByTid = tInformationMapper.getInformationByTid(tInformation);
-        TInformation informationData = new TInformation();
         if(StringUtils.equals("1", index)){
-            informationData.settPraise(informationByTid.gettPraise()+1);
+            tInformation.settPraise(informationByTid.gettPraise()+1);
         }else{
-            informationData.settPraise(informationByTid.gettPraise()-1);
+            tInformation.settPraise(informationByTid.gettPraise()-1);
         }
-        return tInformationMapper.updateByPrimaryKeySelective(informationData);
+        return tInformationMapper.updateByPrimaryKeySelective(tInformation);
     }
 
     /**

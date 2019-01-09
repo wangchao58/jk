@@ -191,4 +191,12 @@
       t_collection_num = #{tCollectionNum,jdbcType=INTEGER}
     where t_id = #{tId,jdbcType=VARCHAR}
   </update>
+
+  <!--  前端资讯详情查看（接口） getInformationByTid -->
+  <select id="getInformationByTid" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TInformation" >
+    select
+    <include refid="Base_Column_List" />
+    from t_information
+    where t_id = #{tId,jdbcType=VARCHAR}
+  </select>
 </mapper>
