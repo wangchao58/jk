@@ -2,6 +2,7 @@ package com.jk.mapper.reception;
 
 import com.jk.entity.reception.TEnshrine;
 import com.jk.entity.reception.TEnshrineExample;
+
 import java.util.List;
 
 public interface TEnshrineMapper {
@@ -18,4 +19,6 @@ public interface TEnshrineMapper {
     int updateByPrimaryKeySelective(TEnshrine record);
 
     int updateByPrimaryKey(TEnshrine record);
+
+    TEnshrine selEnshrine(TEnshrine tEnshrine);
 }

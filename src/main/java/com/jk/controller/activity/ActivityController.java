@@ -138,5 +138,16 @@ public class ActivityController extends BaseController {
         return activityByTid;
     }
 
+    /**
+     * 活动收藏（接口）
+     * @param tActivity
+     * @return
+     */
+    @RequestMapping("/collectionActivity")
+    @ResponseBody
+    public int collectionActivity(TActivity tActivity){
+        return activityService.collectionActivity(tActivity);
+    }
+
 
 }

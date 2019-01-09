@@ -64,7 +64,6 @@ public class TreeController extends BaseController {
     @RequestMapping(value = "/deptZtree")
     @ResponseBody
     public String deptZtree(TDept dept, HttpServletRequest request) {
-
         dept.setIds(this.getSession(request).getGroups());
         String ztree = tDeptService.selectByTree(dept);
         return ztree;

@@ -17,4 +17,6 @@ public interface ActivityService {
     int deleteByPrimaryKey(List<String> idlist);
 
     TActivity getActivityByTid(TActivity tActivity);
+
+    int collectionActivity(TActivity tActivity);
 }
