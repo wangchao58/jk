@@ -56,6 +56,11 @@
     select
     <include refid="Base_Column_List" />
     from t_activity
+    <where>
+      <if test="pId != null and pId !=''" >
+        and p_id = #{pId,jdbcType=VARCHAR}
+      </if>
+    </where>
   </select>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
@@ -257,13 +262,6 @@
     select
     <include refid="Base_Column_List" />
     from t_activity
-    <where>
-      <if test="tId != null and tId !=''" >
-        and t_id = #{tId,jdbcType=VARCHAR}
-      </if>
-      <if test="pId != null and pId !=''" >
-        and p_id = #{pId,jdbcType=VARCHAR}
-      </if>
-    </where>
+    where t_id = #{tId,jdbcType=VARCHAR}
   </select>
 </mapper>

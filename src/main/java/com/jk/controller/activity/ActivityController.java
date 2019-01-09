@@ -3,7 +3,9 @@ package com.jk.controller.activity;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.github.pagehelper.StringUtil;
+import com.jk.entity.jurisdiction.TUser;
 import com.jk.entity.reception.TActivity;
+import com.jk.entity.reception.TApply;
 import com.jk.service.activity.ActivityService;
 import com.jk.util.BaseController;
 import com.jk.util.JsonUtil;
@@ -130,10 +132,7 @@ public class ActivityController extends BaseController {
      */
     @RequestMapping(value = "/getActivityByTid")
     @ResponseBody
-    public TActivity getActivityByTid(HttpServletRequest request, String tId){
-        TActivity tActivity = new TActivity();
-        tActivity.settId(tId);
-//        TUser user = (TUser) request.getSession().getAttribute("user");//用户查询自己所发的活动信息
+    public TActivity getActivityByTid(HttpServletRequest request, TActivity tActivity){
         TActivity activityByTid = activityService.getActivityByTid(tActivity);
         return activityByTid;
     }
@@ -149,5 +148,15 @@ public class ActivityController extends BaseController {
         return activityService.collectionActivity(tActivity);
     }
 
+    /**
+     * 活动报名（接口）
+     * @param tApply
+     * @return
+     */
+    @RequestMapping("/activityApply")
+    @ResponseBody
+    public int activityApply(TApply tApply){
+        return activityService.activityApply(tApply);
+    }
 
 }

@@ -29,6 +29,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
                         "/activity/getActivityList",
                         "/activity/getActivityByTid",
                         "/activity/collectionActivity",
+                        "/activity/activityApply",
                         "/information/getInformationList",
                         "/information/getInformationByTid"
                         );

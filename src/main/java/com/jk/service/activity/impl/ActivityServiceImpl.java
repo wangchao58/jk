@@ -1,8 +1,10 @@
 package com.jk.service.activity.impl;
 
 import com.jk.entity.reception.TActivity;
+import com.jk.entity.reception.TApply;
 import com.jk.entity.reception.TEnshrine;
 import com.jk.mapper.reception.TActivityMapper;
+import com.jk.mapper.reception.TApplyMapper;
 import com.jk.mapper.reception.TEnshrineMapper;
 import com.jk.service.activity.ActivityService;
 import com.jk.util.UUIDUtil;
@@ -18,6 +20,8 @@ public class ActivityServiceImpl implements ActivityService {
     TActivityMapper tActivityMapper;// 活动
     @Autowired
     TEnshrineMapper tEnshrineMapper;// 收藏
+    @Autowired
+    TApplyMapper tApplyMapper;// 报名
 
     /**
      * 活动列表数据查询
@@ -37,6 +41,7 @@ public class ActivityServiceImpl implements ActivityService {
     @Override
     public int insertActivity(TActivity tActivity) {
         tActivity.settId(UUIDUtil.getUUID());
+        tActivity.settCreateTime(new Date());
         tActivityMapper.insertSelective(tActivity);
         return tActivityMapper.insertSelective(tActivity);
     }
@@ -78,7 +83,15 @@ public class ActivityServiceImpl implements ActivityService {
      */
     @Override
     public TActivity getActivityByTid(TActivity tActivity) {
-        return tActivityMapper.getActivityByTid(tActivity);
+        // 获取活动详情信息
+        TActivity activityByTid = tActivityMapper.getActivityByTid(tActivity);
+
+        // 增加此活动浏览次数
+        TActivity activityData = new TActivity();
+        activityData.settId(activityByTid.gettId());
+        activityData.settViewsNum(activityByTid.gettViewsNum()+1);
+        tActivityMapper.updateByPrimaryKeySelective(activityData);
+        return activityByTid;
     }
 
     /**
@@ -94,7 +107,7 @@ public class ActivityServiceImpl implements ActivityService {
 
         TEnshrine tEnshrine = new TEnshrine();
         tEnshrine.sethId(activityByTid.gettId());
-        tEnshrine.setpId(activityByTid.getpId());
+        tEnshrine.setpId(tActivity.getpId());
         TEnshrine enshrine = tEnshrineMapper.selEnshrine(tEnshrine);
         // 判断此活动用户是否收藏
         if(null != enshrine){
@@ -110,7 +123,7 @@ public class ActivityServiceImpl implements ActivityService {
         }else{
             tEnshrine.settId(UUIDUtil.getUUID());
             tEnshrine.sethId(activityByTid.gettId());
-            tEnshrine.setpId(activityByTid.getpId());
+            tEnshrine.setpId(tActivity.getpId());
             tEnshrine.settTime(new Date());
             // 收藏类型，0：拼车，1：店铺；2：活动；3：资讯
             tEnshrine.settType("2");
@@ -122,6 +135,28 @@ public class ActivityServiceImpl implements ActivityService {
                 activityData.settCollectionNum(activityByTid.gettCollectionNum()+1);
                 tActivityMapper.updateByPrimaryKeySelective(activityData);
             }
+        }
+        return i;
+    }
+
+    /**
+     * 活动报名（接口）
+     * @param tApply
+     * @return
+     */
+    @Override
+    public int activityApply(TApply tApply) {
+        int i = 0;
+        TActivity tActivity = new TActivity();
+        tActivity.settId(tApply.gethId());
+        TActivity activityByTid = tActivityMapper.getActivityByTid(tActivity);
+        tApply.settId(UUIDUtil.getUUID());
+        tApply.settTime(new Date());
+        i = tApplyMapper.insertSelective(tApply);
+        if(i>0){
+            // 报名人数增加
+            tActivity.settApplyNum(activityByTid.gettApplyNum()+1);
+            i = tActivityMapper.updateByPrimaryKeySelective(tActivity);
         }
         return i;
     }

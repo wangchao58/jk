@@ -1,6 +1,7 @@
 package com.jk.service.activity;
 
 import com.jk.entity.reception.TActivity;
+import com.jk.entity.reception.TApply;
 
 import java.util.List;
 
@@ -19,4 +20,6 @@ public interface ActivityService {
     TActivity getActivityByTid(TActivity tActivity);
 
     int collectionActivity(TActivity tActivity);
+
+    int activityApply(TApply tApply);
 }
