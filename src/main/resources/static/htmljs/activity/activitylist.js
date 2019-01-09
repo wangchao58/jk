@@ -17,7 +17,7 @@ jQuery(function($) {
             {label:'地点',name:'tSite', editable: true},
             {label:'开始时间',name:'tStartTime',  editable: true, formatter: formatDatebox},
             {label:'结束时间',name:'tEndTime',  editable: true, formatter: formatDatebox},
-            {label:'是否免费',name:'tCharge', editable: true, width:60},
+            {label:'是否免费',name:'tCharge', editable: true, width:60, formatter: statusdd},
             {label:'时间',name:'tTime',  editable: true, width:50 ,formatter: openupd}
         ],
         viewrecords : true,//定义是否要显示总记录数
@@ -191,3 +191,13 @@ function formatDatebox(Value, options, rowObject){
 }
 
 function add(m){return m<10?'0'+m:m };
+
+function statusdd(value) {
+    var tCharge='';
+    if(value=='0'){
+        tCharge='否';
+    } else if(value =='1') {
+        tCharge='是';
+    }
+    return tCharge;
+}
