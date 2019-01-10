@@ -90,8 +90,8 @@
         <div class="col-xs-12 col-sm-5">
             <select id="tCharge" name="tCharge" class="select2" data-placeholder="Click to Choose...">
                 <option>请选择</option>
-                <option th:value="0">否</option>
-                <option th:value="1">是</option>
+                <option th:value="0" th:selected="${tActivity.tCharge eq '0'}">否</option>
+                <option th:value="1" th:selected="${tActivity.tCharge eq '1'}">是</option>
             </select>
         </div>
     </div>
