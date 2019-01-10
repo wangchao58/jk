@@ -5,7 +5,7 @@
     <id column="t_id" property="tId" jdbcType="VARCHAR" />
     <result column="h_id" property="hId" jdbcType="VARCHAR" />
     <result column="p_id" property="pId" jdbcType="VARCHAR" />
-    <result column="t_time" property="tTime" jdbcType="TIMESTAMP" />
+    <result column="t_time" property="tTime" jdbcType="VARCHAR" />
     <result column="t_type" property="tType" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -69,7 +69,7 @@
     insert into t_enshrine (t_id, h_id, p_id, 
       t_time, t_type)
     values (#{tId,jdbcType=VARCHAR}, #{hId,jdbcType=VARCHAR}, #{pId,jdbcType=VARCHAR}, 
-      #{tTime,jdbcType=TIMESTAMP}, #{tType,jdbcType=VARCHAR})
+      #{tTime,jdbcType=VARCHAR}, #{tType,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jk.entity.reception.TEnshrine" >
     insert into t_enshrine
@@ -101,7 +101,7 @@
         #{pId,jdbcType=VARCHAR},
       </if>
       <if test="tTime != null" >
-        #{tTime,jdbcType=TIMESTAMP},
+        #{tTime,jdbcType=VARCHAR},
       </if>
       <if test="tType != null" >
         #{tType,jdbcType=VARCHAR},
@@ -118,7 +118,7 @@
         p_id = #{pId,jdbcType=VARCHAR},
       </if>
       <if test="tTime != null" >
-        t_time = #{tTime,jdbcType=TIMESTAMP},
+        t_time = #{tTime,jdbcType=VARCHAR},
       </if>
       <if test="tType != null" >
         t_type = #{tType,jdbcType=VARCHAR},
@@ -130,7 +130,7 @@
     update t_enshrine
     set h_id = #{hId,jdbcType=VARCHAR},
       p_id = #{pId,jdbcType=VARCHAR},
-      t_time = #{tTime,jdbcType=TIMESTAMP},
+      t_time = #{tTime,jdbcType=VARCHAR},
       t_type = #{tType,jdbcType=VARCHAR}
     where t_id = #{tId,jdbcType=VARCHAR}
   </update>

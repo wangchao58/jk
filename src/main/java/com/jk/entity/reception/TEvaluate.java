@@ -11,7 +11,7 @@ public class TEvaluate {
 
     private String tContent;
 
-    private Date createTime;
+    private String createTime;
 
     private String tPicture;
 
@@ -51,11 +51,11 @@ public class TEvaluate {
         this.tContent = tContent;
     }
 
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 

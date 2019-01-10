@@ -9,7 +9,7 @@ public class TEnshrine {
 
     private String pId;
 
-    private Date tTime;
+    private String tTime;
 
     private String tType;
 
@@ -37,11 +37,11 @@ public class TEnshrine {
         this.pId = pId;
     }
 
-    public Date gettTime() {
+    public String gettTime() {
         return tTime;
     }
 
-    public void settTime(Date tTime) {
+    public void settTime(String tTime) {
         this.tTime = tTime;
     }
 

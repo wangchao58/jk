@@ -9,7 +9,7 @@
     <result column="t_praise" property="tPraise" jdbcType="INTEGER" />
     <result column="t_evaluate" property="tEvaluate" jdbcType="INTEGER" />
     <result column="p_id" property="pId" jdbcType="VARCHAR" />
-    <result column="t_create_time" property="tCreateTime" jdbcType="TIMESTAMP" />
+    <result column="t_create_time" property="tCreateTime" jdbcType="VARCHAR" />
     <result column="t_views_num" property="tViewsNum" jdbcType="INTEGER" />
     <result column="t_collection_num" property="tCollectionNum" jdbcType="INTEGER" />
   </resultMap>
@@ -81,7 +81,7 @@
       t_collection_num)
     values (#{tId,jdbcType=VARCHAR}, #{tContent,jdbcType=VARCHAR}, #{tImg,jdbcType=VARCHAR}, 
       #{tCoordinate,jdbcType=VARCHAR}, #{tPraise,jdbcType=INTEGER}, #{tEvaluate,jdbcType=INTEGER}, 
-      #{pId,jdbcType=VARCHAR}, #{tCreateTime,jdbcType=TIMESTAMP}, #{tViewsNum,jdbcType=INTEGER}, 
+      #{pId,jdbcType=VARCHAR}, #{tCreateTime,jdbcType=VARCHAR}, #{tViewsNum,jdbcType=INTEGER}, 
       #{tCollectionNum,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.jk.entity.reception.TInformation" >
@@ -141,7 +141,7 @@
         #{pId,jdbcType=VARCHAR},
       </if>
       <if test="tCreateTime != null" >
-        #{tCreateTime,jdbcType=TIMESTAMP},
+        #{tCreateTime,jdbcType=VARCHAR},
       </if>
       <if test="tViewsNum != null" >
         #{tViewsNum,jdbcType=INTEGER},
@@ -173,7 +173,7 @@
         p_id = #{pId,jdbcType=VARCHAR},
       </if>
       <if test="tCreateTime != null" >
-        t_create_time = #{tCreateTime,jdbcType=TIMESTAMP},
+        t_create_time = #{tCreateTime,jdbcType=VARCHAR},
       </if>
       <if test="tViewsNum != null" >
         t_views_num = #{tViewsNum,jdbcType=INTEGER},
@@ -192,7 +192,7 @@
       t_praise = #{tPraise,jdbcType=INTEGER},
       t_evaluate = #{tEvaluate,jdbcType=INTEGER},
       p_id = #{pId,jdbcType=VARCHAR},
-      t_create_time = #{tCreateTime,jdbcType=TIMESTAMP},
+      t_create_time = #{tCreateTime,jdbcType=VARCHAR},
       t_views_num = #{tViewsNum,jdbcType=INTEGER},
       t_collection_num = #{tCollectionNum,jdbcType=INTEGER}
     where t_id = #{tId,jdbcType=VARCHAR}

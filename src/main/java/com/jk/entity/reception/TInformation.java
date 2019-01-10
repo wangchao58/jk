@@ -19,7 +19,7 @@ public class TInformation extends Page {
 
     private String pId;
 
-    private Date tCreateTime;
+    private String tCreateTime;
 
     private Integer tViewsNum;
 
@@ -83,11 +83,11 @@ public class TInformation extends Page {
         this.pId = pId;
     }
 
-    public Date gettCreateTime() {
+    public String gettCreateTime() {
         return tCreateTime;
     }
 
-    public void settCreateTime(Date tCreateTime) {
+    public void settCreateTime(String tCreateTime) {
         this.tCreateTime = tCreateTime;
     }
 

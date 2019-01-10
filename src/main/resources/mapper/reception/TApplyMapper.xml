@@ -5,7 +5,7 @@
     <id column="t_id" property="tId" jdbcType="VARCHAR" />
     <result column="h_id" property="hId" jdbcType="VARCHAR" />
     <result column="p_id" property="pId" jdbcType="VARCHAR" />
-    <result column="t_time" property="tTime" jdbcType="TIMESTAMP" />
+    <result column="t_time" property="tTime" jdbcType="VARCHAR" />
     <result column="t_phone" property="tPhone" jdbcType="VARCHAR" />
     <result column="t_weixing" property="tWeixing" jdbcType="VARCHAR" />
     <result column="t_introduction" property="tIntroduction" jdbcType="VARCHAR" />
@@ -72,7 +72,7 @@
       t_time, t_phone, t_weixing, 
       t_introduction)
     values (#{tId,jdbcType=VARCHAR}, #{hId,jdbcType=VARCHAR}, #{pId,jdbcType=VARCHAR}, 
-      #{tTime,jdbcType=TIMESTAMP}, #{tPhone,jdbcType=VARCHAR}, #{tWeixing,jdbcType=VARCHAR}, 
+      #{tTime,jdbcType=VARCHAR}, #{tPhone,jdbcType=VARCHAR}, #{tWeixing,jdbcType=VARCHAR}, 
       #{tIntroduction,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jk.entity.reception.TApply" >
@@ -111,7 +111,7 @@
         #{pId,jdbcType=VARCHAR},
       </if>
       <if test="tTime != null" >
-        #{tTime,jdbcType=TIMESTAMP},
+        #{tTime,jdbcType=VARCHAR},
       </if>
       <if test="tPhone != null" >
         #{tPhone,jdbcType=VARCHAR},
@@ -134,7 +134,7 @@
         p_id = #{pId,jdbcType=VARCHAR},
       </if>
       <if test="tTime != null" >
-        t_time = #{tTime,jdbcType=TIMESTAMP},
+        t_time = #{tTime,jdbcType=VARCHAR},
       </if>
       <if test="tPhone != null" >
         t_phone = #{tPhone,jdbcType=VARCHAR},
@@ -152,7 +152,7 @@
     update t_apply
     set h_id = #{hId,jdbcType=VARCHAR},
       p_id = #{pId,jdbcType=VARCHAR},
-      t_time = #{tTime,jdbcType=TIMESTAMP},
+      t_time = #{tTime,jdbcType=VARCHAR},
       t_phone = #{tPhone,jdbcType=VARCHAR},
       t_weixing = #{tWeixing,jdbcType=VARCHAR},
       t_introduction = #{tIntroduction,jdbcType=VARCHAR}

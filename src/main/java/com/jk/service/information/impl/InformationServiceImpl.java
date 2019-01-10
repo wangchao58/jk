@@ -5,6 +5,7 @@ import com.jk.entity.reception.TInformation;
 import com.jk.mapper.reception.TEvaluateMapper;
 import com.jk.mapper.reception.TInformationMapper;
 import com.jk.service.information.InformationService;
+import com.jk.util.DateUtil;
 import com.jk.util.UUIDUtil;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @Service
 public class InformationServiceImpl implements InformationService {
+    private String dateNow = DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss");
     @Autowired
     TInformationMapper tInformationMapper;
     @Autowired
@@ -53,7 +55,7 @@ public class InformationServiceImpl implements InformationService {
     @Override
     public int insertInformation(TInformation tInformation) {
         tInformation.settId(UUIDUtil.getUUID());
-        tInformation.settCreateTime(new Date());
+        tInformation.settCreateTime(dateNow);
         return tInformationMapper.insertSelective(tInformation);
     }
 
@@ -102,7 +104,7 @@ public class InformationServiceImpl implements InformationService {
         TInformation informationByTid = tInformationMapper.getInformationByTid(tInformation);
 
         tEvaluate.settId(UUIDUtil.getUUID());
-        tEvaluate.setCreateTime(new Date());
+        tEvaluate.setCreateTime(dateNow);
         tEvaluate.settType("3");//评论类型，0：拼车，1：店铺；2：活动；3：资讯
         i = tEvaluateMapper.insertSelective(tEvaluate);
         if(i > 0){

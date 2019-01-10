@@ -9,7 +9,7 @@ public class TApply {
 
     private String pId;
 
-    private Date tTime;
+    private String tTime;
 
     private String tPhone;
 
@@ -41,11 +41,11 @@ public class TApply {
         this.pId = pId;
     }
 
-    public Date gettTime() {
+    public String gettTime() {
         return tTime;
     }
 
-    public void settTime(Date tTime) {
+    public void settTime(String tTime) {
         this.tTime = tTime;
     }
 

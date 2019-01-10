@@ -17,6 +17,8 @@ import java.util.List;
 
 @Service
 public class ActivityServiceImpl implements ActivityService {
+    private String dateNow = DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss");
+
     @Autowired
     TActivityMapper tActivityMapper;// 活动
     @Autowired
@@ -41,7 +43,6 @@ public class ActivityServiceImpl implements ActivityService {
      */
     @Override
     public int insertActivity(TActivity tActivity) {
-        String dateNow = DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss");
         tActivity.settId(UUIDUtil.getUUID());
         tActivity.settCreateTime(dateNow);
         tActivityMapper.insertSelective(tActivity);
@@ -126,7 +127,7 @@ public class ActivityServiceImpl implements ActivityService {
             tEnshrine.settId(UUIDUtil.getUUID());
             tEnshrine.sethId(activityByTid.gettId());
             tEnshrine.setpId(tActivity.getpId());
-            tEnshrine.settTime(new Date());
+            tEnshrine.settTime(dateNow);
             // 收藏类型，0：拼车，1：店铺；2：活动；3：资讯
             tEnshrine.settType("2");
             i = tEnshrineMapper.insertSelective(tEnshrine);
@@ -153,7 +154,7 @@ public class ActivityServiceImpl implements ActivityService {
         tActivity.settId(tApply.gethId());
         TActivity activityByTid = tActivityMapper.getActivityByTid(tActivity);
         tApply.settId(UUIDUtil.getUUID());
-        tApply.settTime(new Date());
+        tApply.settTime(dateNow);
         i = tApplyMapper.insertSelective(tApply);
         if(i>0){
             // 报名人数增加
