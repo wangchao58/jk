@@ -5,9 +5,9 @@
     <id column="t_id" property="tId" jdbcType="VARCHAR" />
     <result column="t_headline" property="tHeadline" jdbcType="VARCHAR" />
     <result column="t_content" property="tContent" jdbcType="VARCHAR" />
-    <result column="t_start_time" property="tStartTime" jdbcType="TIMESTAMP" />
-    <result column="t_end_time" property="tEndTime" jdbcType="TIMESTAMP" />
-    <result column="t_create_time" property="tCreateTime" jdbcType="TIMESTAMP" />
+    <result column="t_start_time" property="tStartTime" jdbcType="VARCHAR" />
+    <result column="t_end_time" property="tEndTime" jdbcType="VARCHAR" />
+    <result column="t_create_time" property="tCreateTime" jdbcType="VARCHAR" />
     <result column="t_site" property="tSite" jdbcType="VARCHAR" />
     <result column="t_charge" property="tCharge" jdbcType="VARCHAR" />
     <result column="p_id" property="pId" jdbcType="VARCHAR" />
@@ -95,7 +95,7 @@
       t_apply_num, t_views_num, t_collection_num
       )
     values (#{tId,jdbcType=VARCHAR}, #{tHeadline,jdbcType=VARCHAR}, #{tContent,jdbcType=VARCHAR}, 
-      #{tStartTime,jdbcType=TIMESTAMP}, #{tEndTime,jdbcType=TIMESTAMP}, #{tCreateTime,jdbcType=TIMESTAMP}, 
+      #{tStartTime,jdbcType=VARCHAR}, #{tEndTime,jdbcType=VARCHAR}, #{tCreateTime,jdbcType=VARCHAR},
       #{tSite,jdbcType=VARCHAR}, #{tCharge,jdbcType=VARCHAR}, #{pId,jdbcType=VARCHAR}, 
       #{tPhone,jdbcType=VARCHAR}, #{tWeixing,jdbcType=VARCHAR}, #{tPerNum,jdbcType=INTEGER}, 
       #{tApplyNum,jdbcType=INTEGER}, #{tViewsNum,jdbcType=INTEGER}, #{tCollectionNum,jdbcType=INTEGER}
@@ -161,13 +161,13 @@
         #{tContent,jdbcType=VARCHAR},
       </if>
       <if test="tStartTime != null" >
-        #{tStartTime,jdbcType=TIMESTAMP},
+        #{tStartTime,jdbcType=VARCHAR},
       </if>
       <if test="tEndTime != null" >
-        #{tEndTime,jdbcType=TIMESTAMP},
+        #{tEndTime,jdbcType=VARCHAR},
       </if>
       <if test="tCreateTime != null" >
-        #{tCreateTime,jdbcType=TIMESTAMP},
+        #{tCreateTime,jdbcType=VARCHAR},
       </if>
       <if test="tSite != null" >
         #{tSite,jdbcType=VARCHAR},
@@ -208,13 +208,13 @@
         t_content = #{tContent,jdbcType=VARCHAR},
       </if>
       <if test="tStartTime != null" >
-        t_start_time = #{tStartTime,jdbcType=TIMESTAMP},
+        t_start_time = #{tStartTime,jdbcType=VARCHAR},
       </if>
       <if test="tEndTime != null" >
-        t_end_time = #{tEndTime,jdbcType=TIMESTAMP},
+        t_end_time = #{tEndTime,jdbcType=VARCHAR},
       </if>
       <if test="tCreateTime != null" >
-        t_create_time = #{tCreateTime,jdbcType=TIMESTAMP},
+        t_create_time = #{tCreateTime,jdbcType=VARCHAR},
       </if>
       <if test="tSite != null" >
         t_site = #{tSite,jdbcType=VARCHAR},
@@ -250,9 +250,9 @@
     update t_activity
     set t_headline = #{tHeadline,jdbcType=VARCHAR},
       t_content = #{tContent,jdbcType=VARCHAR},
-      t_start_time = #{tStartTime,jdbcType=TIMESTAMP},
-      t_end_time = #{tEndTime,jdbcType=TIMESTAMP},
-      t_create_time = #{tCreateTime,jdbcType=TIMESTAMP},
+      t_start_time = #{tStartTime,jdbcType=VARCHAR},
+      t_end_time = #{tEndTime,jdbcType=VARCHAR},
+      t_create_time = #{tCreateTime,jdbcType=VARCHAR},
       t_site = #{tSite,jdbcType=VARCHAR},
       t_charge = #{tCharge,jdbcType=VARCHAR},
       p_id = #{pId,jdbcType=VARCHAR},

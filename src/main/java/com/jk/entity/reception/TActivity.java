@@ -2,8 +2,6 @@ package com.jk.entity.reception;
 
 import com.jk.util.Page;
 
-import java.util.Date;
-
 public class TActivity extends Page {
     private String tId;
 
@@ -11,11 +9,11 @@ public class TActivity extends Page {
 
     private String tContent;
 
-    private Date tStartTime;
+    private String tStartTime;
 
-    private Date tEndTime;
+    private String tEndTime;
 
-    private Date tCreateTime;
+    private String tCreateTime;
 
     private String tSite;
 
@@ -59,27 +57,27 @@ public class TActivity extends Page {
         this.tContent = tContent;
     }
 
-    public Date gettStartTime() {
+    public String gettStartTime() {
         return tStartTime;
     }
 
-    public void settStartTime(Date tStartTime) {
+    public void settStartTime(String tStartTime) {
         this.tStartTime = tStartTime;
     }
 
-    public Date gettEndTime() {
+    public String gettEndTime() {
         return tEndTime;
     }
 
-    public void settEndTime(Date tEndTime) {
+    public void settEndTime(String tEndTime) {
         this.tEndTime = tEndTime;
     }
 
-    public Date gettCreateTime() {
+    public String gettCreateTime() {
         return tCreateTime;
     }
 
-    public void settCreateTime(Date tCreateTime) {
+    public void settCreateTime(String tCreateTime) {
         this.tCreateTime = tCreateTime;
     }
 

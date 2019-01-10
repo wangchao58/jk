@@ -7,6 +7,7 @@ import com.jk.mapper.reception.TActivityMapper;
 import com.jk.mapper.reception.TApplyMapper;
 import com.jk.mapper.reception.TEnshrineMapper;
 import com.jk.service.activity.ActivityService;
+import com.jk.util.DateUtil;
 import com.jk.util.UUIDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,8 +41,9 @@ public class ActivityServiceImpl implements ActivityService {
      */
     @Override
     public int insertActivity(TActivity tActivity) {
+        String dateNow = DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss");
         tActivity.settId(UUIDUtil.getUUID());
-        tActivity.settCreateTime(new Date());
+        tActivity.settCreateTime(dateNow);
         tActivityMapper.insertSelective(tActivity);
         return tActivityMapper.insertSelective(tActivity);
     }

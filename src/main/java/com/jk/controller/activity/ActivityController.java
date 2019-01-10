@@ -3,7 +3,6 @@ package com.jk.controller.activity;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.github.pagehelper.StringUtil;
-import com.jk.entity.jurisdiction.TUser;
 import com.jk.entity.reception.TActivity;
 import com.jk.entity.reception.TApply;
 import com.jk.service.activity.ActivityService;
