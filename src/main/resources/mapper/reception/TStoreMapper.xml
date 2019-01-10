@@ -50,20 +50,10 @@
     t_id, t_store_name, t_site, t_phone, t_qr_code, t_create_time, t_end_time, t_states, 
     t_explain, t_issuer, t_payment, t_money, t_views_num, t_collection_num
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TStoreExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TStore" >
     select
-    <if test="distinct" >
-      distinct
-    </if>
-    'false' as QUERYID,
     <include refid="Base_Column_List" />
     from t_store
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -71,9 +61,12 @@
     from t_store
     where t_id = #{tId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+  <delete id="deleteByPrimaryKey" parameterType="java.util.List" >
     delete from t_store
-    where t_id = #{tId,jdbcType=VARCHAR}
+    where t_id in
+    <foreach collection="list" item="ids" open="(" close=")" separator=",">
+      '${ids}'
+    </foreach>
   </delete>
   <insert id="insert" parameterType="com.jk.entity.reception.TStore" >
     insert into t_store (t_id, t_store_name, t_site, 

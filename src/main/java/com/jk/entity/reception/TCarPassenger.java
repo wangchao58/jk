@@ -1,6 +1,8 @@
 package com.jk.entity.reception;
 
-public class TCarPassenger {
+import com.jk.util.Page;
+
+public class TCarPassenger extends Page {
     private String tId;
 
     private String tLinkman;

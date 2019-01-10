@@ -5,13 +5,13 @@ import com.jk.entity.reception.TStoreExample;
 import java.util.List;
 
 public interface TStoreMapper {
-    int deleteByPrimaryKey(String tId);
+    int deleteByPrimaryKey(List<String> ids);
 
     int insert(TStore record);
 
     int insertSelective(TStore record);
 
-    List<TStore> selectByExample(TStoreExample example);
+    List<TStore> selectByExample(TStore example);
 
     TStore selectByPrimaryKey(String tId);
 

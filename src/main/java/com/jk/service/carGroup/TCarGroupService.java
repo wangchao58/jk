@@ -1,13 +1,12 @@
-package com.jk.mapper.reception;
+package com.jk.service.carGroup;
 
 import com.jk.entity.reception.TCarGroup;
-import com.jk.entity.reception.TCarGroupExample;
+
 import java.util.List;
 
-public interface TCarGroupMapper {
-    int deleteByPrimaryKey(List<String> ids);
+public interface TCarGroupService {
 
-    int insert(TCarGroup record);
+    int deleteByPrimaryKey(String ids);
 
     int insertSelective(TCarGroup record);
 
@@ -16,6 +15,4 @@ public interface TCarGroupMapper {
     TCarGroup selectByPrimaryKey(String tId);
 
     int updateByPrimaryKeySelective(TCarGroup record);
-
-    int updateByPrimaryKey(TCarGroup record);
 }

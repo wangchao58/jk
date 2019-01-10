@@ -1,13 +1,13 @@
-package com.jk.mapper.reception;
+package com.jk.service.carPassenger;
 
 import com.jk.entity.reception.TCarPassenger;
 import com.jk.entity.reception.TCarPassengerExample;
+
 import java.util.List;
 
-public interface TCarPassengerMapper {
-    int deleteByPrimaryKey(List<String> ids);
+public interface TCarPassengerService {
 
-    int insert(TCarPassenger record);
+    int deleteByPrimaryKey(String tId);
 
     int insertSelective(TCarPassenger record);
 
@@ -17,5 +17,4 @@ public interface TCarPassengerMapper {
 
     int updateByPrimaryKeySelective(TCarPassenger record);
 
-    int updateByPrimaryKey(TCarPassenger record);
 }

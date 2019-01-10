@@ -1,6 +1,8 @@
 package com.jk.entity.reception;
 
-public class TStore {
+import com.jk.util.Page;
+
+public class TStore extends Page {
     private String tId;
 
     private String tStoreName;

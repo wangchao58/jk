@@ -47,20 +47,11 @@
     t_id, t_linkman, t_sex, t_phone, t_point, t_destination, t_depart, t_num_people, 
     t_fare, t_explain, t_issuer
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TCarPassengerExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TCarPassenger" >
     select
-    <if test="distinct" >
-      distinct
-    </if>
-    'false' as QUERYID,
     <include refid="Base_Column_List" />
     from t_car_passenger
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
+
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -68,10 +59,15 @@
     from t_car_passenger
     where t_id = #{tId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+
+  <delete id="deleteByPrimaryKey" parameterType="java.util.List" >
     delete from t_car_passenger
-    where t_id = #{tId,jdbcType=VARCHAR}
+    where t_id in
+    <foreach collection="list" item="ids" separator="," open="(" close=")" >
+      '${ids}'
+    </foreach>
   </delete>
+
   <insert id="insert" parameterType="com.jk.entity.reception.TCarPassenger" >
     insert into t_car_passenger (t_id, t_linkman, t_sex, 
       t_phone, t_point, t_destination, 

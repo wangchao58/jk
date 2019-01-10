@@ -1,6 +1,8 @@
 package com.jk.entity.reception;
 
-public class TCarOwner {
+import com.jk.util.Page;
+
+public class TCarOwner extends Page {
     private String tId;
 
     private String tLinkman;
@@ -17,6 +19,8 @@ public class TCarOwner {
 
     private String tWay;
 
+    private String tDepart;
+
     private String tVacantSeat;
 
     private String tCarType;
@@ -26,8 +30,6 @@ public class TCarOwner {
     private String tExplain;
 
     private String tIssuer;
-
-    private byte[] tDepart;
 
     public String gettId() {
         return tId;
@@ -93,6 +95,14 @@ public class TCarOwner {
         this.tWay = tWay;
     }
 
+    public String gettDepart() {
+        return tDepart;
+    }
+
+    public void settDepart(String tDepart) {
+        this.tDepart = tDepart;
+    }
+
     public String gettVacantSeat() {
         return tVacantSeat;
     }
@@ -131,13 +141,5 @@ public class TCarOwner {
 
     public void settIssuer(String tIssuer) {
         this.tIssuer = tIssuer;
-    }
-
-    public byte[] gettDepart() {
-        return tDepart;
-    }
-
-    public void settDepart(byte[] tDepart) {
-        this.tDepart = tDepart;
     }
 }

@@ -664,6 +664,76 @@ public class TCarOwnerExample {
             return (Criteria) this;
         }
 
+        public Criteria andTDepartIsNull() {
+            addCriterion("t_depart is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTDepartIsNotNull() {
+            addCriterion("t_depart is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTDepartEqualTo(String value) {
+            addCriterion("t_depart =", value, "tDepart");
+            return (Criteria) this;
+        }
+
+        public Criteria andTDepartNotEqualTo(String value) {
+            addCriterion("t_depart <>", value, "tDepart");
+            return (Criteria) this;
+        }
+
+        public Criteria andTDepartGreaterThan(String value) {
+            addCriterion("t_depart >", value, "tDepart");
+            return (Criteria) this;
+        }
+
+        public Criteria andTDepartGreaterThanOrEqualTo(String value) {
+            addCriterion("t_depart >=", value, "tDepart");
+            return (Criteria) this;
+        }
+
+        public Criteria andTDepartLessThan(String value) {
+            addCriterion("t_depart <", value, "tDepart");
+            return (Criteria) this;
+        }
+
+        public Criteria andTDepartLessThanOrEqualTo(String value) {
+            addCriterion("t_depart <=", value, "tDepart");
+            return (Criteria) this;
+        }
+
+        public Criteria andTDepartLike(String value) {
+            addCriterion("t_depart like", value, "tDepart");
+            return (Criteria) this;
+        }
+
+        public Criteria andTDepartNotLike(String value) {
+            addCriterion("t_depart not like", value, "tDepart");
+            return (Criteria) this;
+        }
+
+        public Criteria andTDepartIn(List<String> values) {
+            addCriterion("t_depart in", values, "tDepart");
+            return (Criteria) this;
+        }
+
+        public Criteria andTDepartNotIn(List<String> values) {
+            addCriterion("t_depart not in", values, "tDepart");
+            return (Criteria) this;
+        }
+
+        public Criteria andTDepartBetween(String value1, String value2) {
+            addCriterion("t_depart between", value1, value2, "tDepart");
+            return (Criteria) this;
+        }
+
+        public Criteria andTDepartNotBetween(String value1, String value2) {
+            addCriterion("t_depart not between", value1, value2, "tDepart");
+            return (Criteria) this;
+        }
+
         public Criteria andTVacantSeatIsNull() {
             addCriterion("t_vacant_seat is null");
             return (Criteria) this;
