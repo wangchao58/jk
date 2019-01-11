@@ -35,6 +35,8 @@ public class TActivity extends Page {
 
     private String tMoney;
 
+    private String tImg;
+
     public String gettId() {
         return tId;
     }
@@ -161,5 +163,13 @@ public class TActivity extends Page {
 
     public void settMoney(String tMoney) {
         this.tMoney = tMoney;
+    }
+
+    public String gettImg() {
+        return tImg;
+    }
+
+    public void settImg(String tImg) {
+        this.tImg = tImg;
     }
 }
