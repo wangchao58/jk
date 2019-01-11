@@ -1,8 +1,6 @@
 package com.jk.service.information.impl;
 
-import com.jk.entity.reception.TEvaluate;
 import com.jk.entity.reception.TInformation;
-import com.jk.mapper.reception.TEvaluateMapper;
 import com.jk.mapper.reception.TInformationMapper;
 import com.jk.service.information.InformationService;
 import com.jk.util.DateUtil;
@@ -19,8 +17,6 @@ public class InformationServiceImpl implements InformationService {
     private String dateNow = DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss");
     @Autowired
     TInformationMapper tInformationMapper;
-    @Autowired
-    TEvaluateMapper tEvaluateMapper;
 
     /**
      * 资讯列表数据查询
@@ -89,39 +85,5 @@ public class InformationServiceImpl implements InformationService {
             tInformation.settPraise(informationByTid.gettPraise()-1);
         }
         return tInformationMapper.updateByPrimaryKeySelective(tInformation);
-    }
-
-    /**
-     * 资讯评论（接口）
-     * @param tEvaluate
-     * @return
-     */
-    @Override
-    public int addEvaluate(TEvaluate tEvaluate) {
-        int i = 0;
-        TInformation tInformation = new TInformation();
-        tInformation.settId(tEvaluate.gettOtherId());
-        TInformation informationByTid = tInformationMapper.getInformationByTid(tInformation);
-
-        tEvaluate.settId(UUIDUtil.getUUID());
-        tEvaluate.setCreateTime(dateNow);
-        tEvaluate.settType("3");//评论类型，0：拼车，1：店铺；2：活动；3：资讯
-        i = tEvaluateMapper.insertSelective(tEvaluate);
-        if(i > 0){
-            // 修改评论条数
-            tInformation.settEvaluate(informationByTid.gettEvaluate()+1);
-            i = tInformationMapper.updateByPrimaryKeySelective(tInformation);
-        }
-        return i;
-    }
-
-    /**
-     * 查询资讯评论信息（接口）
-     * @param tEvaluate
-     * @return
-     */
-    @Override
-    public List<TEvaluate> selTEvaluateList(TEvaluate tEvaluate) {
-        return tEvaluateMapper.selectByExample(tEvaluate);
     }
 }

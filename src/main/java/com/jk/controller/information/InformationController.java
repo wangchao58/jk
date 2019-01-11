@@ -3,7 +3,6 @@ package com.jk.controller.information;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.github.pagehelper.StringUtil;
-import com.jk.entity.reception.TEvaluate;
 import com.jk.entity.reception.TInformation;
 import com.jk.service.activity.ActivityService;
 import com.jk.service.information.InformationService;
@@ -14,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.List;
 
@@ -139,27 +137,5 @@ public class InformationController {
     @ResponseBody
     public int prais(TInformation tInformation, String index){
         return informationService.prais(tInformation, index);
-    }
-
-    /**
-     * 资讯评论（接口）
-     * @param tEvaluate
-     * @return
-     */
-    @RequestMapping("/addEvaluate")
-    @ResponseBody
-    public int addEvaluate(TEvaluate tEvaluate){
-        return informationService.addEvaluate(tEvaluate);
-    }
-
-    /**
-     * 查询资讯评论信息（接口）
-     * @param tEvaluate
-     * @return
-     */
-    @RequestMapping("/selTEvaluateList")
-    @ResponseBody
-    public List<TEvaluate> selTEvaluateList(TEvaluate tEvaluate){
-        return informationService.selTEvaluateList(tEvaluate);
     }
 }
