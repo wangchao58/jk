@@ -141,11 +141,11 @@ public class ActivityController extends BaseController {
      * @param tActivity
      * @return
      */
-    @RequestMapping("/collectionActivity")
+    /*@RequestMapping(value = "/collectionActivity")
     @ResponseBody
     public int collectionActivity(TActivity tActivity){
         return activityService.collectionActivity(tActivity);
-    }
+    }*/
 
     /**
      * 活动报名（接口）

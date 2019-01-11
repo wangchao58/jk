@@ -19,7 +19,7 @@ public interface ActivityService {
 
     TActivity getActivityByTid(TActivity tActivity);
 
-    int collectionActivity(TActivity tActivity);
+//    int collectionActivity(TActivity tActivity);
 
     int activityApply(TApply tApply);
 }

@@ -102,7 +102,7 @@ public class ActivityServiceImpl implements ActivityService {
      * @param tActivity
      * @return
      */
-    @Override
+    /*@Override
     public int collectionActivity(TActivity tActivity) {
         int i = 0;
         // 根据活动id查询活动信息
@@ -140,7 +140,7 @@ public class ActivityServiceImpl implements ActivityService {
             }
         }
         return i;
-    }
+    }*/
 
     /**
      * 活动报名（接口）
