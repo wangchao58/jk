@@ -17,44 +17,21 @@
     <result column="t_apply_num" property="tApplyNum" jdbcType="INTEGER" />
     <result column="t_views_num" property="tViewsNum" jdbcType="INTEGER" />
     <result column="t_collection_num" property="tCollectionNum" jdbcType="INTEGER" />
+    <result column="t_money" property="tMoney" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
+
     </where>
   </sql>
   <sql id="Base_Column_List" >
     t_id, t_headline, t_content, t_start_time, t_end_time, t_create_time, t_site, t_charge, 
-    p_id, t_phone, t_weixing, t_per_num, t_apply_num, t_views_num, t_collection_num
+    p_id, t_phone, t_weixing, t_per_num, t_apply_num, t_views_num, t_collection_num, t_money
   </sql>
 
   <sql id="getActivityList" >
     a.t_id, a.t_headline, a.t_content, a.t_start_time, a.t_end_time, a.t_create_time, a.t_site, a.t_charge,
-    p.nickName as p_id, a.t_phone, a.t_weixing, a.t_per_num, a.t_apply_num, a.t_views_num, a.t_collection_num
+    p.nickName as p_id, a.t_phone, a.t_weixing, a.t_per_num, a.t_apply_num, a.t_views_num, a.t_collection_num, a.t_money
   </sql>
 
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TActivityExample" >
@@ -92,13 +69,14 @@
       t_start_time, t_end_time, t_create_time, 
       t_site, t_charge, p_id, 
       t_phone, t_weixing, t_per_num, 
-      t_apply_num, t_views_num, t_collection_num
+      t_apply_num, t_views_num, t_collection_num, t_money
       )
     values (#{tId,jdbcType=VARCHAR}, #{tHeadline,jdbcType=VARCHAR}, #{tContent,jdbcType=VARCHAR}, 
       #{tStartTime,jdbcType=VARCHAR}, #{tEndTime,jdbcType=VARCHAR}, #{tCreateTime,jdbcType=VARCHAR},
       #{tSite,jdbcType=VARCHAR}, #{tCharge,jdbcType=VARCHAR}, #{pId,jdbcType=VARCHAR}, 
       #{tPhone,jdbcType=VARCHAR}, #{tWeixing,jdbcType=VARCHAR}, #{tPerNum,jdbcType=INTEGER}, 
-      #{tApplyNum,jdbcType=INTEGER}, #{tViewsNum,jdbcType=INTEGER}, #{tCollectionNum,jdbcType=INTEGER}
+      #{tApplyNum,jdbcType=INTEGER}, #{tViewsNum,jdbcType=INTEGER}, #{tCollectionNum,jdbcType=INTEGER},
+      #{tMoney,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.jk.entity.reception.TActivity" >
@@ -149,6 +127,9 @@
       <if test="tCollectionNum != null" >
         t_collection_num,
       </if>
+      <if test="tMoney != null" >
+        t_money,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="tId != null" >
@@ -195,6 +176,9 @@
       </if>
       <if test="tCollectionNum != null" >
         #{tCollectionNum,jdbcType=INTEGER},
+      </if>
+      <if test="tMoney != null" >
+        #{tMoney,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -243,6 +227,9 @@
       <if test="tCollectionNum != null" >
         t_collection_num = #{tCollectionNum,jdbcType=INTEGER},
       </if>
+      <if test="tMoney != null" >
+        t_money = #{tMoney,jdbcType=INTEGER},
+      </if>
     </set>
     where t_id = #{tId,jdbcType=VARCHAR}
   </update>
@@ -261,7 +248,8 @@
       t_per_num = #{tPerNum,jdbcType=INTEGER},
       t_apply_num = #{tApplyNum,jdbcType=INTEGER},
       t_views_num = #{tViewsNum,jdbcType=INTEGER},
-      t_collection_num = #{tCollectionNum,jdbcType=INTEGER}
+      t_collection_num = #{tCollectionNum,jdbcType=INTEGER},
+      t_money = #{tMoney,jdbcType=VARCHAR}
     where t_id = #{tId,jdbcType=VARCHAR}
   </update>
 

@@ -33,6 +33,8 @@ public class TActivity extends Page {
 
     private Integer tCollectionNum;
 
+    private String tMoney;
+
     public String gettId() {
         return tId;
     }
@@ -151,5 +153,13 @@ public class TActivity extends Page {
 
     public void settCollectionNum(Integer tCollectionNum) {
         this.tCollectionNum = tCollectionNum;
+    }
+
+    public String gettMoney() {
+        return tMoney;
+    }
+
+    public void settMoney(String tMoney) {
+        this.tMoney = tMoney;
     }
 }
