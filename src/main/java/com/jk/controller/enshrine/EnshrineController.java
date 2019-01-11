@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/enshrine")
 public class EnshrineController {
@@ -22,5 +24,16 @@ public class EnshrineController {
     @ResponseBody
     public int addEnshrine(TEnshrine tEnshrine){
         return enshrineService.addEnshrine(tEnshrine);
+    }
+
+    /**
+     * 收藏数据查询（接口）
+     * @param tEnshrine
+     * @return
+     */
+    @RequestMapping(value = "/selEnshrineList")
+    @ResponseBody
+    public List<TEnshrine> selEnshrineList(TEnshrine tEnshrine){
+        return enshrineService.selEnshrineList(tEnshrine);
     }
 }

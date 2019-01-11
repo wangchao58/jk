@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class EnshrineServiceImpl implements EnshrineService {
@@ -42,6 +43,16 @@ public class EnshrineServiceImpl implements EnshrineService {
 
         }
         return i;
+    }
+
+    /**
+     * 收藏数据查询（接口）
+     * @param tEnshrine
+     * @return
+     */
+    @Override
+    public List<TEnshrine> selEnshrineList(TEnshrine tEnshrine) {
+        return tEnshrineMapper.selectByExample(tEnshrine);
     }
 
     /**

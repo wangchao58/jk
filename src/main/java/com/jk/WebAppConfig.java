@@ -36,7 +36,8 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
                         "/information/prais",
                         "/information/addEvaluate",
                         "/information/selTEvaluateList",
-                        "/enshrine/addEnshrine"
+                        "/enshrine/addEnshrine",
+                        "/enshrine/selEnshrineList"
                         );
 
     }
