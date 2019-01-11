@@ -11,7 +11,7 @@ public interface TPersonageMapper {
 
     int insertSelective(TPersonage record);
 
-    List<TPersonage> selectByExample(TPersonageExample example);
+    List<TPersonage> selectByExample(TPersonage record);
 
     TPersonage selectByPrimaryKey(String tId);
 

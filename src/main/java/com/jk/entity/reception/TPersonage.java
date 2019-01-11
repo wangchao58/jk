@@ -1,8 +1,8 @@
 package com.jk.entity.reception;
 
-import java.util.Date;
+import com.jk.util.Page;
 
-public class TPersonage {
+public class TPersonage extends Page {
     private String tId;
 
     private String openid;
@@ -13,9 +13,9 @@ public class TPersonage {
 
     private String tPhone;
 
-    private Date tCreateTime;
+    private String tCreateTime;
 
-    private Date tUpdateTime;
+    private String tUpdateTime;
 
     private String tSex;
 
@@ -59,19 +59,19 @@ public class TPersonage {
         this.tPhone = tPhone;
     }
 
-    public Date gettCreateTime() {
+    public String gettCreateTime() {
         return tCreateTime;
     }
 
-    public void settCreateTime(Date tCreateTime) {
+    public void settCreateTime(String tCreateTime) {
         this.tCreateTime = tCreateTime;
     }
 
-    public Date gettUpdateTime() {
+    public String gettUpdateTime() {
         return tUpdateTime;
     }
 
-    public void settUpdateTime(Date tUpdateTime) {
+    public void settUpdateTime(String tUpdateTime) {
         this.tUpdateTime = tUpdateTime;
     }
 

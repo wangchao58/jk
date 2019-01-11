@@ -18,6 +18,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
                         "/**/*.gif",
                         "/**/*.css",
                         "/**/*.ts",
+                        "/personage/addPersonage",
                         "/territory/listTerritorySele",
                         "/dept/listDeptByPort",
                         "/slideshow/listSlideshowByPort",
