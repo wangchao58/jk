@@ -33,19 +33,19 @@ public class TCarPassengerController extends BaseController {
     public String listMenuView(Model model, String pid, String id) {
         model.addAttribute("pid",pid);
         model.addAttribute("id",id);
-        return "html/authority/CarPassenger/listCarPassenger";
+        return "html/reception/carPassenger/listCarPassenger";
     }
 
 
     /**
      * 删除乘客发布的信息
-     * @param tId
+     * @param ids
      * @return
      */
     @RequestMapping(value = "/deleteByPrimaryKey")
     @ResponseBody
-    public int deleteByPrimaryKey(String tId) {
-        int i = tCarPassengerService.deleteByPrimaryKey(tId);
+    public int deleteByPrimaryKey(String ids) {
+        int i = tCarPassengerService.deleteByPrimaryKey(ids);
         return i;
     }
 

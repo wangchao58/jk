@@ -33,19 +33,19 @@ public class TCarOwnerController {
     public String listMenuView(Model model, String pid, String id) {
         model.addAttribute("pid",pid);
         model.addAttribute("id",id);
-        return "html/authority/CarPassenger/listCarPassenger";
+        return "html/reception/carOwner/carOwnerlist";
     }
 
 
     /**
      * 删除拼车车主发布的信息
-     * @param tId
+     * @param ids
      * @return
      */
     @RequestMapping(value = "/deleteByPrimaryKey")
     @ResponseBody
-    public int deleteByPrimaryKey(String tId) {
-        int i = tCarOwnerService.deleteByPrimaryKey(tId);
+    public int deleteByPrimaryKey(String ids) {
+        int i = tCarOwnerService.deleteByPrimaryKey(ids);
         return i;
     }
 

@@ -2,7 +2,6 @@ package com.jk.controller.store;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.jk.entity.reception.TCarOwner;
 import com.jk.entity.reception.TStore;
 import com.jk.service.store.TStoreService;
 import com.jk.util.JsonUtil;
@@ -27,19 +26,19 @@ public class TStoreController  {
 
 
     /**
-     * 进入拼车车主列表页面
+     * 进入店铺管理列表页面
      * @return
      */
-    @RequestMapping(value = "/listCarPassengerView")
+    @RequestMapping(value = "/listStoreView")
     public String listMenuView(Model model, String pid, String id) {
         model.addAttribute("pid",pid);
         model.addAttribute("id",id);
-        return "html/authority/CarPassenger/listCarPassenger";
+        return "html/reception/store/storeList";
     }
 
 
     /**
-     * 删除拼车车主发布的信息
+     * 删除店铺管理发布的信息
      * @param tId
      * @return
      */
@@ -50,6 +49,11 @@ public class TStoreController  {
         return i;
     }
 
+    /**
+     * 增加店铺管理发布的信息
+     * @param record
+     * @return
+     */
     @RequestMapping(value = "/insertSelective")
     @ResponseBody
     public int insertSelective(TStore record) {
@@ -77,6 +81,12 @@ public class TStoreController  {
         return JsonUtil.toJsonString(record);
     }
 
+    /**
+     * 功能：查询一条
+     * 作者：transcend
+     * @param tId
+     * @return
+     */
     @RequestMapping(value = "/selectByPrimaryKey")
     @ResponseBody
     public TStore selectByPimaryKey(String tId) {
@@ -84,6 +94,12 @@ public class TStoreController  {
         return tStore;
     }
 
+    /**
+     * 功能：修改
+     * 作者：transcend
+     * @param record
+     * @return
+     */
     @RequestMapping(value = "/updateByPrimaryKeySelective")
     @ResponseBody
     public int updateByPrimaryKeySelective(TStore record) {
