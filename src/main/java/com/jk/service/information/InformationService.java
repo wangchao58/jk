@@ -1,6 +1,5 @@
 package com.jk.service.information;
 
-import com.jk.entity.reception.TEvaluate;
 import com.jk.entity.reception.TInformation;
 
 import java.util.List;
@@ -19,8 +18,4 @@ public interface InformationService {
     TInformation getInformationByTid(TInformation tInformation);
 
     int prais(TInformation tInformation, String index);
-
-    int addEvaluate(TEvaluate tEvaluate);
-
-    List<TEvaluate> selTEvaluateList(TEvaluate tEvaluate);
 }

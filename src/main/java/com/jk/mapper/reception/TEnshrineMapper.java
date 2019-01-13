@@ -12,7 +12,7 @@ public interface TEnshrineMapper {
 
     int insertSelective(TEnshrine record);
 
-    List<TEnshrine> selectByExample(TEnshrineExample example);
+    List<TEnshrine> selectByExample(TEnshrine tEnshrine);
 
     TEnshrine selectByPrimaryKey(String tId);
 

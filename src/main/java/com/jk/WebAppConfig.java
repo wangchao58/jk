@@ -18,6 +18,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
                         "/**/*.gif",
                         "/**/*.css",
                         "/**/*.ts",
+                        "/personage/addPersonage",
                         "/territory/listTerritorySele",
                         "/dept/listDeptByPort",
                         "/slideshow/listSlideshowByPort",
@@ -29,14 +30,15 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
                         "/activity/addActivity",
                         "/activity/getActivityList",
                         "/activity/getActivityByTid",
-                        "/activity/collectionActivity",
                         "/activity/activityApply",
                         "/information/addInformation",
                         "/information/getInformationList",
                         "/information/getInformationByTid",
                         "/information/prais",
-                        "/information/addEvaluate",
-                        "/information/selTEvaluateList"
+                        "/evaluate/addEvaluate",
+                        "/evaluate/selTEvaluateList",
+                        "/enshrine/addEnshrine",
+                        "/enshrine/selEnshrineList"
                         );
 
     }
