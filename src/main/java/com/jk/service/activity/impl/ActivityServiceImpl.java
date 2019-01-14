@@ -88,6 +88,8 @@ public class ActivityServiceImpl implements ActivityService {
     public TActivity getActivityByTid(TActivity tActivity) {
         // 获取活动详情信息
         TActivity activityByTid = tActivityMapper.getActivityByTid(tActivity);
+        activityByTid.settStartTime(activityByTid.gettStartTime().substring(0,16));
+        activityByTid.settEndTime(activityByTid.gettEndTime().substring(0,16));
 
         // 增加此活动浏览次数
         TActivity activityData = new TActivity();
