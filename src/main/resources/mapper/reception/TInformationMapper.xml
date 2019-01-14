@@ -12,34 +12,11 @@
     <result column="t_create_time" property="tCreateTime" jdbcType="VARCHAR" />
     <result column="t_views_num" property="tViewsNum" jdbcType="INTEGER" />
     <result column="t_collection_num" property="tCollectionNum" jdbcType="INTEGER" />
+    <result column="avatar" property="avatar" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
+
     </where>
   </sql>
   <sql id="Base_Column_List" >
@@ -47,10 +24,14 @@
     t_views_num, t_collection_num
   </sql>
 
+  <sql id="tInformation" >
+    i.t_id, i.t_content, i.t_img, i.t_coordinate, i.t_praise, i.t_evaluate, i.t_create_time,
+    i.t_views_num, i.t_collection_num, p.nickName as p_id, p.avatarUrl as avatar
+  </sql>
+
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TInformationExample" >
     select
-    i.t_id, i.t_content, i.t_img, i.t_coordinate, i.t_praise, i.t_evaluate, i.t_create_time,
-    i.t_views_num, i.t_collection_num, p.nickName as p_id
+    <include refid="tInformation"/>
     from t_information i
     LEFT JOIN t_personage p
     ON i.p_id = p.openid
@@ -63,8 +44,7 @@
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select
-      i.t_id, i.t_content, i.t_img, i.t_coordinate, i.t_praise, i.t_evaluate, i.t_create_time,
-      i.t_views_num, i.t_collection_num, p.nickName as p_id
+    <include refid="tInformation"/>
     from t_information i
            LEFT JOIN t_personage p
                      ON i.p_id = p.openid
@@ -201,8 +181,7 @@
   <!--  前端资讯详情查看（接口） getInformationByTid -->
   <select id="getInformationByTid" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TInformation" >
     select
-      i.t_id, i.t_content, i.t_img, i.t_coordinate, i.t_praise, i.t_evaluate, i.t_create_time,
-      i.t_views_num, i.t_collection_num, p.nickName as p_id
+      <include refid="tInformation"/>
     from t_information i
     LEFT JOIN t_personage p
     ON i.p_id = p.openid

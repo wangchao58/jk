@@ -2,8 +2,6 @@ package com.jk.entity.reception;
 
 import com.jk.util.Page;
 
-import java.util.Date;
-
 public class TInformation extends Page {
     private String tId;
 
@@ -26,6 +24,8 @@ public class TInformation extends Page {
     private Integer tCollectionNum;
 
     private String url;
+
+    private String avatar;
 
     public String gettId() {
         return tId;
@@ -113,5 +113,13 @@ public class TInformation extends Page {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 }
