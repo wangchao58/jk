@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -111,7 +112,12 @@ public class InformationController {
     @RequestMapping(value = "/getInformationList")
     @ResponseBody
     public List<TInformation> getInformationList(TInformation tInformation) {
-        List<TInformation> tInformationList = informationService.selectByExample(tInformation);
+        List<TInformation> tInformationList = new ArrayList<>();
+        List<TInformation> tInformations = informationService.selectByExample(tInformation);
+        for (TInformation information : tInformations) {
+            information.settCreateTime(information.gettCreateTime().substring(5,16));
+            tInformationList.add(information);
+        }
         return tInformationList;
     }
 

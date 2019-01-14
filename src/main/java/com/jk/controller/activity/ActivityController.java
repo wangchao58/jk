@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -121,8 +122,13 @@ public class ActivityController extends BaseController {
     @RequestMapping(value = "/getActivityList")
     @ResponseBody
     public List<TActivity> getActivityList(TActivity tActivity) {
-        List<TActivity> ActivitytList = activityService.selectByExample(tActivity);
-        return ActivitytList;
+        List<TActivity> activitytList = new ArrayList<>();
+        List<TActivity> tActivities = activityService.selectByExample(tActivity);
+        for (TActivity activity : tActivities) {
+            activity.settCreateTime(activity.gettCreateTime().substring(5,10));
+            activitytList.add(activity);
+        }
+        return activitytList;
     }
 
     /**
