@@ -18,4 +18,6 @@ public interface TPraiseMapper {
     int updateByPrimaryKeySelective(TPraise record);
 
     int updateByPrimaryKey(TPraise record);
+
+    TPraise selectPraise(TPraise tPraise);
 }

@@ -73,7 +73,7 @@ public class EnshrineServiceImpl implements EnshrineService {
             // 取消收藏
             i = tEnshrineMapper.deleteByPrimaryKey(enshrine.gettId());
             if(i>0){
-                // 收藏活动，修改收藏次数
+                // 修改收藏次数
                 TActivity activityData = new TActivity();
                 activityData.settId(activityByTid.gettId());
                 activityData.settCollectionNum(activityByTid.gettCollectionNum()-1);

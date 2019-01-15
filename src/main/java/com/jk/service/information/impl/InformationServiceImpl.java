@@ -70,20 +70,5 @@ public class InformationServiceImpl implements InformationService {
         return tInformationMapper.getInformationByTid(tInformation);
     }
 
-    /**
-     * 资讯点赞（接口）
-     * @param tInformation
-     * @param index 1:点赞 0：取消赞
-     * @return
-     */
-    @Override
-    public int prais(TInformation tInformation, String index) {
-        TInformation informationByTid = tInformationMapper.getInformationByTid(tInformation);
-        if(StringUtils.equals("1", index)){
-            tInformation.settPraise(informationByTid.gettPraise()+1);
-        }else{
-            tInformation.settPraise(informationByTid.gettPraise()-1);
-        }
-        return tInformationMapper.updateByPrimaryKeySelective(tInformation);
-    }
+
 }

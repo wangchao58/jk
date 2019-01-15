@@ -133,15 +133,5 @@ public class InformationController {
         return informationByTid;
     }
 
-    /**
-     * 资讯点赞（接口）
-     * @param tInformation
-     * @param index 1:点赞 0：取消赞
-     * @return
-     */
-    @RequestMapping("/prais")
-    @ResponseBody
-    public int prais(TInformation tInformation, String index){
-        return informationService.prais(tInformation, index);
-    }
+
 }

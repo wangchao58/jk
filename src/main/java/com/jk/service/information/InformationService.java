@@ -17,5 +17,4 @@ public interface InformationService {
 
     TInformation getInformationByTid(TInformation tInformation);
 
-    int prais(TInformation tInformation, String index);
 }
