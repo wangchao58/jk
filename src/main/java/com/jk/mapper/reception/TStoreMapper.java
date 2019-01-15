@@ -9,6 +9,8 @@ public interface TStoreMapper {
 
     int insert(TStore record);
 
+    int insertNiewsNum(String id);
+
     int insertSelective(TStore record);
 
     List<TStore> selectByExample(TStore example);

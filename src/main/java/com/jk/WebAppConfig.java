@@ -38,7 +38,9 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
                         "/evaluate/addEvaluate",
                         "/evaluate/selTEvaluateList",
                         "/enshrine/addEnshrine",
-                        "/enshrine/selEnshrineList"
+                        "/enshrine/selEnshrineList",
+                        "/store/selectByExampleByPort",
+                        "/store/selectByPrimaryKey"
                         );
 
     }

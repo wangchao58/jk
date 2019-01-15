@@ -80,6 +80,13 @@
       #{tIssuer,jdbcType=VARCHAR}, #{tPayment,jdbcType=VARCHAR}, #{tMoney,jdbcType=VARCHAR}, 
       #{tViewsNum,jdbcType=INTEGER}, #{tCollectionNum,jdbcType=INTEGER})
   </insert>
+
+  <insert id="insertNiewsNum" parameterType="java.lang.String" >
+    insert into t_store (t_id)
+    values (#{id,jdbcType=VARCHAR})
+    on duplicate key update t_views_num=t_views_num+1
+  </insert>
+
   <insert id="insertSelective" parameterType="com.jk.entity.reception.TStore" >
     insert into t_store
     <trim prefix="(" suffix=")" suffixOverrides="," >
