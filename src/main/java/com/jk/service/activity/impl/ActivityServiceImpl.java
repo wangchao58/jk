@@ -9,6 +9,7 @@ import com.jk.mapper.reception.TEnshrineMapper;
 import com.jk.service.activity.ActivityService;
 import com.jk.util.DateUtil;
 import com.jk.util.UUIDUtil;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -91,11 +92,14 @@ public class ActivityServiceImpl implements ActivityService {
         activityByTid.settStartTime(activityByTid.gettStartTime().substring(0,16));
         activityByTid.settEndTime(activityByTid.gettEndTime().substring(0,16));
 
-        // 增加此活动浏览次数
-        TActivity activityData = new TActivity();
-        activityData.settId(activityByTid.gettId());
-        activityData.settViewsNum(activityByTid.gettViewsNum()+1);
-        tActivityMapper.updateByPrimaryKeySelective(activityData);
+        // 点击收藏时重新获取数据，不增加浏览量
+        if(!StringUtils.equals("true", tActivity.getEnshrineViews())){
+            // 增加此活动浏览次数
+            TActivity activityData = new TActivity();
+            activityData.settId(activityByTid.gettId());
+            activityData.settViewsNum(activityByTid.gettViewsNum()+1);
+            tActivityMapper.updateByPrimaryKeySelective(activityData);
+        }
         return activityByTid;
     }
 
