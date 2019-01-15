@@ -36,6 +36,7 @@ public class TStoreServiceImpl implements TStoreService {
 
     @Override
     public TStore selectByPrimaryKey(String tId) {
+        int i = tStoreMapper.insertNiewsNum(tId);
         TStore tStore = tStoreMapper.selectByPrimaryKey(tId);
         return tStore;
     }

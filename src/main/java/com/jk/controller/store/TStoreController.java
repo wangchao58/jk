@@ -11,7 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 店铺管理
@@ -62,7 +64,7 @@ public class TStoreController  {
     }
 
     /**
-     * 功能：乘客列表
+     * 功能：店铺列表
      * 作者：transcend
      * @param record
      * @param rows
@@ -79,6 +81,25 @@ public class TStoreController  {
         record.setPage(record.getPage());
         record.setTotal(pageInfo.getPages());
         return JsonUtil.toJsonString(record);
+    }
+
+    /**
+     * 功能：接口店铺列表
+     * 作者：transcend
+     * @param record
+     * @param rows
+     * @return
+     */
+    @RequestMapping(value = "/selectByExampleByPort")
+    @ResponseBody
+    public Map<String,Object> selectByExampleByPort(TStore record, int rows) {
+        Map<String,Object> maps = new HashMap<>();
+        PageHelper.startPage(record.getPage(),rows);//分页查询
+        List<TStore> tStoreList =  tStoreService.selectByExample(record);
+        PageInfo<TStore> pageInfo = new PageInfo<>(tStoreList);
+        maps.put("tStoreList",tStoreList);
+        maps.put("pages",pageInfo.getPages());
+        return maps;
     }
 
     /**

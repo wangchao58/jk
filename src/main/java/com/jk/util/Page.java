@@ -8,13 +8,13 @@ import java.util.List;
  * @param <T>
  */
 public class Page<T> {
-    private int page;
+    private int page;//第几页
 
-    private int pageSize;
+    private int pageSize;//每页多少条
 
-    private long total;
+    private long total;//总页
 
-    private List<T> rows;
+    private List<T> rows;// 列表
 
     public int getPage() {
         return page;
