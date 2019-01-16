@@ -65,9 +65,8 @@ public class EnshrineServiceImpl implements EnshrineService {
     public int tStoreMapper(TEnshrine tEnshrine){
         int i = 0;
         String addO = "+";
-        String dateNow = DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss");
         TEnshrine enshrine = tEnshrineMapper.selEnshrineBytype(tEnshrine);
-        // 判断此活动用户是否收藏
+        // 判断此用户是否收藏
         if(null != enshrine){
             // 取消收藏
             i = tEnshrineMapper.deleteByPrimaryKey(enshrine.gettId());
@@ -76,6 +75,7 @@ public class EnshrineServiceImpl implements EnshrineService {
                 addO="-";
             }
         }else{
+            String dateNow = DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss");
             tEnshrine.settId(UUIDUtil.getUUID());
             tEnshrine.settTime(dateNow);
             i = tEnshrineMapper.insertSelective(tEnshrine);
