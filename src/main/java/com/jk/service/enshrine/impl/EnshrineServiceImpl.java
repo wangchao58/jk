@@ -2,8 +2,10 @@ package com.jk.service.enshrine.impl;
 
 import com.jk.entity.reception.TActivity;
 import com.jk.entity.reception.TEnshrine;
+import com.jk.entity.reception.TStore;
 import com.jk.mapper.reception.TActivityMapper;
 import com.jk.mapper.reception.TEnshrineMapper;
+import com.jk.mapper.reception.TStoreMapper;
 import com.jk.service.enshrine.EnshrineService;
 import com.jk.util.DateUtil;
 import com.jk.util.UUIDUtil;
@@ -20,6 +22,8 @@ public class EnshrineServiceImpl implements EnshrineService {
     TEnshrineMapper tEnshrineMapper;
     @Autowired
     TActivityMapper tActivityMapper;// 活动
+    @Autowired
+    TStoreMapper tStoreMapper;//店铺
 
     /**
      * 收藏添加（接口）
@@ -34,7 +38,7 @@ public class EnshrineServiceImpl implements EnshrineService {
         if(StringUtils.equals("0",tType)){
 
         }else if(StringUtils.equals("1",tType)){
-
+            i = tStoreMapper(tEnshrine);
         }else if(StringUtils.equals("2",tType)){
             i = activityEnshrine(tEnshrine);
         }else if(StringUtils.equals("3",tType)){
@@ -53,6 +57,32 @@ public class EnshrineServiceImpl implements EnshrineService {
         return tEnshrineMapper.selectByExample(tEnshrine);
     }
 
+    /**
+     * 店铺收藏
+     * @param tEnshrine
+     * @return
+     */
+    public int tStoreMapper(TEnshrine tEnshrine){
+        int i = 0;
+        String addO = "+";
+        String dateNow = DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss");
+        TEnshrine enshrine = tEnshrineMapper.selEnshrineBytype(tEnshrine);
+        // 判断此活动用户是否收藏
+        if(null != enshrine){
+            // 取消收藏
+            i = tEnshrineMapper.deleteByPrimaryKey(enshrine.gettId());
+            if(i>0){
+                // 修改收藏次数
+                addO="-";
+            }
+        }else{
+            tEnshrine.settId(UUIDUtil.getUUID());
+            tEnshrine.settTime(dateNow);
+            i = tEnshrineMapper.insertSelective(tEnshrine);
+        }
+        tStoreMapper.insertCollectionNum(tEnshrine.gethId(),addO);
+        return i;
+    }
     /**
      * 活动收藏
      * @param tEnshrine

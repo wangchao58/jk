@@ -87,6 +87,12 @@
     on duplicate key update t_views_num=t_views_num+1
   </insert>
 
+  <insert id="insertCollectionNum" parameterType="java.lang.String" >
+    insert into t_store (t_id)
+    values (#{id,jdbcType=VARCHAR})
+    on duplicate key update t_collection_num=t_collection_num ${addO} 1
+  </insert>
+
   <insert id="insertSelective" parameterType="com.jk.entity.reception.TStore" >
     insert into t_store
     <trim prefix="(" suffix=")" suffixOverrides="," >

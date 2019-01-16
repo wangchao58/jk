@@ -21,4 +21,6 @@ public interface TEnshrineMapper {
     int updateByPrimaryKey(TEnshrine record);
 
     TEnshrine selEnshrine(TEnshrine tEnshrine);
+
+    TEnshrine selEnshrineBytype(TEnshrine tEnshrine);
 }
