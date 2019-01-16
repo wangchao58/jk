@@ -1,6 +1,8 @@
 package com.jk.entity.reception;
 
-public class TShare {
+import com.jk.util.Page;
+
+public class TShare extends Page {
     private String tId;
 
     private String tUserid;

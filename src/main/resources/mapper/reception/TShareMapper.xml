@@ -38,20 +38,12 @@
   <sql id="Base_Column_List" >
     t_id, t_userid, t_url
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TShareExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TShare" >
     select
-    <if test="distinct" >
-      distinct
-    </if>
-    'false' as QUERYID,
+
     <include refid="Base_Column_List" />
     from t_share
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
+
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -59,9 +51,12 @@
     from t_share
     where t_id = #{tId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+  <delete id="deleteByPrimaryKey" parameterType="java.util.List" >
     delete from t_share
-    where t_id = #{tId,jdbcType=VARCHAR}
+    where t_id in
+    <foreach collection="list" separator="," item="ids" open="(" close=")">
+      '${ids}'
+    </foreach>
   </delete>
   <insert id="insert" parameterType="com.jk.entity.reception.TShare" >
     insert into t_share (t_id, t_userid, t_url

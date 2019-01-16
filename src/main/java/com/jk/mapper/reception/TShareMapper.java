@@ -5,13 +5,13 @@ import com.jk.entity.reception.TShareExample;
 import java.util.List;
 
 public interface TShareMapper {
-    int deleteByPrimaryKey(String tId);
+    int deleteByPrimaryKey(List<String> ids);
 
     int insert(TShare record);
 
     int insertSelective(TShare record);
 
-    List<TShare> selectByExample(TShareExample example);
+    List<TShare> selectByExample(TShare example);
 
     TShare selectByPrimaryKey(String tId);
 
