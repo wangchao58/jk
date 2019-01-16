@@ -13,6 +13,7 @@
     <result column="t_views_num" property="tViewsNum" jdbcType="INTEGER" />
     <result column="t_collection_num" property="tCollectionNum" jdbcType="INTEGER" />
     <result column="avatar" property="avatar" jdbcType="VARCHAR" />
+    <result column="praiseId" property="praiseId" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -27,6 +28,12 @@
   <sql id="tInformation" >
     i.t_id, i.t_content, i.t_img, i.t_coordinate, i.t_praise, i.t_evaluate, i.t_create_time,
     i.t_views_num, i.t_collection_num, p.nickName as p_id, p.avatarUrl as avatar
+  </sql>
+
+  <sql id="informationData" >
+    i.t_id, i.t_content, i.t_img, i.t_coordinate, i.t_praise,
+    i.t_evaluate, i.t_create_time, i.t_views_num, i.t_collection_num, p.nickName as p_id,
+    p.avatarUrl as avatar, pr.t_id as praiseId
   </sql>
 
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TInformationExample" >
@@ -182,10 +189,13 @@
   <!--  前端资讯详情查看（接口） getInformationByTid -->
   <select id="getInformationByTid" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TInformation" >
     select
-      <include refid="tInformation"/>
+      <include refid="informationData"/>
     from t_information i
     LEFT JOIN t_personage p
     ON i.p_id = p.openid
+    LEFT JOIN t_praise pr
+    ON i.t_id = pr.h_id
+    and pr.p_id = #{pId,jdbcType=VARCHAR}
     where i.t_id = #{tId,jdbcType=VARCHAR}
   </select>
 </mapper>
