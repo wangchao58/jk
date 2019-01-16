@@ -14,7 +14,6 @@ import java.util.List;
 
 @Service
 public class InformationServiceImpl implements InformationService {
-    private String dateNow = DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss");
     @Autowired
     TInformationMapper tInformationMapper;
 
@@ -50,6 +49,7 @@ public class InformationServiceImpl implements InformationService {
 
     @Override
     public int insertInformation(TInformation tInformation) {
+        String dateNow = DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss");
         tInformation.settId(UUIDUtil.getUUID());
         tInformation.settCreateTime(dateNow);
         return tInformationMapper.insertSelective(tInformation);

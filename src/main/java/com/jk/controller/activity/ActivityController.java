@@ -125,7 +125,7 @@ public class ActivityController extends BaseController {
         List<TActivity> activitytList = new ArrayList<>();
         List<TActivity> tActivities = activityService.selectByExample(tActivity);
         for (TActivity activity : tActivities) {
-            activity.settCreateTime(activity.gettCreateTime().substring(5,10));
+            activity.settStartTime(activity.gettStartTime().substring(5,10));
             activitytList.add(activity);
         }
         return activitytList;

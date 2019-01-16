@@ -1,7 +1,5 @@
 package com.jk.entity.reception;
 
-import java.util.Date;
-
 public class TEvaluate {
     private String tId;
 
@@ -18,6 +16,10 @@ public class TEvaluate {
     private String tAnonymity;
 
     private String tType;
+
+    private String avatar; //微信头像
+
+    private String nickName; //微信昵称
 
     public String gettId() {
         return tId;
@@ -81,5 +83,21 @@ public class TEvaluate {
 
     public void settType(String tType) {
         this.tType = tType;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 }

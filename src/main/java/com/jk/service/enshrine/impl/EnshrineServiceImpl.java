@@ -16,8 +16,6 @@ import java.util.List;
 
 @Service
 public class EnshrineServiceImpl implements EnshrineService {
-    private String dateNow = DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss");
-
     @Autowired
     TEnshrineMapper tEnshrineMapper;
     @Autowired
@@ -62,6 +60,7 @@ public class EnshrineServiceImpl implements EnshrineService {
      */
     public int activityEnshrine(TEnshrine tEnshrine){
         int i = 0;
+        String dateNow = DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss");
         TActivity tActivity = new TActivity();
         tActivity.settId(tEnshrine.gethId());
         // 根据活动id查询活动信息

@@ -15,8 +15,6 @@ import java.util.Date;
 
 @Service
 public class PraiseServiceImpl implements PraiseService {
-    private String dateNow = DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss");
-
     @Autowired
     TInformationMapper tInformationMapper;
     @Autowired
@@ -51,6 +49,7 @@ public class PraiseServiceImpl implements PraiseService {
      * @return
      */
     public int infromationPraise(TPraise tPraise) {
+        String dateNow = DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss");
         int i = 0;
         TInformation tInformation = new TInformation();
         tInformation.settId(tPraise.gethId());

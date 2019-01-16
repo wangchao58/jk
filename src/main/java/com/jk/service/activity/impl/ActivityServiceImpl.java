@@ -18,8 +18,6 @@ import java.util.List;
 
 @Service
 public class ActivityServiceImpl implements ActivityService {
-    private String dateNow = DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss");
-
     @Autowired
     TActivityMapper tActivityMapper;// 活动
     @Autowired
@@ -44,6 +42,7 @@ public class ActivityServiceImpl implements ActivityService {
      */
     @Override
     public int insertActivity(TActivity tActivity) {
+        String dateNow = DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss");
         tActivity.settId(UUIDUtil.getUUID());
         tActivity.settCreateTime(dateNow);
         tActivityMapper.insertSelective(tActivity);
@@ -155,6 +154,7 @@ public class ActivityServiceImpl implements ActivityService {
      */
     @Override
     public int activityApply(TApply tApply) {
+        String dateNow = DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss");
         int i = 0;
         TActivity tActivity = new TActivity();
         tActivity.settId(tApply.gethId());

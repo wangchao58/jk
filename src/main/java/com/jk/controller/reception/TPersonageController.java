@@ -22,7 +22,6 @@ import java.util.Map;
 @Controller
 @RequestMapping(value = "/personage")
 public class TPersonageController extends BaseController {
-    private String dateNow = DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss");
     @Autowired
     TPersonageService tPersonageService;
 
@@ -62,6 +61,7 @@ public class TPersonageController extends BaseController {
     @RequestMapping(value = "/addPersonage")
     @ResponseBody
     public Map<String,Object> addPersonage(TPersonage personage,String code) {
+        String dateNow = DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss");
         Map<String,Object> m = HttpUtil.sendGet(code);
         personage.setOpenid(m.get("openid").toString());
         personage.settId(UUIDUtil.getUUID());

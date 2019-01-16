@@ -10,12 +10,12 @@ import com.jk.util.UUIDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Service
 public class EvaluateServicrImpl implements EvaluateServicr {
-    private String dateNow = DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss");
 
     @Autowired
     TEvaluateMapper tEvaluateMapper;
@@ -30,6 +30,7 @@ public class EvaluateServicrImpl implements EvaluateServicr {
     @Override
     public int addEvaluate(TEvaluate tEvaluate) {
         int i = 0;
+        String dateNow = DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss");
         TInformation tInformation = new TInformation();
         tInformation.settId(tEvaluate.gettOtherId());
         TInformation informationByTid = tInformationMapper.getInformationByTid(tInformation);
@@ -52,6 +53,13 @@ public class EvaluateServicrImpl implements EvaluateServicr {
      */
     @Override
     public List<TEvaluate> selTEvaluateList(TEvaluate tEvaluate) {
-        return tEvaluateMapper.selectByExample(tEvaluate);
+        List<TEvaluate> evaluateList = new ArrayList<>();
+        List<TEvaluate> tEvaluates = tEvaluateMapper.selectByExample(tEvaluate);
+        for (TEvaluate evaluate : tEvaluates) {
+            String createTime = evaluate.getCreateTime().substring(0,16);
+            evaluate.setCreateTime(createTime);
+            evaluateList.add(evaluate);
+        }
+        return evaluateList;
     }
 }
