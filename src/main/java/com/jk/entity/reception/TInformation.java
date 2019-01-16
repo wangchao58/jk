@@ -27,6 +27,8 @@ public class TInformation extends Page {
 
     private String avatar;
 
+    private String praiseId;
+
     public String gettId() {
         return tId;
     }
@@ -121,5 +123,13 @@ public class TInformation extends Page {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public String getPraiseId() {
+        return praiseId;
+    }
+
+    public void setPraiseId(String praiseId) {
+        this.praiseId = praiseId;
     }
 }

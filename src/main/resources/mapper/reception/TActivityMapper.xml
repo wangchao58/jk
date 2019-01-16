@@ -36,6 +36,12 @@
     a.t_money, a.t_img
   </sql>
 
+  <sql id="getActivity" >
+    a.t_id, a.t_headline, a.t_content, a.t_start_time, a.t_end_time, a.t_create_time, a.t_site, a.t_charge,
+    p.nickName as p_id, a.t_phone, a.t_weixing, a.t_per_num, a.t_apply_num, a.t_views_num, a.t_collection_num,
+    a.t_money, a.t_img, e.t_id as enshrineId
+  </sql>
+
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TActivityExample" >
     select
     <include refid="getActivityList" />
@@ -47,6 +53,7 @@
         and a.p_id = #{pId,jdbcType=VARCHAR}
       </if>
     </where>
+    order by a.t_create_time desc
   </select>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
@@ -270,10 +277,13 @@
   <!--  前端活动详情查看（接口） getActivityByTid -->
   <select id="getActivityByTid" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TActivity" >
     select
-      <include refid="getActivityList" />
+      <include refid="getActivity" />
       from t_activity a
       LEFT JOIN t_personage p
       ON a.p_id = p.openid
+      LEFT JOIN t_enshrine e
+      ON a.t_id = e.h_id
+      and e.p_id = #{pId,jdbcType=VARCHAR}
     where a.t_id = #{tId,jdbcType=VARCHAR}
   </select>
 </mapper>

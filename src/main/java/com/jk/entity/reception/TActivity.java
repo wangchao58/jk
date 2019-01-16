@@ -39,6 +39,8 @@ public class TActivity extends Page {
 
     private String enshrineViews;
 
+    private String enshrineId;
+
     public String gettId() {
         return tId;
     }
@@ -181,5 +183,13 @@ public class TActivity extends Page {
 
     public void setEnshrineViews(String enshrineViews) {
         this.enshrineViews = enshrineViews;
+    }
+
+    public String getEnshrineId() {
+        return enshrineId;
+    }
+
+    public void setEnshrineId(String enshrineId) {
+        this.enshrineId = enshrineId;
     }
 }

@@ -130,6 +130,7 @@ public class InformationController {
     @ResponseBody
     public TInformation getInformationByTid(TInformation tInformation){
         TInformation informationByTid = informationService.getInformationByTid(tInformation);
+        informationByTid.settCreateTime(informationByTid.gettCreateTime().substring(5,16));
         return informationByTid;
     }
 

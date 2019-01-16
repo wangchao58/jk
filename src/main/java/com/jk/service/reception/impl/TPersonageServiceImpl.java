@@ -13,13 +13,12 @@ import java.util.List;
 
 @Service
 public class TPersonageServiceImpl implements TPersonageService {
-    private String dateNow = DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss");
-
     @Autowired
     TPersonageMapper tPersonageMapper;
 
     @Override
     public String insertSelective(TPersonage record) {
+        String dateNow = DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss");
         int i = 0;
         String id = "";
         TPersonage recordu =  tPersonageMapper.selectByPrimaryKey(record.getOpenid());
