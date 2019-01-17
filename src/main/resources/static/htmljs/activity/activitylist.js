@@ -138,7 +138,7 @@ function openUpdDiag(uuid) {
     var indext = layer.open({
         type: 2,
         title:'活动信息编辑',
-        area: ['70%', '90%'],
+        area: ['70%', '30%'],
         fixed: false, //不固定
         maxmin: true,
         content: '/activity/updActivityView?id='+uuid,

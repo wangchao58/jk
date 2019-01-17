@@ -133,7 +133,7 @@ function openUpdDiag(uuid) {
     var indext = layer.open({
         type: 2,
         title:'资讯信息编辑',
-        area: ['70%', '80%'],
+        area: ['70%', '30%'],
         fixed: false, //不固定
         maxmin: true,
         content: '/information/updInformationView?id='+uuid,
