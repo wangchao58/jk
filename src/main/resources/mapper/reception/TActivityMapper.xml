@@ -52,6 +52,9 @@
       <if test="pId != null and pId !=''" >
         and a.p_id = #{pId,jdbcType=VARCHAR}
       </if>
+      <if test="tHeadline != null and pId !=''" >
+        and a.t_headline like CONCAT('%',#{tHeadline,jdbcType=VARCHAR},'%')
+      </if>
     </where>
     order by a.t_create_time desc
   </select>

@@ -46,6 +46,9 @@
       <if test="pId != null and pId !=''" >
         and i.p_id = #{pId,jdbcType=VARCHAR}
       </if>
+      <if test="tContent != null and pId !=''" >
+        and i.t_content like CONCAT('%',#{tContent,jdbcType=VARCHAR},'%')
+      </if>
     </where>
     order by i.t_create_time desc
   </select>
