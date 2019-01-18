@@ -52,6 +52,10 @@ public class InformationServiceImpl implements InformationService {
         String dateNow = DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss");
         tInformation.settId(UUIDUtil.getUUID());
         tInformation.settCreateTime(dateNow);
+        tInformation.settPraise(0);
+        tInformation.settEvaluate(0);
+        tInformation.settViewsNum(0);
+        tInformation.settCollectionNum(0);
         return tInformationMapper.insertSelective(tInformation);
     }
 
