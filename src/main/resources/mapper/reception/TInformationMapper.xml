@@ -14,6 +14,7 @@
     <result column="t_collection_num" property="tCollectionNum" jdbcType="INTEGER" />
     <result column="avatar" property="avatar" jdbcType="VARCHAR" />
     <result column="praiseId" property="praiseId" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -22,18 +23,18 @@
   </sql>
   <sql id="Base_Column_List" >
     t_id, t_content, t_img, t_coordinate, t_praise, t_evaluate, p_id, t_create_time, 
-    t_views_num, t_collection_num
+    t_views_num, t_collection_num, city
   </sql>
 
   <sql id="tInformation" >
     i.t_id, i.t_content, i.t_img, i.t_coordinate, i.t_praise, i.t_evaluate, i.t_create_time,
-    i.t_views_num, i.t_collection_num, p.nickName as p_id, p.avatarUrl as avatar
+    i.t_views_num, i.t_collection_num, i.city, p.nickName as p_id, p.avatarUrl as avatar
   </sql>
 
   <sql id="informationData" >
     i.t_id, i.t_content, i.t_img, i.t_coordinate, i.t_praise,
-    i.t_evaluate, i.t_create_time, i.t_views_num, i.t_collection_num, p.nickName as p_id,
-    p.avatarUrl as avatar, pr.t_id as praiseId
+    i.t_evaluate, i.t_create_time, i.t_views_num, i.t_collection_num, i.city,
+    p.nickName as p_id, p.avatarUrl as avatar, pr.t_id as praiseId
   </sql>
 
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TInformationExample" >
@@ -69,11 +70,11 @@
     insert into t_information (t_id, t_content, t_img, 
       t_coordinate, t_praise, t_evaluate, 
       p_id, t_create_time, t_views_num, 
-      t_collection_num)
+      t_collection_num, city)
     values (#{tId,jdbcType=VARCHAR}, #{tContent,jdbcType=VARCHAR}, #{tImg,jdbcType=VARCHAR}, 
       #{tCoordinate,jdbcType=VARCHAR}, #{tPraise,jdbcType=INTEGER}, #{tEvaluate,jdbcType=INTEGER}, 
       #{pId,jdbcType=VARCHAR}, #{tCreateTime,jdbcType=VARCHAR}, #{tViewsNum,jdbcType=INTEGER}, 
-      #{tCollectionNum,jdbcType=INTEGER})
+      #{tCollectionNum,jdbcType=INTEGER}, #{city,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.jk.entity.reception.TInformation" >
     insert into t_information
@@ -108,6 +109,9 @@
       <if test="tCollectionNum != null" >
         t_collection_num,
       </if>
+      <if test="city != null" >
+        city,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="tId != null" >
@@ -139,6 +143,9 @@
       </if>
       <if test="tCollectionNum != null" >
         #{tCollectionNum,jdbcType=INTEGER},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -172,6 +179,9 @@
       <if test="tCollectionNum != null" >
         t_collection_num = #{tCollectionNum,jdbcType=INTEGER},
       </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=INTEGER},
+      </if>
     </set>
     where t_id = #{tId,jdbcType=VARCHAR}
   </update>
@@ -185,7 +195,8 @@
       p_id = #{pId,jdbcType=VARCHAR},
       t_create_time = #{tCreateTime,jdbcType=VARCHAR},
       t_views_num = #{tViewsNum,jdbcType=INTEGER},
-      t_collection_num = #{tCollectionNum,jdbcType=INTEGER}
+      t_collection_num = #{tCollectionNum,jdbcType=INTEGER},
+      city = #{city,jdbcType=INTEGER}
     where t_id = #{tId,jdbcType=VARCHAR}
   </update>
 

@@ -29,6 +29,8 @@ public class TInformation extends Page {
 
     private String praiseId;
 
+    private String city;
+
     public String gettId() {
         return tId;
     }
@@ -131,5 +133,13 @@ public class TInformation extends Page {
 
     public void setPraiseId(String praiseId) {
         this.praiseId = praiseId;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }
