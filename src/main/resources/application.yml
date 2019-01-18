@@ -8,11 +8,16 @@ spring:
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/jkkj?serverTimezone=GMT%2B8
     username: root
-    password: root
+    password: kaixuan
+#    url: jdbc:mysql://47.94.18.194:3306/jkkj?serverTimezone=GMT%2B8
+#    username: root
+#    password: 123456
     driver-class-name: com.mysql.jdbc.Driver
   servlet:
     multipart:
-      max-file-size: 10
+#      max-file-size: 10
+    maxFileSize: 50Mb
+    maxRequestSize: 50Mb
 mvc:
     view:
       suffix: .html
