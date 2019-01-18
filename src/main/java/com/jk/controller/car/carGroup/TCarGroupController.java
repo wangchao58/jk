@@ -3,6 +3,7 @@ package com.jk.controller.car.carGroup;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.jk.entity.reception.TCarGroup;
+import com.jk.entity.reception.TStore;
 import com.jk.service.carGroup.TCarGroupService;
 import com.jk.util.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 拼车群
@@ -74,6 +77,27 @@ public class TCarGroupController {
         record.setTotal(pageInfo.getPages());
         return JsonUtil.toJsonString(record);
     }
+
+
+    /**
+     * 功能：接口店铺列表
+     * 作者：transcend
+     * @param record
+     * @param rows
+     * @return
+     */
+    @RequestMapping(value = "/selectByExampleByPort")
+    @ResponseBody
+    public Map<String,Object> selectByExampleByPort(TCarGroup record, int rows) {
+        Map<String,Object> maps = new HashMap<>();
+        PageHelper.startPage(record.getPage(),rows);//分页查询
+        List<TCarGroup> tStoreList =  tCarGroupService.selectByExample(record);
+        PageInfo<TCarGroup> pageInfo = new PageInfo<>(tStoreList);
+        maps.put("carGroupList",tStoreList);
+        maps.put("pages",pageInfo.getPages());
+        return maps;
+    }
+
 
     @RequestMapping(value = "/selectByPrimaryKey")
     @ResponseBody
