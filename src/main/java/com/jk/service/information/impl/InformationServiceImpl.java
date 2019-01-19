@@ -24,6 +24,9 @@ public class InformationServiceImpl implements InformationService {
      */
     @Override
     public List<TInformation> selectByExample(TInformation tInformation) {
+        if(StringUtils.equals("undefined",tInformation.gettContent())){
+            tInformation.settContent("");
+        }
         return tInformationMapper.selectByExample(tInformation);
     }
 

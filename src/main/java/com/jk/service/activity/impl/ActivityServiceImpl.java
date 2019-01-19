@@ -32,6 +32,9 @@ public class ActivityServiceImpl implements ActivityService {
      */
     @Override
     public List<TActivity> selectByExample(TActivity tActivity) {
+        if(StringUtils.equals("undefined",tActivity.gettHeadline())){
+            tActivity.settHeadline("");
+        }
         return tActivityMapper.selectByExample(tActivity);
     }
 
@@ -45,7 +48,10 @@ public class ActivityServiceImpl implements ActivityService {
         String dateNow = DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss");
         tActivity.settId(UUIDUtil.getUUID());
         tActivity.settCreateTime(dateNow);
-        tActivityMapper.insertSelective(tActivity);
+        tActivity.settPerNum(0);
+        tActivity.settApplyNum(0);
+        tActivity.settViewsNum(0);
+        tActivity.settCollectionNum(0);
         return tActivityMapper.insertSelective(tActivity);
     }
 
