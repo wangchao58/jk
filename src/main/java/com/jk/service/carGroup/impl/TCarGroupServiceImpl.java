@@ -37,6 +37,7 @@ public class TCarGroupServiceImpl implements TCarGroupService {
 
     @Override
     public TCarGroup selectByPrimaryKey(String tId) {
+        tCarGroupMapper.insertNiewsNum(tId);
         TCarGroup tCarGroup= tCarGroupMapper.selectByPrimaryKey(tId);
         return tCarGroup;
     }

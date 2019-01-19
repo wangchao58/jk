@@ -42,6 +42,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
                         "/share/insertSelective",
                         "/store/selectByExampleByPort",
                         "/carGroup/selectByExampleByPort",
+                        "/carGroup/selectByPrimaryKey",
                         "/store/selectByPrimaryKey"
                         );
 

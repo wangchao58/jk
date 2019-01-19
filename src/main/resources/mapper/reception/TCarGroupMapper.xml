@@ -7,7 +7,7 @@
     <result column="t_sort" property="tSort" jdbcType="VARCHAR" />
     <result column="t_group_lord" property="tGroupLord" jdbcType="VARCHAR" />
     <result column="t_group_code" property="tGroupCode" jdbcType="VARCHAR" />
-    <result column="t_create_time" property="tCreateTime" jdbcType="TIMESTAMP" />
+    <result column="t_create_time" property="tCreateTime" jdbcType="VARCHAR" />
     <result column="t_attribution" property="tAttribution" jdbcType="VARCHAR" />
     <result column="t_claim" property="tClaim" jdbcType="VARCHAR" />
     <result column="t_introduction" property="tIntroduction" jdbcType="VARCHAR" />
@@ -29,6 +29,11 @@
     select
     <include refid="Base_Column_List" />
     from t_car_group
+    <where>
+      <if test="tGroupName != null and tGroupName != ''">
+        and t_group_name like   CONCAT('%',#{tGroupName,jdbcType=VARCHAR},'%')
+      </if>
+    </where>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -36,6 +41,13 @@
     from t_car_group
     where t_id = #{tId,jdbcType=VARCHAR}
   </select>
+
+  <insert id="insertNiewsNum" parameterType="java.lang.String" >
+    insert into t_car_group (t_id)
+    values (#{id,jdbcType=VARCHAR})
+    on duplicate key update t_views_num=t_views_num+1
+  </insert>
+
   <delete id="deleteByPrimaryKey" parameterType="java.util.List" >
     delete from t_car_group
     where t_id in

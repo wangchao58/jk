@@ -15,7 +15,7 @@ public class TCarGroup extends Page {
 
     private String tGroupCode;
 
-    private Date tCreateTime;
+    private String tCreateTime;
 
     private String tAttribution;
 
@@ -71,11 +71,11 @@ public class TCarGroup extends Page {
         this.tGroupCode = tGroupCode;
     }
 
-    public Date gettCreateTime() {
+    public String gettCreateTime() {
         return tCreateTime;
     }
 
-    public void settCreateTime(Date tCreateTime) {
+    public void settCreateTime(String tCreateTime) {
         this.tCreateTime = tCreateTime;
     }
 

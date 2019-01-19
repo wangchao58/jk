@@ -15,6 +15,8 @@ public interface TCarGroupMapper {
 
     TCarGroup selectByPrimaryKey(String tId);
 
+    int insertNiewsNum(String id);
+
     int updateByPrimaryKeySelective(TCarGroup record);
 
     int updateByPrimaryKey(TCarGroup record);
