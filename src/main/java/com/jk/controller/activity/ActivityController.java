@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.github.pagehelper.StringUtil;
 import com.jk.entity.reception.TActivity;
 import com.jk.entity.reception.TApply;
+import com.jk.entity.reception.TStore;
 import com.jk.service.activity.ActivityService;
 import com.jk.util.BaseController;
 import com.jk.util.JsonUtil;
@@ -15,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * 活动相关
@@ -121,14 +120,19 @@ public class ActivityController extends BaseController {
      */
     @RequestMapping(value = "/getActivityList")
     @ResponseBody
-    public List<TActivity> getActivityList(TActivity tActivity) {
+    public Map<String,Object> getActivityList(TActivity tActivity, int rows) {
+        Map<String,Object> maps = new HashMap<>();
         List<TActivity> activitytList = new ArrayList<>();
+        PageHelper.startPage(tActivity.getPage(),rows);//分页查询
         List<TActivity> tActivities = activityService.selectByExample(tActivity);
         for (TActivity activity : tActivities) {
             activity.settStartTime(activity.gettStartTime().substring(5,10));
             activitytList.add(activity);
         }
-        return activitytList;
+        PageInfo<TActivity> pageInfo = new PageInfo<>(tActivities);
+        maps.put("activitytList", activitytList);
+        maps.put("pages", pageInfo.getPages());
+        return maps;
     }
 
     /**

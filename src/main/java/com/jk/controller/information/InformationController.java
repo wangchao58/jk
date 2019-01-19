@@ -13,9 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * 资讯相关
@@ -111,14 +109,19 @@ public class InformationController {
      */
     @RequestMapping(value = "/getInformationList")
     @ResponseBody
-    public List<TInformation> getInformationList(TInformation tInformation) {
+    public Map<String,Object> getInformationList(TInformation tInformation, int rows) {
+        Map<String,Object> maps = new HashMap<>();
         List<TInformation> tInformationList = new ArrayList<>();
+        PageHelper.startPage(tInformation.getPage(),rows);//分页查询
         List<TInformation> tInformations = informationService.selectByExample(tInformation);
         for (TInformation information : tInformations) {
             information.settCreateTime(information.gettCreateTime().substring(5,16));
             tInformationList.add(information);
         }
-        return tInformationList;
+        PageInfo<TInformation> pageInfo = new PageInfo<>(tInformations);
+        maps.put("tInformation", tInformationList);
+        maps.put("pages", pageInfo.getPages());
+        return maps;
     }
 
     /**
