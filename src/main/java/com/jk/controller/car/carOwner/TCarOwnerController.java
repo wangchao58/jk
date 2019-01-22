@@ -2,6 +2,7 @@ package com.jk.controller.car.carOwner;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.jk.entity.reception.TCarGroup;
 import com.jk.entity.reception.TCarOwner;
 import com.jk.service.carOwner.TCarOwnerService;
 import com.jk.util.JsonUtil;
@@ -11,7 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 拼车车主管理
@@ -49,12 +52,38 @@ public class TCarOwnerController {
         return i;
     }
 
+    /**
+     * 增加车主、乘客信息
+     * @param record
+     * @return
+     */
     @RequestMapping(value = "/insertSelective")
     @ResponseBody
     public int insertSelective(TCarOwner record) {
         int i = tCarOwnerService.insertSelective(record);
         return i;
     }
+
+
+    /**
+     * 功能：接口乘客、车主接口列表
+     * 作者：transcend
+     * @param record
+     * @param rows
+     * @return
+     */
+    @RequestMapping(value = "/selectByExampleByPort")
+    @ResponseBody
+    public Map<String,Object> selectByExampleByPort(TCarOwner record, int rows) {
+        Map<String,Object> maps = new HashMap<>();
+        PageHelper.startPage(record.getPage(),rows);//分页查询
+        List<TCarOwner> tCarOwnerList =  tCarOwnerService.selectByExample(record);
+        PageInfo<TCarOwner> pageInfo = new PageInfo<>(tCarOwnerList);
+        maps.put("tCarOwnerList",tCarOwnerList);
+        maps.put("pages",pageInfo.getPages());
+        return maps;
+    }
+
 
     /**
      * 功能：乘客列表

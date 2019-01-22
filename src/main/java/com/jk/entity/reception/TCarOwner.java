@@ -31,6 +31,8 @@ public class TCarOwner extends Page {
 
     private String tIssuer;
 
+    private String tOwner;
+
     public String gettId() {
         return tId;
     }
@@ -141,5 +143,13 @@ public class TCarOwner extends Page {
 
     public void settIssuer(String tIssuer) {
         this.tIssuer = tIssuer;
+    }
+
+    public String gettOwner() {
+        return tOwner;
+    }
+
+    public void settOwner(String tOwner) {
+        this.tOwner = tOwner;
     }
 }

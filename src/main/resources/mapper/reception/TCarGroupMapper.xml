@@ -31,7 +31,7 @@
     from t_car_group
     <where>
       <if test="tGroupName != null and tGroupName != ''">
-        and t_group_name like   CONCAT('%',#{tGroupName,jdbcType=VARCHAR},'%')
+        and t_group_name like   concat('%',#{tGroupName,jdbcType=VARCHAR},'%')
       </if>
     </where>
   </select>

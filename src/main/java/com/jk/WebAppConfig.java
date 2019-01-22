@@ -43,6 +43,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
                         "/store/selectByExampleByPort",
                         "/carGroup/selectByExampleByPort",
                         "/carGroup/selectByPrimaryKey",
+                        "/carOwner/selectByExampleByPort",
                         "/store/selectByPrimaryKey"
                         );
 
