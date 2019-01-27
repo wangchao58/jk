@@ -17,6 +17,7 @@
     <result column="t_explain" jdbcType="VARCHAR" property="tExplain" />
     <result column="t_issuer" jdbcType="VARCHAR" property="tIssuer" />
     <result column="t_owner" jdbcType="VARCHAR" property="tOwner" />
+    <result column="t_wechat" jdbcType="VARCHAR" property="tWechat" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -49,7 +50,7 @@
   </sql>
   <sql id="Base_Column_List">
     t_id, t_linkman, t_sex, t_phone, t_id_number, t_point, t_destination, t_way, t_depart, 
-    t_vacant_seat, t_car_type, t_fare, t_explain, t_issuer,t_owner
+    t_vacant_seat, t_car_type, t_fare, t_explain, t_issuer,t_owner,t_wechat
   </sql>
   <select id="selectByExample" parameterType="com.jk.entity.reception.TCarOwner" resultMap="BaseResultMap">
     select
@@ -142,6 +143,9 @@
       <if test="tOwner != null">
         t_owner,
       </if>
+      <if test="tWechat != null">
+        t_wechat,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="tId != null">
@@ -189,6 +193,9 @@
       <if test="tOwner != null">
         #{tOwner,jdbcType=VARCHAR},
       </if>
+      <if test="tWechat != null">
+        #{tWechat,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.jk.entity.reception.TCarOwner">
@@ -235,6 +242,9 @@
       </if>
       <if test="tOwner != null">
         t_owner = #{tOwner,jdbcType=VARCHAR},
+      </if>
+      <if test="tWechat != null">
+        t_wechat = #{tWechat,jdbcType=VARCHAR},
       </if>
     </set>
     where t_id = #{tId,jdbcType=VARCHAR}

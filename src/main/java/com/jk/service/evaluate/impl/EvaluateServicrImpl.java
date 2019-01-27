@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class EvaluateServicrImpl implements EvaluateServicr {
@@ -30,13 +31,14 @@ public class EvaluateServicrImpl implements EvaluateServicr {
     @Override
     public int addEvaluate(TEvaluate tEvaluate) {
         int i = 0;
-        String dateNow = DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss");
+        String dateNow = DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm");
         TInformation tInformation = new TInformation();
         tInformation.settId(tEvaluate.gettOtherId());
-        TInformation informationByTid = tInformationMapper.getInformationByTid(tInformation);
+        TInformation informationByTid = tInformationMapper.selectByPrimaryKeyByprore(tEvaluate.gettOtherId());
 
         tEvaluate.settId(UUIDUtil.getUUID());
         tEvaluate.setCreateTime(dateNow);
+        tEvaluate.setfId(informationByTid.getpId());
         i = tEvaluateMapper.insertSelective(tEvaluate);
         if(i > 0){
             // 修改评论条数
@@ -61,5 +63,11 @@ public class EvaluateServicrImpl implements EvaluateServicr {
             evaluateList.add(evaluate);
         }
         return evaluateList;
+    }
+
+    @Override
+    public List<Map<String, Object>> selTEvaluateListByPort(TEvaluate tEvaluate) {
+        List<Map<String, Object>> tEvaluatesByMap = tEvaluateMapper.selTEvaluateListByPort(tEvaluate);
+        return tEvaluatesByMap;
     }
 }

@@ -116,6 +116,10 @@ public class InformationController {
         List<TInformation> tInformations = informationService.selectByExample(tInformation);
         for (TInformation information : tInformations) {
             information.settCreateTime(information.gettCreateTime().substring(5,16));
+            if(StringUtil.isNotEmpty(information.gettImg())){
+                List<String> listImg = Arrays.asList(information.gettImg().split(","));
+                information.setListImg(listImg);
+            }
             tInformationList.add(information);
         }
         PageInfo<TInformation> pageInfo = new PageInfo<>(tInformations);
@@ -133,6 +137,10 @@ public class InformationController {
     @ResponseBody
     public TInformation getInformationByTid(TInformation tInformation){
         TInformation informationByTid = informationService.getInformationByTid(tInformation);
+        if(StringUtil.isNotEmpty(informationByTid.gettImg())){
+            List<String> listImg = Arrays.asList(informationByTid.gettImg().split(","));
+            informationByTid.setListImg(listImg);
+        }
         informationByTid.settCreateTime(informationByTid.gettCreateTime().substring(5,16));
         return informationByTid;
     }

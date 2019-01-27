@@ -21,7 +21,7 @@ public class TPersonageServiceImpl implements TPersonageService {
         String dateNow = DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss");
         int i = 0;
         String id = "";
-        TPersonage recordu =  tPersonageMapper.selectByPrimaryKey(record.getOpenid());
+        TPersonage recordu =  tPersonageMapper.selectByOpenId(record.getOpenid());
         if(recordu != null && StringUtil.isNotEmpty(recordu.gettId())) {
             recordu.setOpenid(record.getOpenid());
             recordu.settUpdateTime(dateNow);

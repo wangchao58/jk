@@ -31,6 +31,10 @@ public class TStore extends Page {
 
     private Integer tCollectionNum;
 
+    private String tWechat;
+
+    private String tPicture;
+
     public String gettId() {
         return tId;
     }
@@ -141,5 +145,21 @@ public class TStore extends Page {
 
     public void settCollectionNum(Integer tCollectionNum) {
         this.tCollectionNum = tCollectionNum;
+    }
+
+    public String gettWechat() {
+        return tWechat;
+    }
+
+    public void settWechat(String tWechat) {
+        this.tWechat = tWechat;
+    }
+
+    public String gettPicture() {
+        return tPicture;
+    }
+
+    public void settPicture(String tPicture) {
+        this.tPicture = tPicture;
     }
 }

@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class PraiseServiceImpl implements PraiseService {
@@ -43,18 +45,23 @@ public class PraiseServiceImpl implements PraiseService {
         return i;
     }
 
+    @Override
+    public List<Map<String,Object>> listPraise(TPraise tPraise) {
+        return tPraiseMapper.selectByMap(tPraise);
+    }
+
     /**
      * 资讯点赞
      * @param tPraise
      * @return
      */
     public int infromationPraise(TPraise tPraise) {
-        String dateNow = DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss");
+        String dateNow = DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm");
         int i = 0;
         TInformation tInformation = new TInformation();
         tInformation.settId(tPraise.gethId());
         // 根据点赞数据id查询数据
-        TInformation informationByTid = tInformationMapper.getInformationByTid(tInformation);
+        TInformation informationByTid = tInformationMapper.selectByPrimaryKeyByprore(tPraise.gethId());
 
         TInformation tInformationData = new TInformation();
         tInformationData.settId(informationByTid.gettId());
@@ -69,12 +76,13 @@ public class PraiseServiceImpl implements PraiseService {
         }else{
             tPraise.settId(UUIDUtil.getUUID());
             tPraise.settTime(dateNow);
+            tPraise.setfId(informationByTid.getpId());
             i = tPraiseMapper.insertSelective(tPraise);
             if(i > 0){
                 tInformation.settPraise(informationByTid.gettPraise()+1);
             }
         }
         i = tInformationMapper.updateByPrimaryKeySelective(tInformation);
-        return i;
+        return tInformation.gettPraise();
     }
 }

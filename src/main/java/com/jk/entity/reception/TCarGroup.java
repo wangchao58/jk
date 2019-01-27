@@ -31,6 +31,12 @@ public class TCarGroup extends Page {
 
     private Integer tViewsNum;
 
+    private String tIssuer;
+
+    private String tGroupImg;
+
+    private String tStatus;
+
     public String gettId() {
         return tId;
     }
@@ -133,5 +139,29 @@ public class TCarGroup extends Page {
 
     public void settViewsNum(Integer tViewsNum) {
         this.tViewsNum = tViewsNum;
+    }
+
+    public String gettIssuer() {
+        return tIssuer;
+    }
+
+    public void settIssuer(String tIssuer) {
+        this.tIssuer = tIssuer;
+    }
+
+    public String gettGroupImg() {
+        return tGroupImg;
+    }
+
+    public void settGroupImg(String tGroupImg) {
+        this.tGroupImg = tGroupImg;
+    }
+
+    public String gettStatus() {
+        return tStatus;
+    }
+
+    public void settStatus(String tStatus) {
+        this.tStatus = tStatus;
     }
 }

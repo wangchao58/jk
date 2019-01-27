@@ -3,6 +3,7 @@ package com.jk.service.carOwner.impl;
 import com.jk.entity.reception.TCarOwner;
 import com.jk.mapper.reception.TCarOwnerMapper;
 import com.jk.service.carOwner.TCarOwnerService;
+import com.jk.util.UUIDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,7 @@ public class TCarOwnerServiceImpl implements TCarOwnerService {
 
     @Override
     public int insertSelective(TCarOwner record) {
+        record.settId(UUIDUtil.getUUID());
         int i = tCarOwnerMapper.insertSelective(record);
         return i;
     }

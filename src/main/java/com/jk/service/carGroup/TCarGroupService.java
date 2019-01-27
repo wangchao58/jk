@@ -12,6 +12,8 @@ public interface TCarGroupService {
 
     List<TCarGroup> selectByExample(TCarGroup example);
 
+    List<TCarGroup> selectByExampleByPort(TCarGroup example);
+
     TCarGroup selectByPrimaryKey(String tId);
 
     int updateByPrimaryKeySelective(TCarGroup record);

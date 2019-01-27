@@ -12,6 +12,7 @@
     <result column="t_type" property="tType" jdbcType="VARCHAR" />
     <result column="avatar" property="avatar" jdbcType="VARCHAR" />
     <result column="nickName" property="nickName" jdbcType="VARCHAR" />
+    <result column="f_id" property="fId" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -19,7 +20,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    t_id, p_id, t_other_id, t_content, create_time, t_picture, t_anonymity, t_type
+    t_id, p_id, t_other_id, t_content, create_time, t_picture, t_anonymity, t_type,f_id
   </sql>
 
   <sql id="EvaluateData" >
@@ -31,14 +32,23 @@
     select
     <include refid="EvaluateData" />
     from t_evaluate e
-    LEFT JOIN t_personage p
-    ON e.p_id = p.openid
+    left join t_personage p
+    on e.p_id = p.t_id
     <where>
       <if test="tOtherId != null and tOtherId !=''" >
         and e.t_other_id = #{tOtherId,jdbcType=VARCHAR}
       </if>
     </where>
     order by create_time desc
+  </select>
+
+  <select id="selTEvaluateListByPort" resultType="java.util.Map" parameterType="com.jk.entity.reception.TEvaluate" >
+    select e.create_time,pe.nickName,e.t_content as eContent,i.t_content,pe.avatarUrl,i.t_id as tId
+    from t_evaluate e
+    left join t_personage pe on e.p_id=pe.t_id
+    left join t_information i on e.t_other_id=i.t_id
+    where e.f_id=#{fId,jdbcType=VARCHAR}
+    order by e.create_time desc
   </select>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
@@ -86,6 +96,9 @@
       <if test="tType != null" >
         t_type,
       </if>
+      <if test="fId != null" >
+        f_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="tId != null" >
@@ -111,6 +124,9 @@
       </if>
       <if test="tType != null" >
         #{tType,jdbcType=VARCHAR},
+      </if>
+      <if test="fId != null" >
+        #{fId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>

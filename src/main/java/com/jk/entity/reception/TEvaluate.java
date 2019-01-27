@@ -1,6 +1,8 @@
 package com.jk.entity.reception;
 
-public class TEvaluate {
+import com.jk.util.Page;
+
+public class TEvaluate extends Page {
     private String tId;
 
     private String pId;
@@ -20,6 +22,8 @@ public class TEvaluate {
     private String avatar; //微信头像
 
     private String nickName; //微信昵称
+
+    private String fId; //微信昵称
 
     public String gettId() {
         return tId;
@@ -99,5 +103,13 @@ public class TEvaluate {
 
     public void setNickName(String nickName) {
         this.nickName = nickName;
+    }
+
+    public String getfId() {
+        return fId;
+    }
+
+    public void setfId(String fId) {
+        this.fId = fId;
     }
 }

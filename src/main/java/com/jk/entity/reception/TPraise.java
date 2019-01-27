@@ -1,6 +1,8 @@
 package com.jk.entity.reception;
 
-public class TPraise {
+import com.jk.util.Page;
+
+public class TPraise extends Page {
     private String tId;
 
     private String hId;
@@ -10,6 +12,8 @@ public class TPraise {
     private String tTime;
 
     private String tType;
+
+    private String fId;
 
     public String gettId() {
         return tId;
@@ -49,5 +53,13 @@ public class TPraise {
 
     public void settType(String tType) {
         this.tType = tType;
+    }
+
+    public String getfId() {
+        return fId;
+    }
+
+    public void setfId(String fId) {
+        this.fId = fId;
     }
 }

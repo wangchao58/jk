@@ -13,6 +13,8 @@ public interface TCarGroupMapper {
 
     List<TCarGroup> selectByExample(TCarGroup example);
 
+    List<TCarGroup> selectByExampleByPort(TCarGroup example);
+
     TCarGroup selectByPrimaryKey(String tId);
 
     int insertNiewsNum(String id);

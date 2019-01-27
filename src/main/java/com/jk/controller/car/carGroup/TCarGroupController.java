@@ -80,7 +80,7 @@ public class TCarGroupController {
 
 
     /**
-     * 功能：接口店铺列表
+     * 功能：接口拼车群列表
      * 作者：transcend
      * @param record
      * @param rows
@@ -91,7 +91,7 @@ public class TCarGroupController {
     public Map<String,Object> selectByExampleByPort(TCarGroup record, int rows) {
         Map<String,Object> maps = new HashMap<>();
         PageHelper.startPage(record.getPage(),rows);//分页查询
-        List<TCarGroup> tStoreList =  tCarGroupService.selectByExample(record);
+        List<TCarGroup> tStoreList =  tCarGroupService.selectByExampleByPort(record);
         PageInfo<TCarGroup> pageInfo = new PageInfo<>(tStoreList);
         maps.put("carGroupList",tStoreList);
         maps.put("pages",pageInfo.getPages());

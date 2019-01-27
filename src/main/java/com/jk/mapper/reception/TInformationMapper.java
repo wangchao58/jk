@@ -15,6 +15,8 @@ public interface TInformationMapper {
 
     TInformation selectByPrimaryKey(String tId);
 
+    TInformation selectByPrimaryKeyByprore(String tId);
+
     int updateByPrimaryKeySelective(TInformation record);
 
     int updateByPrimaryKey(TInformation record);

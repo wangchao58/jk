@@ -56,6 +56,12 @@
     from t_personage
     where t_id = #{tId,jdbcType=VARCHAR}
   </select>
+  <select id="selectByOpenId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from t_personage
+    where openid = #{openId,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from t_personage
     where t_id = #{tId,jdbcType=VARCHAR}

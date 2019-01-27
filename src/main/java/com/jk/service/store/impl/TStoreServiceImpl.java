@@ -3,10 +3,14 @@ package com.jk.service.store.impl;
 import com.jk.entity.reception.TStore;
 import com.jk.mapper.reception.TStoreMapper;
 import com.jk.service.store.TStoreService;
+import com.jk.util.DateUtil;
+import com.jk.util.UUIDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.unit.DataUnit;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -24,6 +28,8 @@ public class TStoreServiceImpl implements TStoreService {
 
     @Override
     public int insertSelective(TStore record) {
+        record.settId(UUIDUtil.getUUID());
+        record.settCreateTime(DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss"));
         int i = tStoreMapper.insertSelective(record);
         return i;
     }

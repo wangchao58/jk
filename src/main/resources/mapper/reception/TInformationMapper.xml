@@ -42,7 +42,7 @@
     <include refid="tInformation"/>
     from t_information i
     LEFT JOIN t_personage p
-    ON i.p_id = p.openid
+    ON i.p_id = p.t_id
     <where>
       <if test="pId != null and pId !=''" >
         and i.p_id = #{pId,jdbcType=VARCHAR}
@@ -58,9 +58,15 @@
     select
     <include refid="tInformation"/>
     from t_information i
-           LEFT JOIN t_personage p
-                     ON i.p_id = p.openid
+           left join t_personage p
+                     on i.p_id = p.openid
     where i.t_id = #{tId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByPrimaryKeyByprore" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List"/>
+    from t_information
+    where t_id = #{tId,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from t_information
@@ -205,10 +211,10 @@
     select
       <include refid="informationData"/>
     from t_information i
-    LEFT JOIN t_personage p
-    ON i.p_id = p.openid
-    LEFT JOIN t_praise pr
-    ON i.t_id = pr.h_id
+    left join t_personage p
+    on i.p_id = p.t_id
+    left join t_praise pr
+    on i.t_id = pr.h_id
     and pr.p_id = #{pId,jdbcType=VARCHAR}
     where i.t_id = #{tId,jdbcType=VARCHAR}
   </select>

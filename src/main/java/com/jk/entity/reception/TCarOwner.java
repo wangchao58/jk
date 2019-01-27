@@ -33,6 +33,8 @@ public class TCarOwner extends Page {
 
     private String tOwner;
 
+    private String tWechat;
+
     public String gettId() {
         return tId;
     }
@@ -151,5 +153,13 @@ public class TCarOwner extends Page {
 
     public void settOwner(String tOwner) {
         this.tOwner = tOwner;
+    }
+
+    public String gettWechat() {
+        return tWechat;
+    }
+
+    public void settWechat(String tWechat) {
+        this.tWechat = tWechat;
     }
 }

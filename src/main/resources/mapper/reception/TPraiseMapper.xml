@@ -7,6 +7,7 @@
     <result column="p_id" property="pId" jdbcType="VARCHAR" />
     <result column="t_time" property="tTime" jdbcType="VARCHAR" />
     <result column="t_type" property="tType" jdbcType="VARCHAR" />
+    <result column="f_id" property="fId" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -14,7 +15,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    t_id, h_id, p_id, t_time, t_type
+    t_id, h_id, p_id, t_time, t_type,f_id
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TPraiseExample" >
     select
@@ -31,6 +32,16 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByMap" resultType="java.util.Map" parameterType="com.jk.entity.reception.TPraise" >
+    select p.t_time,pe.nickName,i.t_content,pe.avatarUrl,i.t_id as tId
+    from t_praise p
+    left join t_personage pe on p.p_id=pe.t_id
+    left join t_information i on p.h_id=i.t_id
+    <where>
+      and p.f_id = #{fId,jdbcType=VARCHAR}
+    </where>
+  </select>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
@@ -65,6 +76,9 @@
       <if test="tType != null" >
         t_type,
       </if>
+      <if test="fId != null" >
+        f_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="tId != null" >
@@ -81,6 +95,9 @@
       </if>
       <if test="tType != null" >
         #{tType,jdbcType=VARCHAR},
+      </if>
+      <if test="fId != null" >
+        #{fId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>

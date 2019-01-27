@@ -3,10 +3,13 @@ package com.jk.service.carGroup.impl;
 import com.jk.entity.reception.TCarGroup;
 import com.jk.mapper.reception.TCarGroupMapper;
 import com.jk.service.carGroup.TCarGroupService;
+import com.jk.util.DateUtil;
+import com.jk.util.UUIDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -25,6 +28,8 @@ public class TCarGroupServiceImpl implements TCarGroupService {
 
     @Override
     public int insertSelective(TCarGroup record) {
+        record.settId(UUIDUtil.getUUID());
+        record.settCreateTime(DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss"));
         int i = tCarGroupMapper.insertSelective(record);
         return i;
     }
@@ -32,6 +37,12 @@ public class TCarGroupServiceImpl implements TCarGroupService {
     @Override
     public List<TCarGroup> selectByExample(TCarGroup example) {
         List<TCarGroup> tCarGroupList= tCarGroupMapper.selectByExample(example);
+        return tCarGroupList;
+    }
+
+    @Override
+    public List<TCarGroup> selectByExampleByPort(TCarGroup example) {
+        List<TCarGroup> tCarGroupList= tCarGroupMapper.selectByExampleByPort(example);
         return tCarGroupList;
     }
 

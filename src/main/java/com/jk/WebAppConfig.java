@@ -19,6 +19,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
                         "/**/*.css",
                         "/**/*.ts",
                         "/personage/addPersonage",
+                        "/personage/updPersonage",
                         "/territory/listTerritorySele",
                         "/dept/listDeptByPort",
                         "/slideshow/listSlideshowByPort",
@@ -43,7 +44,13 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
                         "/store/selectByExampleByPort",
                         "/carGroup/selectByExampleByPort",
                         "/carGroup/selectByPrimaryKey",
+                        "/carGroup/insertSelective",
                         "/carOwner/selectByExampleByPort",
+                        "/carOwner/selectByPrimaryKey",
+                        "/carOwner/insertSelective",
+                        "/praise/listPraise",
+                        "/evaluate/selTEvaluateListByPort",
+                        "/store/insertSelective",
                         "/store/selectByPrimaryKey"
                         );
 

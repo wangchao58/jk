@@ -47,7 +47,7 @@
     <include refid="getActivityList" />
     from t_activity a
     LEFT JOIN t_personage p
-    ON a.p_id = p.openid
+    ON a.p_id = p.t_id
     <where>
       <if test="pId != null and pId !=''" >
         and a.p_id = #{pId,jdbcType=VARCHAR}
@@ -283,7 +283,7 @@
       <include refid="getActivity" />
       from t_activity a
       LEFT JOIN t_personage p
-      ON a.p_id = p.openid
+      ON a.p_id = p.t_id
       LEFT JOIN t_enshrine e
       ON a.t_id = e.h_id
       and e.p_id = #{pId,jdbcType=VARCHAR}

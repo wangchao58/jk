@@ -15,6 +15,8 @@ public interface TPersonageMapper {
 
     TPersonage selectByPrimaryKey(String tId);
 
+    TPersonage selectByOpenId(String openId);
+
     int updateByPrimaryKeySelective(TPersonage record);
 
     int updateByPrimaryKey(TPersonage record);

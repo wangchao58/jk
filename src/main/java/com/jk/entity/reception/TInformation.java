@@ -2,6 +2,8 @@ package com.jk.entity.reception;
 
 import com.jk.util.Page;
 
+import java.util.List;
+
 public class TInformation extends Page {
     private String tId;
 
@@ -30,6 +32,9 @@ public class TInformation extends Page {
     private String praiseId;
 
     private String city;
+
+    private List<String> listImg;
+
 
     public String gettId() {
         return tId;
@@ -141,5 +146,13 @@ public class TInformation extends Page {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public List<String> getListImg() {
+        return listImg;
+    }
+
+    public void setListImg(List<String> listImg) {
+        this.listImg = listImg;
     }
 }

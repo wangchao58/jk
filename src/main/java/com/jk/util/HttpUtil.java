@@ -18,7 +18,7 @@ public class HttpUtil {
         String result = "";
         BufferedReader in = null;
         try {
-            String urlNameString = "https://api.weixin.qq.com/sns/jscode2session?appid=wx64219b04c3af9d85&secret=cff148670d0e8dd06be650a6ed6774fe&"+
+            String urlNameString = "https://api.weixin.qq.com/sns/jscode2session?appid=wxf11aa7f7e19c80db&secret=7519930aa8c7ad0b7a4d221bfeb7ba5d&"+
                     "js_code="+code+"&&grant_type=authorization_code";
             URL realUrl = new URL(urlNameString);
             // 打开和URL之间的连接

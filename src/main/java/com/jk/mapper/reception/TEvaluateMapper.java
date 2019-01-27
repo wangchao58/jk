@@ -3,6 +3,7 @@ package com.jk.mapper.reception;
 import com.jk.entity.reception.TEvaluate;
 import com.jk.entity.reception.TEvaluateExample;
 import java.util.List;
+import java.util.Map;
 
 public interface TEvaluateMapper {
     int deleteByPrimaryKey(String tId);
@@ -12,6 +13,8 @@ public interface TEvaluateMapper {
     int insertSelective(TEvaluate record);
 
     List<TEvaluate> selectByExample(TEvaluate tEvaluate);
+
+    List<Map<String, Object>> selTEvaluateListByPort(TEvaluate tEvaluate);
 
     TEvaluate selectByPrimaryKey(String tId);
 
