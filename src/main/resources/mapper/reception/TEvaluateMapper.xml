@@ -43,10 +43,12 @@
   </select>
 
   <select id="selTEvaluateListByPort" resultType="java.util.Map" parameterType="com.jk.entity.reception.TEvaluate" >
-    select e.create_time,pe.nickName,e.t_content as eContent,i.t_content,pe.avatarUrl,i.t_id as tId
+    select e.create_time,pe.nickName,e.t_content as eContent,i.t_content,pe.avatarUrl,i.t_id as tId,e.t_type as tType,
+    s.t_explain ,s.t_id as sId
     from t_evaluate e
     left join t_personage pe on e.p_id=pe.t_id
     left join t_information i on e.t_other_id=i.t_id
+    left join t_store s on e.t_other_id=s.t_id
     where e.f_id=#{fId,jdbcType=VARCHAR}
     order by e.create_time desc
   </select>
