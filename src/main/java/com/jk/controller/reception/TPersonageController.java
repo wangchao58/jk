@@ -64,7 +64,7 @@ public class TPersonageController extends BaseController {
         String dateNow = DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss");
         Map<String,Object> m = HttpUtil.sendGet(code);
         personage.setOpenid(m.get("openid").toString());
-        personage.settId(UUIDUtil.getUUID());
+
         personage.settCreateTime(dateNow);
         int i = 0;
         Map<String,Object> map = new HashMap<>();

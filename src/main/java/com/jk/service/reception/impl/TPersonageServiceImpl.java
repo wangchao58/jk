@@ -5,6 +5,7 @@ import com.jk.entity.reception.TPersonage;
 import com.jk.mapper.reception.TPersonageMapper;
 import com.jk.service.reception.TPersonageService;
 import com.jk.util.DateUtil;
+import com.jk.util.UUIDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,7 @@ public class TPersonageServiceImpl implements TPersonageService {
             i = tPersonageMapper.updateByPrimaryKeySelective(recordu);
             id=recordu.gettId();
         } else {
+            record.settId(UUIDUtil.getUUID());
             i = tPersonageMapper.insertSelective(record);
             id=record.gettId();
         }

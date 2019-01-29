@@ -41,6 +41,8 @@ public class TActivity extends Page {
 
     private String enshrineId;
 
+    private String participation;
+
     public String gettId() {
         return tId;
     }
@@ -191,5 +193,13 @@ public class TActivity extends Page {
 
     public void setEnshrineId(String enshrineId) {
         this.enshrineId = enshrineId;
+    }
+
+    public String getParticipation() {
+        return participation;
+    }
+
+    public void setParticipation(String participation) {
+        this.participation = participation;
     }
 }

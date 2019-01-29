@@ -1,13 +1,14 @@
 package com.jk.service.store.impl;
 
+import com.github.pagehelper.StringUtil;
 import com.jk.entity.reception.TStore;
 import com.jk.mapper.reception.TStoreMapper;
 import com.jk.service.store.TStoreService;
 import com.jk.util.DateUtil;
+import com.jk.util.Page;
 import com.jk.util.UUIDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.unit.DataUnit;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -28,9 +29,15 @@ public class TStoreServiceImpl implements TStoreService {
 
     @Override
     public int insertSelective(TStore record) {
-        record.settId(UUIDUtil.getUUID());
-        record.settCreateTime(DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss"));
-        int i = tStoreMapper.insertSelective(record);
+        int i=0;
+        if(StringUtil.isEmpty(record.gettId())) {
+            record.settId(UUIDUtil.getUUID());
+            record.settCreateTime(DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss"));
+            i = tStoreMapper.insertSelective(record);
+        } else {
+            i = tStoreMapper.updateByPrimaryKeySelective(record);
+        }
+
         return i;
     }
 

@@ -1,8 +1,8 @@
 package com.jk.entity.reception;
 
-import java.util.Date;
+import com.jk.util.Page;
 
-public class TEnshrine {
+public class TEnshrine extends Page {
     private String tId;
 
     private String hId;

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class EnshrineServiceImpl implements EnshrineService {
@@ -55,6 +56,11 @@ public class EnshrineServiceImpl implements EnshrineService {
     @Override
     public List<TEnshrine> selEnshrineList(TEnshrine tEnshrine) {
         return tEnshrineMapper.selectByExample(tEnshrine);
+    }
+
+    @Override
+    public List<Map<String,Object>> selEnshrineListByport(TEnshrine tEnshrine) {
+        return tEnshrineMapper.selEnshrineListByport(tEnshrine);
     }
 
     /**

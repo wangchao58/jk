@@ -19,6 +19,7 @@
     <result column="t_collection_num" property="tCollectionNum" jdbcType="INTEGER" />
     <result column="t_money" property="tMoney" jdbcType="VARCHAR" />
     <result column="t_img" property="tImg" jdbcType="VARCHAR" />
+    <result column="participation" property="participation" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -46,14 +47,17 @@
     select
     <include refid="getActivityList" />
     from t_activity a
-    LEFT JOIN t_personage p
-    ON a.p_id = p.t_id
+    left join t_personage p
+    on a.p_id = p.t_id
     <where>
       <if test="pId != null and pId !=''" >
         and a.p_id = #{pId,jdbcType=VARCHAR}
       </if>
-      <if test="tHeadline != null and pId !=''" >
+      <if test="tHeadline != null and tHeadline !=''" >
         and a.t_headline like CONCAT('%',#{tHeadline,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="participation != null and participation !='' and pId != null and pId !=''" >
+        or a.t_id in (select h_id from t_apply where p_id=#{pId,jdbcType=VARCHAR})
       </if>
     </where>
     order by a.t_create_time desc

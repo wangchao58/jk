@@ -33,6 +33,34 @@
       </if>
     </where>
   </select>
+  <select id="selEnshrineListByport" resultType="java.util.Map" parameterType="com.jk.entity.reception.TEnshrine" >
+    select
+      e.t_id as tId,
+      e.t_type as tType,
+      s.t_store_name as tStoreName,
+      s.t_explain as tExplain,
+      s.t_phone as tPhone,
+      s.t_site as tSite ,
+      a.t_headline as tHeadline,
+      a.t_money as tMoney ,
+      a.t_site as asite,
+      a.t_id as aId,
+      s.t_id as sId,
+      s.t_picture as tPicture,
+      a.t_img as tImg,
+      a.t_start_time as tStartTime
+    from t_enshrine e
+    left join t_activity a on e.h_id=a.t_id
+    left join t_store s on e.h_id = s.t_id
+    <where>
+      <if test="pId != null and pId !=''" >
+        and e.p_id = #{pId,jdbcType=VARCHAR}
+      </if>
+      <if test="tType != null and tType !=''" >
+        and t_type = #{tType,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
