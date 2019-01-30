@@ -10,6 +10,8 @@ public class TSlideshow extends Page {
 
     private String picture;
 
+    private String url;
+
     private Date createTime;
 
     public String getId() {
@@ -26,6 +28,14 @@ public class TSlideshow extends Page {
 
     public void setPicture(String picture) {
         this.picture = picture;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public Date getCreateTime() {

@@ -9,7 +9,8 @@ jQuery(function($) {
         mtype: "post",
         colModel:[
             {label:'id',name:'id', editable:false,hidden:true },
-            {label:'图片',name:'picture', editable: true, width:300 , formatter:showimage},
+            {label:'图片',name:'picture', editable: true, width:100 , formatter:showimage},
+            {label:'链接',name:'url', editable: true, width:300},
             {label:'增加时间',name:'createTime', editable: true, formatter:formatDatebox }
         ],
         viewrecords : true,//定义是否要显示总记录数
@@ -120,7 +121,7 @@ function openEditDiag(uuid) {
     var indext = layer.open({
         type: 2,
         title:'修改休息时间',
-        area: ['70%', '80%'],
+        area: ['70%', '30%'],
         fixed: false, //不固定
         maxmin: true,
         content: '/rest/updRestView?id='+uuid,
@@ -138,7 +139,7 @@ function openAddDiag() {
     var indext = layer.open({
         type: 2,
         title:'增加轮播图',
-        area: ['70%', '80%'],
+        area: ['70%', '30%'],
         fixed: false, //不固定
         maxmin: true,
         content: '/slideshow/addSlideshow',
