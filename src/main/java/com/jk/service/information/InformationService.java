@@ -17,4 +17,5 @@ public interface InformationService {
 
     TInformation getInformationByTid(TInformation tInformation);
 
+    int removeInformation(TInformation tInformation);
 }

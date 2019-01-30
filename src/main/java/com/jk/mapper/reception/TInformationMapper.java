@@ -22,4 +22,7 @@ public interface TInformationMapper {
     int updateByPrimaryKey(TInformation record);
 
     TInformation getInformationByTid(TInformation tInformation);
+
+    int removeByPrimaryKey(TInformation tInformation);
+
 }

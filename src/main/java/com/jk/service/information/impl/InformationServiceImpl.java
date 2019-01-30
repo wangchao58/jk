@@ -77,5 +77,15 @@ public class InformationServiceImpl implements InformationService {
         return tInformationMapper.getInformationByTid(tInformation);
     }
 
+    /**
+     * 资讯前端删除（接口）
+     * @param tInformation
+     * @return
+     */
+    @Override
+    public int removeInformation(TInformation tInformation) {
+        return tInformationMapper.removeByPrimaryKey(tInformation);
+    }
+
 
 }

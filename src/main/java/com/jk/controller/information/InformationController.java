@@ -111,7 +111,7 @@ public class InformationController {
     @ResponseBody
     public Map<String,Object> getInformationList(TInformation tInformation, int rows) {
         Map<String,Object> maps = new HashMap<>();
-        List<TInformation> tInformationList = new ArrayList<>();
+            List<TInformation> tInformationList = new ArrayList<>();
         PageHelper.startPage(tInformation.getPage(),rows);//分页查询
         List<TInformation> tInformations = informationService.selectByExample(tInformation);
         for (TInformation information : tInformations) {
@@ -143,6 +143,17 @@ public class InformationController {
         }
         informationByTid.settCreateTime(informationByTid.gettCreateTime().substring(5,16));
         return informationByTid;
+    }
+
+    /**
+     * 资讯前端删除（接口）
+     * @param tInformation
+     * @return
+     */
+    @RequestMapping(value = "/removeInformation")
+    @ResponseBody
+    public int removeInformation(TInformation tInformation){
+        return informationService.removeInformation(tInformation);
     }
 
 

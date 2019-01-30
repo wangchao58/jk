@@ -35,6 +35,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
                         "/information/addInformation",
                         "/information/getInformationList",
                         "/information/getInformationByTid",
+                        "/information/removeInformation",
                         "/praise/addPraise",
                         "/evaluate/addEvaluate",
                         "/evaluate/selTEvaluateList",

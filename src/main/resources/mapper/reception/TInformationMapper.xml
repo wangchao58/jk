@@ -218,4 +218,10 @@
     and pr.p_id = #{pId,jdbcType=VARCHAR}
     where i.t_id = #{tId,jdbcType=VARCHAR}
   </select>
+
+  <!--资讯前端删除（接口）-->
+  <delete id="removeByPrimaryKey" parameterType="com.jk.entity.reception.TInformation" >
+    delete from t_information
+    where t_id = #{tId,jdbcType=VARCHAR} and p_id = #{pId,jdbcType=VARCHAR}
+  </delete>
 </mapper>
