@@ -168,4 +168,18 @@ public class ActivityController extends BaseController {
         return activityService.activityApply(tApply);
     }
 
+    /**
+     * 查询活动报名（接口）
+     * @param tApply
+     * @return
+     */
+    @RequestMapping("/activityApplyByPortList")
+    @ResponseBody
+    public Map<String,Object> activityApplyByPortList(TApply tApply){
+        Map<String,Object> map = new HashMap<>();
+        List<Map<String,Object>> listApply = activityService.activityApplyByPortList(tApply);
+        map.put("listApply",listApply);
+        return map;
+    }
+
 }

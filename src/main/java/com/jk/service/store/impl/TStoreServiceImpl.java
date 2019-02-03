@@ -43,7 +43,31 @@ public class TStoreServiceImpl implements TStoreService {
 
     @Override
     public List<TStore> selectByExample(TStore example) {
+
+        //String district = example.getDistrict();
+        String city = example.getCity();
+        String province = example.getProvince();
+        example.setCity("");
+        example.setProvince("");
         List<TStore> tStoreList = tStoreMapper.selectByExample(example);
+
+        if(tStoreList.size()==0) {
+            example.setDistrict("");
+            example.setCity(city);
+            tStoreList = tStoreMapper.selectByExample(example);
+        }
+        if(tStoreList.size()==0) {
+            example.setDistrict("");
+            example.setCity("");
+            example.setProvince(province);
+            tStoreList = tStoreMapper.selectByExample(example);
+        }
+        if(tStoreList.size()==0) {
+            example.setDistrict("");
+            example.setCity("");
+            example.setProvince("");
+            tStoreList = tStoreMapper.selectByExample(example);
+        }
         return tStoreList;
     }
 
