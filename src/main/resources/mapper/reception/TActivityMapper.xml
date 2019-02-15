@@ -63,6 +63,20 @@
     order by a.t_create_time desc
   </select>
 
+  <select id="activityApplyByPortList" resultType="java.util.Map" parameterType="com.jk.entity.reception.TApply" >
+    select p.t_id ,p.nickname,a.t_time,a.t_introduction ,a.t_phone from t_apply a
+    left join t_personage p on a.p_id = p.t_id
+    <where>
+      <if test="tId != null and tId != ''">
+        and a.h_id = #{tId,jdbcType=VARCHAR}
+      </if>
+      <if test="pId != null and tId != ''">
+        and a.p_id = #{pId,jdbcType=VARCHAR}
+      </if>
+    </where>
+    order by a.t_time desc
+  </select>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select
     <include refid="getActivityList" />

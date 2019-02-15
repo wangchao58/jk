@@ -4,6 +4,7 @@ import com.jk.entity.reception.TActivity;
 import com.jk.entity.reception.TApply;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ActivityService {
 
@@ -22,4 +23,6 @@ public interface ActivityService {
 //    int collectionActivity(TActivity tActivity);
 
     int activityApply(TApply tApply);
+
+    List<Map<String,Object>> activityApplyByPortList(TApply tActivity);
 }

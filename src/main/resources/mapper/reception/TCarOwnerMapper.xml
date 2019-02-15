@@ -68,6 +68,9 @@
          or t_way like concat('%',#{tDestination,jdbcType=VARCHAR},'%')
         )
       </if>
+      <if test="tIssuer != null and tIssuer != ''" >
+        and t_issuer = #{tIssuer,jdbcType=VARCHAR}
+      </if>
     </where>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">

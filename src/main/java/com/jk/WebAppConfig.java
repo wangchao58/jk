@@ -32,6 +32,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
                         "/activity/getActivityList",
                         "/activity/getActivityByTid",
                         "/activity/activityApply",
+                        "/activity/activityApplyByPortList",
                         "/information/addInformation",
                         "/information/getInformationList",
                         "/information/getInformationByTid",
@@ -53,6 +54,9 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
                         "/praise/listPraise",
                         "/evaluate/selTEvaluateListByPort",
                         "/store/insertSelective",
+                        "/appointment/getAppointmentList",
+                        "/appointment/addAppointment",
+                        "/complain/addtComplain",
                         "/store/selectByPrimaryKey"
                         );
 

@@ -26,7 +26,12 @@
   </sql>
   <sql id="Base_Column_List" >
     t_id, t_group_name, t_sort, t_group_lord, t_group_code, t_create_time, t_attribution,
-    t_claim, t_introduction, t_explain, t_payment, t_money, t_views_num,t_issuer,t_group_img,t_status
+    t_claim, t_introduction, t_explain, t_payment, t_money, t_views_num,t_issuer,t_group_img,
+
+    case  t_status
+    when '0' then '未审核'
+    when '1' then '已审核'
+    end as t_status
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TCarGroup" >
     select

@@ -31,11 +31,11 @@ public class TCarGroupController {
      * 进入拼车车主列表页面
      * @return
      */
-    @RequestMapping(value = "/listCarPassengerView")
+    @RequestMapping(value = "/listCarGroupView")
     public String listMenuView(Model model, String pid, String id) {
         model.addAttribute("pid",pid);
         model.addAttribute("id",id);
-        return "html/authority/CarPassenger/listCarPassenger";
+        return "html/reception/carGroup/listCarGroup";
     }
 
 

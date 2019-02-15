@@ -34,6 +34,10 @@ public class TStore extends Page {
     private String tWechat;
 
     private String tPicture;
+    private String nation;
+    private String province;
+    private String city;
+    private String district;
 
     public String gettId() {
         return tId;
@@ -161,5 +165,37 @@ public class TStore extends Page {
 
     public void settPicture(String tPicture) {
         this.tPicture = tPicture;
+    }
+
+    public String getNation() {
+        return nation;
+    }
+
+    public void setNation(String nation) {
+        this.nation = nation;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
     }
 }

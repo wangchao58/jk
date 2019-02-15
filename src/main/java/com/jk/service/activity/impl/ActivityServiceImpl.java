@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ActivityServiceImpl implements ActivityService {
@@ -174,5 +175,11 @@ public class ActivityServiceImpl implements ActivityService {
             i = tActivityMapper.updateByPrimaryKeySelective(tActivity);
         }
         return i;
+    }
+
+    @Override
+    public List<Map<String, Object>> activityApplyByPortList(TApply tActivity) {
+        List<Map<String, Object>> maps = tActivityMapper.activityApplyByPortList(tActivity);
+        return maps;
     }
 }

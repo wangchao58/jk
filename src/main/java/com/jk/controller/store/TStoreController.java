@@ -58,7 +58,10 @@ public class TStoreController  {
      */
     @RequestMapping(value = "/insertSelective")
     @ResponseBody
-    public int insertSelective(TStore record) {
+    public int insertSelective(TStore record,String [] region) {
+        record.setProvince(region[0]);
+        record.setCity(region[1]);
+        record.setDistrict(region[2]);
         int i = tStoreService.insertSelective(record);
         return i;
     }
