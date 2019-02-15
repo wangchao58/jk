@@ -48,6 +48,11 @@
     select
     <include refid="Base_Column_List" />
     from t_personage
+    <where>
+      <if test="nickname != null and nickname != ''">
+        and nickName like concat('%',#{nickname,jdbcType=VARCHAR},'%' )
+      </if>
+    </where>
   </select>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
