@@ -41,13 +41,13 @@ public class TStoreController  {
 
     /**
      * 删除店铺管理发布的信息
-     * @param tId
+     * @param ids
      * @return
      */
     @RequestMapping(value = "/deleteByPrimaryKey")
     @ResponseBody
-    public int deleteByPrimaryKey(String tId) {
-        int i = tStoreService.deleteByPrimaryKey(tId);
+    public int deleteByPrimaryKey(String ids) {
+        int i = tStoreService.deleteByPrimaryKey(ids);
         return i;
     }
 

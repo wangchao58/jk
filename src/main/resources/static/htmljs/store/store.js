@@ -8,7 +8,7 @@ jQuery(function($) {
         datatype: "json",
         mtype: "post",
         colModel:[
-            {label:'id',name:'id', editable:false,hidden:true },
+            {label:'tId',name:'tId', editable:false,hidden:true },
             {label:'店名',name:'tStoreName', editable: true },
             {label:'手机号',name:'tPhone', editable: true },
             {label:'入注时间',name:'tCreateTime',  editable: true},
@@ -84,11 +84,10 @@ function deletes() {
     //获取值
     var ids=$('#grid-table').jqGrid('getGridParam','selarrrow');
     var row="";
-    //var id = $("grid-table").jqGrid('getDataIDs');
     //遍历访问这个集合
     $(ids).each(function (index, id){
         //由id获得对应数据行
-        var name= jQuery('#grid-table').jqGrid('getCell',id,'id');//name是colModel中的一属性
+        var name= jQuery('#grid-table').jqGrid('getCell',id,'tId');//name是colModel中的一属性
         if(name != 1) {
             row += name+",";
         }
@@ -100,7 +99,7 @@ function deletes() {
             btn: ['继续','取消'] //按钮
         }, function(){
             $.ajax({
-                url: '/dept/delDept',
+                url: '/store/deleteByPrimaryKey',
                 data: {'ids':row},
                 type: "POST",
                 success: function (result) {
@@ -108,7 +107,7 @@ function deletes() {
                         layer.msg('操作成功', {icon: 1});
                         selText();
                     } else {
-                        layer.alert('操作失败,或总部不能删除', {icon: 1});
+                        layer.alert('操作失败', {icon: 1});
                     }
                 }
             });
