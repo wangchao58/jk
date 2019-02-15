@@ -70,7 +70,10 @@
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from t_information
-    where t_id = #{tId,jdbcType=VARCHAR}
+    where t_id in
+    <foreach collection="list" item="ids" open="(" close=")" separator=",">
+      '${ids}'
+    </foreach>
   </delete>
   <insert id="insert" parameterType="com.jk.entity.reception.TInformation" >
     insert into t_information (t_id, t_content, t_img, 
