@@ -9,15 +9,12 @@ jQuery(function($) {
         mtype: "post",
         colModel:[
             {label:'id',name:'id', editable:false,hidden:true },
-            {label:'昵称',name:'realName', editable: true,width:100 },
+            {label:'昵称',name:'nickname', editable: true,width:100 },
+            {label:'头像',name:'avatarurl', editable: true,width:100,formatter:showimage },
             {label:'电话号码',name:'phone', editable: true,width:100},
-            {label:'年龄',name:'age', editable: true,width:50},
-            {label:'性别',name:'sex', editable: true,width:50},
-            {label:'风格定位',name:'style', editable: true},
-            {label:'到店距离',name:'distance', editable: true,width:100},
-            {label:'职业属性',name:'occupation', editable: true,width:100},
-            {label:'增加时间',name:'createTime', editable: true ,formatter:formatDatebox},
-            {label:'最近登录时间',name:'updateTime', editable: true ,formatter:formatDatebox}
+            {label:'性别',name:'tSex', editable: true,width:50,formatter:checkSex},
+            {label:'增加时间',name:'tCreateTime', editable: true},
+            {label:'最近登录时间',name:'tUpdateTime', editable: true}
         ],
 
         viewrecords : true,//定义是否要显示总记录数
@@ -82,7 +79,7 @@ function selText() {
     // 使用jqgrid中的方法
     $("#grid-table").jqGrid('setGridParam',{
         postData:{
-            'realName' : $("#realName").val()
+            'nickname' : $("#nickname").val()
         }
     }).trigger("reloadGrid"); //重新载入
 }
@@ -189,13 +186,43 @@ function mySubmit(){
 }
 
 function formatDatebox(Value, options, rowObject){
-
     var time = new Date(Value);
     var y = time.getFullYear();
     var m = time.getMonth()+1;
     var d = time.getDate();
     return y+'-'+add(m)+'-'+add(d);
+}
+function add(m){return m<10?'0'+m:m };
 
+/**
+ * 性别判断
+ * @param Value
+ * @returns {string}
+ */
+function checkSex(Value, options, rowObject){
+    var sex = "";
+    if(0 == Value){
+        sex = "未知";
+    }else if(2 == Value){
+        sex = "女";
+    }else if(1 == Value){
+        sex = "男";
+    }
+    return sex;
 }
 
-function add(m){return m<10?'0'+m:m };
+/**
+ * 图片展示
+ * @param Value
+ * @param options
+ * @param rowObject
+ * @returns {string}
+ */
+function showimage(Value, options, rowObject){
+    if(undefined != Value){
+        return "<img  src='"+Value+"' width='50px' height='50px'/>";
+    }else{
+        return "";
+    }
+}
+
