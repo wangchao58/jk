@@ -119,7 +119,7 @@ function selText() {
     // 使用jqgrid中的方法
     $("#grid-table").jqGrid('setGridParam',{
         postData:{
-            'realName' : $("#realName").val()
+            'pId' : $("#pId").val()
         }
     }).trigger("reloadGrid"); //重新载入
 }

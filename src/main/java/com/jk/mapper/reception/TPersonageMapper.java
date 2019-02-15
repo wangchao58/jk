@@ -20,4 +20,6 @@ public interface TPersonageMapper {
     int updateByPrimaryKeySelective(TPersonage record);
 
     int updateByPrimaryKey(TPersonage record);
+
+    TPersonage selOpenidByNickName(String nickName);
 }

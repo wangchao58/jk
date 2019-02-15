@@ -172,4 +172,12 @@
       t_sex = #{tSex,jdbcType=VARCHAR}
     where t_id = #{tId,jdbcType=VARCHAR}
   </update>
+
+  <!-- 根据发布人微信昵称查询pId(openid) -->
+  <select id="selOpenidByNickName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from t_personage
+    where nickName = #{nickName,jdbcType=VARCHAR}
+  </select>
 </mapper>

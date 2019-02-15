@@ -1,7 +1,9 @@
 package com.jk.service.information.impl;
 
 import com.jk.entity.reception.TInformation;
+import com.jk.entity.reception.TPersonage;
 import com.jk.mapper.reception.TInformationMapper;
+import com.jk.mapper.reception.TPersonageMapper;
 import com.jk.service.information.InformationService;
 import com.jk.util.DateUtil;
 import com.jk.util.UUIDUtil;
@@ -16,6 +18,8 @@ import java.util.List;
 public class InformationServiceImpl implements InformationService {
     @Autowired
     TInformationMapper tInformationMapper;
+    @Autowired
+    TPersonageMapper tPersonageMapper;
 
     /**
      * 资讯列表数据查询
@@ -24,6 +28,11 @@ public class InformationServiceImpl implements InformationService {
      */
     @Override
     public List<TInformation> selectByExample(TInformation tInformation) {
+        // 根据发布人微信昵称查询pId(openid)
+        TPersonage tPersonage = tPersonageMapper.selOpenidByNickName(tInformation.getpId());
+        if(null != tPersonage && StringUtils.isNotBlank(tPersonage.gettId())){
+            tInformation.setpId(tPersonage.gettId());
+        }
         if(StringUtils.equals("undefined",tInformation.gettContent())){
             tInformation.settContent("");
         }
