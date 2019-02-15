@@ -40,6 +40,7 @@
     <where>
       and p.f_id = #{fId,jdbcType=VARCHAR}
     </where>
+    order by t_time desc
   </select>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
