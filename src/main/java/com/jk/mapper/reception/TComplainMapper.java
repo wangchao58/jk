@@ -1,7 +1,7 @@
 package com.jk.mapper.reception;
 
 import com.jk.entity.reception.TComplain;
-import com.jk.entity.reception.TComplainExample;
+
 import java.util.List;
 
 public interface TComplainMapper {
@@ -11,7 +11,7 @@ public interface TComplainMapper {
 
     int insertSelective(TComplain record);
 
-    List<TComplain> selectByExample(TComplainExample example);
+    List<TComplain> selectByExample(TComplain tComplain);
 
     TComplain selectByPrimaryKey(String tId);
 
