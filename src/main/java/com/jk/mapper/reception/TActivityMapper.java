@@ -25,4 +25,6 @@ public interface TActivityMapper {
     int updateByPrimaryKey(TActivity record);
 
     TActivity getActivityByTid(TActivity tActivity);
+
+    TActivity selActivityByPrimaryKey(TActivity tActivity);
 }

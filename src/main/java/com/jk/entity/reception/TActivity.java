@@ -43,6 +43,15 @@ public class TActivity extends Page {
 
     private String participation;
 
+    private String startdate;
+
+    private String starttime;
+
+    private String enddate;
+
+    private String endtime;
+
+
     public String gettId() {
         return tId;
     }
@@ -201,5 +210,37 @@ public class TActivity extends Page {
 
     public void setParticipation(String participation) {
         this.participation = participation;
+    }
+
+    public String getStartdate() {
+        return startdate;
+    }
+
+    public void setStartdate(String startdate) {
+        this.startdate = startdate;
+    }
+
+    public String getStarttime() {
+        return starttime;
+    }
+
+    public void setStarttime(String starttime) {
+        this.starttime = starttime;
+    }
+
+    public String getEnddate() {
+        return enddate;
+    }
+
+    public void setEnddate(String enddate) {
+        this.enddate = enddate;
+    }
+
+    public String getEndtime() {
+        return endtime;
+    }
+
+    public void setEndtime(String endtime) {
+        this.endtime = endtime;
     }
 }

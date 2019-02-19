@@ -25,4 +25,6 @@ public interface ActivityService {
     int activityApply(TApply tApply);
 
     List<Map<String,Object>> activityApplyByPortList(TApply tActivity);
+
+    TActivity selActivityByPrimaryKey(TActivity tActivity);
 }

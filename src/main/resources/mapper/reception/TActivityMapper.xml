@@ -307,4 +307,12 @@
       and e.p_id = #{pId,jdbcType=VARCHAR}
     where a.t_id = #{tId,jdbcType=VARCHAR}
   </select>
+
+  <!-- 我的活动编辑获取信息（接口） -->
+  <select id="selActivityByPrimaryKey" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TActivity" >
+    select
+    <include refid="Base_Column_List" />
+    from t_activity
+    where t_id = #{tId,jdbcType=VARCHAR}
+  </select>
 </mapper>

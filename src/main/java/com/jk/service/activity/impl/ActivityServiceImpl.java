@@ -2,7 +2,6 @@ package com.jk.service.activity.impl;
 
 import com.jk.entity.reception.TActivity;
 import com.jk.entity.reception.TApply;
-import com.jk.entity.reception.TEnshrine;
 import com.jk.mapper.reception.TActivityMapper;
 import com.jk.mapper.reception.TApplyMapper;
 import com.jk.mapper.reception.TEnshrineMapper;
@@ -181,5 +180,47 @@ public class ActivityServiceImpl implements ActivityService {
     public List<Map<String, Object>> activityApplyByPortList(TApply tActivity) {
         List<Map<String, Object>> maps = tActivityMapper.activityApplyByPortList(tActivity);
         return maps;
+    }
+
+    /**
+     * 我的活动编辑获取信息（接口）
+     * @param tActivity
+     * @return
+     */
+    @Override
+    public TActivity selActivityByPrimaryKey(TActivity tActivity) {
+        TActivity activityByTid = tActivityMapper.selActivityByPrimaryKey(tActivity);
+        String startdate = "";
+        String starttime = "";
+        String enddate = "";
+        String endtime = "";
+        if(null != tActivity){
+            String startTime = activityByTid.gettStartTime();
+            String endTime = activityByTid.gettEndTime();
+            if(StringUtils.isNotBlank(startTime)){
+                String[] startData = startTime.split(" ");
+                if(startData.length > 0){
+                    startdate = startData[0];
+                    starttime = startData[1];
+                }else{
+                    startdate = startData[0];
+                }
+            }
+            if(StringUtils.isNotBlank(endTime)){
+                String[] endData = endTime.split(" ");
+                if(endData.length > 0){
+                    enddate = endData[0];
+                    endtime = endData[1];
+                }else{
+                    enddate = endData[0];
+                }
+            }
+        }
+        activityByTid.setStartdate(startdate);
+        activityByTid.setStarttime(starttime);
+        activityByTid.setEnddate(enddate);
+        activityByTid.setEndtime(endtime);
+
+        return activityByTid;
     }
 }

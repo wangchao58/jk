@@ -5,7 +5,6 @@ import com.github.pagehelper.PageInfo;
 import com.github.pagehelper.StringUtil;
 import com.jk.entity.reception.TActivity;
 import com.jk.entity.reception.TApply;
-import com.jk.entity.reception.TStore;
 import com.jk.service.activity.ActivityService;
 import com.jk.util.BaseController;
 import com.jk.util.JsonUtil;
@@ -181,6 +180,18 @@ public class ActivityController extends BaseController {
         List<Map<String,Object>> listApply = activityService.activityApplyByPortList(tApply);
         map.put("listApply",listApply);
         return map;
+    }
+
+    /**
+     * 我的活动编辑获取信息（接口）
+     * @param tActivity
+     * @return
+     */
+    @RequestMapping("/selActivityByPrimaryKey")
+    @ResponseBody
+    public TActivity selActivityByPrimaryKey(TActivity tActivity){
+        TActivity tActivityData = activityService.selActivityByPrimaryKey(tActivity);
+        return tActivityData;
     }
 
 }
