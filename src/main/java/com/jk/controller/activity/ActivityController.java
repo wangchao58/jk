@@ -127,6 +127,7 @@ public class ActivityController extends BaseController {
         List<TActivity> tActivities = activityService.selectByExample(tActivity);
         for (TActivity activity : tActivities) {
             activity.settStartTime(activity.gettStartTime().substring(5,10));
+            activity.setParticipation(tActivity.getParticipation());
             activitytList.add(activity);
         }
         PageInfo<TActivity> pageInfo = new PageInfo<>(tActivities);

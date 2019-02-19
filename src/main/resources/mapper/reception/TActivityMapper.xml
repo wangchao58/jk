@@ -70,7 +70,7 @@
       <if test="tId != null and tId != ''">
         and a.h_id = #{tId,jdbcType=VARCHAR}
       </if>
-      <if test="pId != null and tId != ''">
+      <if test="pId != null and pId != ''">
         and a.p_id = #{pId,jdbcType=VARCHAR}
       </if>
     </where>
