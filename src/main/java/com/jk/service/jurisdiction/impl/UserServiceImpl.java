@@ -5,13 +5,13 @@ import com.jk.entity.jurisdiction.TUser;
 import com.jk.mapper.jurisdiction.TUserMapper;
 import com.jk.mapper.jurisdiction.TUserRoleMapper;
 import com.jk.service.jurisdiction.UserService;
-import com.jk.util.DateUtil;
 import com.jk.util.Md5Util;
 import com.jk.util.UUIDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -107,5 +107,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public TUser selectByNamePas(TUser user) {
         return tUserMapper.selectByNamePas(user);
+    }
+
+    /**
+     * 根据“用户名”查询用户数据
+     * @param tUser
+     * @return
+     */
+    @Override
+    public TUser getUserByUserName(TUser tUser) {
+        TUser tUserData = tUserMapper.getUserByUserName(tUser);
+        return tUserData;
     }
 }

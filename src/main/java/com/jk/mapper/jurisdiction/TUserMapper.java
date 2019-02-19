@@ -29,4 +29,6 @@ public interface TUserMapper {
     int updateByPrimaryKey(TUser record);
 
     TUser selUserByLoginName(String loginName);
+
+    TUser getUserByUserName(TUser tUser);
 }

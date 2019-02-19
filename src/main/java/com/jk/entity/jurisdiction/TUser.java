@@ -32,6 +32,8 @@ public class TUser extends Page {
 
     private String duration;
 
+    private String newPwd;
+
     public String getUserId() {
         return userId;
     }
@@ -134,5 +136,13 @@ public class TUser extends Page {
 
     public void setDuration(String duration) {
         this.duration = duration;
+    }
+
+    public String getNewPwd() {
+        return newPwd;
+    }
+
+    public void setNewPwd(String newPwd) {
+        this.newPwd = newPwd;
     }
 }

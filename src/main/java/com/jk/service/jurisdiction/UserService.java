@@ -3,7 +3,6 @@ package com.jk.service.jurisdiction;
 import com.jk.entity.jurisdiction.TUser;
 
 import java.util.List;
-import java.util.Map;
 
 public interface UserService {
 
@@ -22,4 +21,6 @@ public interface UserService {
     TUser selectByPrimaryKey(String userId);
 
     TUser selectByNamePas(TUser user);
+
+    TUser getUserByUserName(TUser tUser);
 }
