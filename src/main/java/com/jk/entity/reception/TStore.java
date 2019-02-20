@@ -43,6 +43,8 @@ public class TStore extends Page {
 
     private String latitude;
 
+    private String enshrineId; //收藏主键id
+
     public String gettId() {
         return tId;
     }
@@ -217,5 +219,13 @@ public class TStore extends Page {
 
     public void setLatitude(String latitude) {
         this.latitude = latitude;
+    }
+
+    public String getEnshrineId() {
+        return enshrineId;
+    }
+
+    public void setEnshrineId(String enshrineId) {
+        this.enshrineId = enshrineId;
     }
 }

@@ -35,6 +35,11 @@
     t_explain, t_issuer, t_payment, t_money, t_views_num, t_collection_num,t_wechat,t_picture,
     nation,province,city,district,longitude,latitude
   </sql>
+  <sql id="TStore_Data" >
+    s.t_id, s.t_store_name, s.t_site, s.t_phone, s.t_qr_code, s.t_create_time, s.t_end_time, s.t_states,
+    s.t_explain, s.t_issuer, s.t_payment, s.t_money, s.t_views_num, s.t_collection_num,s.t_wechat,t_picture,
+    s.nation,s.province,s.city,s.district,s.longitude,s.latitude, e.t_id as enshrineId
+  </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TStore" >
     select
     <include refid="Base_Column_List" />
@@ -59,9 +64,11 @@
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
-    <include refid="Base_Column_List" />
-    from t_store
-    where t_id = #{tId,jdbcType=VARCHAR}
+    <include refid="TStore_Data" />
+    from t_store s
+    LEFT JOIN t_enshrine e
+    ON s.t_id = e.h_id
+    where s.t_id = #{tId,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.util.List" >
     delete from t_store
