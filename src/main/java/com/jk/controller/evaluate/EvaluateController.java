@@ -59,5 +59,19 @@ public class EvaluateController {
         return maps;
     }
 
+    /**
+     * 评论总数
+     * @param tEvaluate
+     * @return
+     */
+    @RequestMapping("/totalEvaluate")
+    @ResponseBody
+    public Map<String,Object> totalEvaluate(TEvaluate tEvaluate){
+        Map<String,Object> maps = new HashMap<>();
+        List<Map<String,Object>> listEvaluate = evaluateServicr.selTEvaluateListByPort(tEvaluate);
+        maps.put("totalEvaluate", listEvaluate.size());
+        return maps;
+    }
+
 
 }

@@ -48,4 +48,18 @@ public class PraiseController {
         maps.put("pages", pageInfo.getPages());
         return maps;
     }
+
+    /**
+     * 点赞总数
+     * @param tPraise
+     * @return
+     */
+    @RequestMapping("/totalPraise")
+    @ResponseBody
+    public Map<String,Object> totalPraise(TPraise tPraise){
+        Map<String,Object> maps = new HashMap<>();
+        List<Map<String,Object>> tPraiseList = praiseService.listPraise(tPraise);
+        maps.put("tPraiseTotal", tPraiseList.size());
+        return maps;
+    }
 }
