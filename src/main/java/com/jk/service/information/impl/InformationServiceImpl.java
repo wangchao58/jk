@@ -29,10 +29,10 @@ public class InformationServiceImpl implements InformationService {
     @Override
     public List<TInformation> selectByExample(TInformation tInformation) {
         // 根据发布人微信昵称查询pId(openid)
-        TPersonage tPersonage = tPersonageMapper.selOpenidByNickName(tInformation.getpId());
-        if(null != tPersonage && StringUtils.isNotBlank(tPersonage.gettId())){
-            tInformation.setpId(tPersonage.gettId());
-        }
+//        TPersonage tPersonage = tPersonageMapper.selOpenidByNickName(tInformation.getpId());
+//        if(null != tPersonage && StringUtils.isNotBlank(tPersonage.gettId())){
+//            tInformation.setpId(tPersonage.gettId());
+//        }
         if(StringUtils.equals("undefined",tInformation.gettContent())){
             tInformation.settContent("");
         }
