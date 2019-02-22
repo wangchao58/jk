@@ -11,7 +11,7 @@ jQuery(function($) {
             {label:'tId',name:'tId', editable:false,hidden:true },
             {label:'店名',name:'tStoreName', editable: true },
             {label:'手机号',name:'tPhone', editable: true },
-            {label:'入注时间',name:'tCreateTime',  editable: true},
+            {label:'入驻时间',name:'tCreateTime',  editable: true},
             {label:'增加时间',name:'tCreateTime', editable: true},
             {label:'到期时间',name:'tEndTime', editable: true},
             {label:'浏览次数',name:'tViewsNum', editable: true},
@@ -72,7 +72,7 @@ function selText() {
     // 使用jqgrid中的方法
     $("#grid-table").jqGrid('setGridParam',{
         postData:{
-            'deptName' : $("#deptName").val()
+            'tStoreName' : $("#tStoreName").val()
         }
     }).trigger("reloadGrid"); //重新载入
 }
@@ -148,11 +148,11 @@ function openAddDiag() {
     //页面层
     var indext = layer.open({
         type: 2,
-        title:'部门增加',
+        title:'店铺增加',
         area: ['70%', '80%'],
         fixed: false, //不固定
         maxmin: true,
-        content: '/dept/addDeptView',
+        content: '/store/addStoreView',
         btn:['确定','取消'],
         yes: function (layero, index) {
             var iframeWin = window[index.find('iframe')[0]['name']]; //得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();

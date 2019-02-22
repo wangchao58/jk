@@ -40,6 +40,16 @@ public class TStoreController  {
 
 
     /**
+     * 进入增加店铺页面
+     * @return
+     */
+    @RequestMapping(value = "/addStoreView")
+    public String addStoreView() {
+        return "html/reception/store/storeadd";
+    }
+
+
+    /**
      * 删除店铺管理发布的信息
      * @param ids
      * @return
