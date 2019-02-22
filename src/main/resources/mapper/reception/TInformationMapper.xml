@@ -45,7 +45,9 @@
     ON i.p_id = p.t_id
     <where>
       <if test="pId != null and pId !=''" >
-        and i.p_id = #{pId,jdbcType=VARCHAR}
+        and i.p_id = (select t_id
+        from t_personage
+        where nickName = #{pId,jdbcType=VARCHAR})
       </if>
       <if test="tContent != null and pId !=''" >
         and i.t_content like CONCAT('%',#{tContent,jdbcType=VARCHAR},'%')
