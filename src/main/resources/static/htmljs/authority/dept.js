@@ -9,10 +9,10 @@ jQuery(function($) {
         mtype: "post",
         colModel:[
             {label:'id',name:'id', editable:false,hidden:true },
-            {label:'门店名',name:'deptName', editable: true },
-            {label:'上级门店',name:'pName', editable: true },
+            {label:'部门名称',name:'deptName', editable: true },
+            {label:'上级部门',name:'pName', editable: true },
             {label:'地址',name:'site',  editable: true},
-            {label:'门店简介',name:'introduction', editable: true},
+            {label:'部门介绍',name:'introduction', editable: true},
             {label:'备注',name:'remark', editable: true},
             {label:'增加时间',name:'createTime', editable: true, formatter:formatDatebox},
             {label:'操作',name:'operate', editable: true ,formatter: operation}

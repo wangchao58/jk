@@ -20,7 +20,7 @@
 <br>
 <form class="form-horizontal" id="aouDept">
     <div class="form-group">
-        <label for="id" class="col-xs-12 col-sm-3 control-label no-padding-right">门店名:</label>
+        <label for="id" class="col-xs-12 col-sm-3 control-label no-padding-right">部门名称:</label>
         <div class="col-xs-12 col-sm-5">
             <span class="block input-icon input-icon-right">
                 <input type="hidden" id="id" name="id" th:value="${dept.id}" class="width-100" />
@@ -30,7 +30,7 @@
     </div>
 
     <div class="form-group">
-        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="deptName">上级:</label>
+        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="deptName">上级部门:</label>
         <div class="col-xs-12 col-sm-5" >
             <span class="block input-icon input-icon-right">
                 <input type="hidden" name="pid" id="deptId" th:value="${dept.pid}">
@@ -40,108 +40,33 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="area">所属区域:</label>
-
-        <div class="col-xs-12 col-sm-9">
-            <input type="hidden" id="hiddenArea" th:value="${dept.area}">
-            <select id="area" name="area" class="select2"  data-placeholder="Click to Choose...">
-
-            </select>
-        </div>
-    </div>
-   <!-- <div class="form-group">
-        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="longitude"></label>
-        <div class="col-xs-12 col-sm-5" >
-            <span class="block input-icon input-icon-right">
-                <input type="button"  value="获取地图地址" onclick="getMap();" class="width-100" />
-            </span>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="longitude">经度:</label>
-        <div class="col-xs-12 col-sm-5" >
-            <span class="block input-icon input-icon-right">
-                <input type="text" id="longitude"  name="longitude" th:value="${dept.longitude}"  class="width-100" />
-            </span>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="latitude">纬度:</label>
-        <div class="col-xs-12 col-sm-5" >
-            <span class="block input-icon input-icon-right">
-                <input type="text" id="latitude"  name="latitude" th:value="${dept.latitude}"  class="width-100" />
-            </span>
-        </div>
-    </div>-->
-    <div class="form-group">
-        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="introduction">门店简介:</label>
+        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="introduction">部门介绍:</label>
         <div class="col-xs-12 col-sm-5" >
             <span class="block input-icon input-icon-right">
                 <input type="text" id="introduction"  name="introduction" th:value="${dept.introduction}"  class="width-100" />
             </span>
         </div>
     </div>
+    <!--<div class="form-group">-->
+        <!--<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="headPortrait">图片:</label>-->
+        <!--<div class="col-xs-12 col-sm-5" >-->
+            <!--<span class="block input-icon input-icon-right">-->
+                <!--&lt;!&ndash;<input type="text" id="portrait"  name="portrait" class="width-100" />&ndash;&gt;-->
+                <!--<input type="hidden" id="headPortrait" name="headPortrait" th:value="${dept.portrait}"  class="width-100" />-->
+                <!--<input type="file" id="uploadClick" name="file"  class="width-100" />-->
+                <!--<img id="previewImg"-->
+                     <!--style="width:200px;height:auto;margin-left: 15px;margin-top: 15px;margin-bottom: 20px;"/>-->
+            <!--</span>-->
+        <!--</div>-->
+    <!--</div>-->
     <div class="form-group">
-        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="headPortrait">门店图片:</label>
-        <div class="col-xs-12 col-sm-5" >
-            <span class="block input-icon input-icon-right">
-                <!--<input type="text" id="portrait"  name="portrait" class="width-100" />-->
-                <input type="hidden" id="headPortrait" name="headPortrait" th:value="${dept.portrait}"  class="width-100" />
-                <input type="file" id="uploadClick" name="file"  class="width-100" />
-                <img id="previewImg"
-                     style="width:200px;height:auto;margin-left: 15px;margin-top: 15px;margin-bottom: 20px;"/>
-            </span>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="site">门店地址:</label>
+        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="site">地址:</label>
         <div class="col-xs-12 col-sm-5" >
             <span class="block input-icon input-icon-right">
                 <input type="text" id="site"  name="site" th:value="${dept.site}"  class="width-100" />
             </span>
         </div>
     </div>
-    <div class="form-group">
-        <label class="control-label col-xs-12 col-sm-3  no-padding-right" for="startTime">每天开门时间:</label>
-        <!--<div class="col-xs-12 col-sm-5 form_datetime" >
-            <span class="block input-icon input-icon-right">
-                <input type="text" id="startTime"  name="startTime" class="width-100" />
-            </span>
-        </div>-->
-        <div class="input-group date form_datetime col-md-5" id="startTime" data-link-field="dtp_input1">
-            <input class="form-control" name="startTime" size="16" type="text" th:value="${dept.startTime}"  readonly>
-            <!--<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>-->
-            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-xs-12 col-sm-3  no-padding-right" for="endTime">每天关门时间:</label>
-        <!--<div class="input-group date form_datetime col-md-5" id="timeEnd" data-link-field="dtp_input1">
-            <span class="block input-icon input-icon-right">
-                <input class="form-control" type="text" id="endTime"  name="endTime" />
-            </span>
-        </div>-->
-        <div class="input-group date form_datetime col-md-5" id="endTime" data-link-field="dtp_input1">
-            <input class="form-control" name="endTime" size="16" type="text" th:value="${dept.endTime}" value="" readonly>
-            <!--<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>-->
-
-            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-        </div>
-    </div>
-    <!--<div class="form-group">
-        <label class="control-label col-xs-12 col-sm-3 no-padding-right" >工作(天):</label>
-        <div class="col-xs-12 col-sm-5" >
-            <span class="block input-icon input-icon-right">
-                星期一:<input type="checkbox" th:value="1" checked name="period"/>
-                星期二:<input type="checkbox" th:value="2" checked name="period"/>
-                星期三:<input type="checkbox" th:value="3" checked name="period"/>
-                星期四:<input type="checkbox" th:value="4" checked name="period"/>
-                星期五:<input type="checkbox" th:value="5" checked name="period"/>
-                星期六:<input type="checkbox" th:value="6" checked name="period"/>
-                星期日:<input type="checkbox" th:value="7" checked name="period"/>
-            </span>
-        </div>
-    </div>-->
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="remark">备注:</label>
         <div class="col-xs-12 col-sm-5" >
