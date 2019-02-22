@@ -7,6 +7,7 @@ import com.jk.service.store.TStoreService;
 import com.jk.util.DateUtil;
 import com.jk.util.Page;
 import com.jk.util.UUIDUtil;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -72,8 +73,10 @@ public class TStoreServiceImpl implements TStoreService {
     }
 
     @Override
-    public TStore selectByPrimaryKey(String tId) {
-        tStoreMapper.insertNiewsNum(tId);
+    public TStore selectByPrimaryKey(String tId, String enshrineViews) {
+        if(!StringUtils.equals("true", enshrineViews)){
+            tStoreMapper.insertNiewsNum(tId);
+        }
         TStore tStore = tStoreMapper.selectByPrimaryKey(tId);
         return tStore;
     }

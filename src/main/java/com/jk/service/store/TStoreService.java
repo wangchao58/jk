@@ -11,7 +11,7 @@ public interface TStoreService {
 
     List<TStore> selectByExample(TStore example);
 
-    TStore selectByPrimaryKey(String tId);
+    TStore selectByPrimaryKey(String tId, String enshrineViews);
 
     int updateByPrimaryKeySelective(TStore record);
 
