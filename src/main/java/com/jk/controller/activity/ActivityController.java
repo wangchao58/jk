@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.github.pagehelper.StringUtil;
 import com.jk.entity.reception.TActivity;
 import com.jk.entity.reception.TApply;
+import com.jk.entity.reception.TInformation;
 import com.jk.service.activity.ActivityService;
 import com.jk.util.BaseController;
 import com.jk.util.JsonUtil;
@@ -192,6 +193,17 @@ public class ActivityController extends BaseController {
     public TActivity selActivityByPrimaryKey(TActivity tActivity){
         TActivity tActivityData = activityService.selActivityByPrimaryKey(tActivity);
         return tActivityData;
+    }
+
+    /**
+     * 活动前端删除（接口）
+     * @param tActivity
+     * @return
+     */
+    @RequestMapping(value = "/removeActivity")
+    @ResponseBody
+    public int removeActivity(TActivity tActivity){
+        return activityService.removeInformation(tActivity);
     }
 
 }

@@ -223,4 +223,9 @@ public class ActivityServiceImpl implements ActivityService {
 
         return activityByTid;
     }
+
+    @Override
+    public int removeInformation(TActivity tActivity) {
+        return tActivityMapper.removeInformation(tActivity);
+    }
 }

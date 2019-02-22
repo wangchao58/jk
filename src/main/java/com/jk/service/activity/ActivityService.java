@@ -27,4 +27,6 @@ public interface ActivityService {
     List<Map<String,Object>> activityApplyByPortList(TApply tActivity);
 
     TActivity selActivityByPrimaryKey(TActivity tActivity);
+
+    int removeInformation(TActivity tActivity);
 }

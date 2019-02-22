@@ -27,4 +27,6 @@ public interface TActivityMapper {
     TActivity getActivityByTid(TActivity tActivity);
 
     TActivity selActivityByPrimaryKey(TActivity tActivity);
+
+    int removeInformation(TActivity tActivity);
 }

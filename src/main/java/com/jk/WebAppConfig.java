@@ -34,6 +34,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
                         "/activity/activityApply",
                         "/activity/activityApplyByPortList",
                         "/activity/selActivityByPrimaryKey",
+                        "/activity/removeActivity",
                         "/information/addInformation",
                         "/information/getInformationList",
                         "/information/getInformationByTid",

@@ -315,4 +315,10 @@
     from t_activity
     where t_id = #{tId,jdbcType=VARCHAR}
   </select>
+
+  <!--活动前端删除（接口）-->
+  <delete id="removeInformation" parameterType="com.jk.entity.reception.TActivity" >
+    delete from t_activity
+    where t_id = #{tId,jdbcType=VARCHAR} and p_id = #{pId,jdbcType=VARCHAR}
+  </delete>
 </mapper>
