@@ -41,7 +41,7 @@ public class InformationController {
     }
 
     /**
-     * 资讯列表数据查询
+     * 资讯列表数据查询（后端）
      * @param tInformation
      * @param rows
      * @return
@@ -50,7 +50,7 @@ public class InformationController {
     @ResponseBody
     public String listInformation(TInformation tInformation, int rows) {
         PageHelper.startPage(tInformation.getPage(), rows); //分页查询
-        List<TInformation> tInformationList = informationService.selectByExample(tInformation);
+        List<TInformation> tInformationList = informationService.selectInformation(tInformation);
         PageInfo<TInformation> pageInfo = new PageInfo<>(tInformationList);
         tInformation.setPageSize(rows);
         tInformation.setRows(tInformationList);

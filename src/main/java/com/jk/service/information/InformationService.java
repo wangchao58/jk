@@ -5,6 +5,8 @@ import com.jk.entity.reception.TInformation;
 import java.util.List;
 
 public interface InformationService {
+    List<TInformation> selectInformation(TInformation tInformation);
+
     List<TInformation> selectByExample(TInformation tInformation);
 
     TInformation selectByPrimaryKey(String id);

@@ -22,6 +22,19 @@ public class InformationServiceImpl implements InformationService {
     TPersonageMapper tPersonageMapper;
 
     /**
+     * 资讯列表数据查询（后端）
+     * @param tInformation
+     * @return
+     */
+    @Override
+    public List<TInformation> selectInformation(TInformation tInformation) {
+        if(StringUtils.equals("undefined",tInformation.gettContent())){
+            tInformation.settContent("");
+        }
+        return tInformationMapper.selectInformation(tInformation);
+    }
+
+    /**
      * 资讯列表数据查询
      * @param tInformation
      * @return

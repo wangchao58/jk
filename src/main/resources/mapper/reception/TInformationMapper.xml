@@ -37,7 +37,8 @@
     p.nickName as p_id, p.avatarUrl as avatar, pr.t_id as praiseId
   </sql>
 
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TInformationExample" >
+  <!-- 后端分页 -->
+  <select id="selectInformation" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TInformationExample" >
     select
     <include refid="tInformation"/>
     from t_information i
@@ -48,6 +49,24 @@
         and i.p_id = (select t_id
         from t_personage
         where nickName = #{pId,jdbcType=VARCHAR})
+      </if>
+      <if test="tContent != null and pId !=''" >
+        and i.t_content like CONCAT('%',#{tContent,jdbcType=VARCHAR},'%')
+      </if>
+    </where>
+    order by i.t_create_time desc
+  </select>
+
+  <!-- 前端分页 -->
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TInformationExample" >
+    select
+    <include refid="tInformation"/>
+    from t_information i
+    LEFT JOIN t_personage p
+    ON i.p_id = p.t_id
+    <where>
+      <if test="pId != null and pId !=''" >
+        and i.p_id = #{pId,jdbcType=VARCHAR}
       </if>
       <if test="tContent != null and pId !=''" >
         and i.t_content like CONCAT('%',#{tContent,jdbcType=VARCHAR},'%')
