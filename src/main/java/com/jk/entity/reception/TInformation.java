@@ -35,6 +35,7 @@ public class TInformation extends Page {
 
     private List<String> listImg;
 
+    private String praiseImage;
 
     public String gettId() {
         return tId;
@@ -154,5 +155,13 @@ public class TInformation extends Page {
 
     public void setListImg(List<String> listImg) {
         this.listImg = listImg;
+    }
+
+    public String getPraiseImage() {
+        return praiseImage;
+    }
+
+    public void setPraiseImage(String praiseImage) {
+        this.praiseImage = praiseImage;
     }
 }

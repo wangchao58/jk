@@ -28,7 +28,7 @@
 
   <sql id="tInformation" >
     i.t_id, i.t_content, i.t_img, i.t_coordinate, i.t_praise, i.t_evaluate, i.t_create_time,
-    i.t_views_num, i.t_collection_num, i.city, p.nickName as p_id, p.avatarUrl as avatar
+    i.t_views_num, i.t_collection_num, i.city, p.nickName as p_id, p.avatarUrl as avatar, pr.t_id as praiseId
   </sql>
 
   <sql id="informationData" >
@@ -64,10 +64,13 @@
     from t_information i
     LEFT JOIN t_personage p
     ON i.p_id = p.t_id
+    left join (select * from t_praise where p_id = #{pId,jdbcType=VARCHAR}) pr
+    on i.t_id = pr.h_id
+    and pr.p_id = #{pId,jdbcType=VARCHAR}
     <where>
-      <if test="pId != null and pId !=''" >
-        and i.p_id = #{pId,jdbcType=VARCHAR}
-      </if>
+      <!--<if test="pId != null and pId !=''" >-->
+        <!--and i.p_id = #{pId,jdbcType=VARCHAR}-->
+      <!--</if>-->
       <if test="tContent != null and pId !=''" >
         and i.t_content like CONCAT('%',#{tContent,jdbcType=VARCHAR},'%')
       </if>
