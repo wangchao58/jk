@@ -55,11 +55,29 @@ public class InformationController {
     @RequestMapping(value = "/listInformation")
     @ResponseBody
     public String listInformation(TInformation tInformation, int rows) throws UnsupportedEncodingException {
+        List<TInformation> tInformations = new ArrayList<>();
         PageHelper.startPage(tInformation.getPage(), rows); //分页查询
         List<TInformation> tInformationList = informationService.selectInformation(tInformation);
+        for (TInformation information : tInformationList) {
+            information.settCreateTime(information.gettCreateTime().substring(5,16));
+            if(StringUtil.isNotEmpty(information.gettImg())){
+                List<String> listImg = Arrays.asList(information.gettImg().split(","));
+                information.setListImg(listImg);
+            }
+            // 发布内容
+            String tContent = information.gettContent();
+            // 判断时候Base64编码
+            Boolean isLegal = tContent.matches(base64Pattern);
+            if (isLegal) {
+                //解码
+                String tContentData = new String(decoder.decode(tContent), "UTF-8");
+                information.settContent(tContentData);
+            }
+            tInformations.add(information);
+        }
         PageInfo<TInformation> pageInfo = new PageInfo<>(tInformationList);
         tInformation.setPageSize(rows);
-        tInformation.setRows(tInformationList);
+        tInformation.setRows(tInformations);
         tInformation.setPage(tInformation.getPage());
         tInformation.setTotal(pageInfo.getPages());
         return JsonUtil.toJsonString(tInformation);
