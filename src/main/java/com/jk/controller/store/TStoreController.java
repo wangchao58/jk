@@ -141,4 +141,16 @@ public class TStoreController  {
         int i = tStoreService.updateByPrimaryKeySelective(record);
         return i;
     }
+
+    /**
+     * 店铺添加（后台）
+     * @param record
+     * @return
+     */
+    @RequestMapping(value = "/addTStore")
+    @ResponseBody
+    public int addTStore(TStore record) {
+        record.settPicture("https://i.bjjkkj.com/file/download?fileName="+record.gettPicture());
+        return tStoreService.insertSelective(record);
+    }
 }

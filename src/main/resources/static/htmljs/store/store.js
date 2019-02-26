@@ -166,10 +166,9 @@ function openAddDiag() {
  * 提交
  */
 function mySubmit(){
-
     $.ajax({
-        url: '/dept/addDept',
-        data: $("#aouDept").serialize(),
+        url: '/store/addTStore',
+        data: $("#store").serialize(),
         type: "POST",
         async: true,
         dataType: "json",

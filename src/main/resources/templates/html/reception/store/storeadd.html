@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <head th:replace="include/style :: acestyle" />
     <div th:include="include/script"></div>
-    <script th:src="@{/htmljs/authority/dept.js}"></script>
+    <script th:src="@{/htmljs/store/store.js}"></script>
     <script th:src="@{/htmljs/authority/deptZtree.js}"></script>
     <link rel="stylesheet" href="https://cache.amap.com/lbs/static/main1119.css"/>
     <script charset="utf-8" src="kindeditor/kindeditor-min.js"></script>
@@ -18,13 +18,13 @@
 <body>
 
 <br>
-<form class="form-horizontal" id="aouDept">
+<form class="form-horizontal" id="store">
     <div class="form-group">
         <label for="id" class="col-xs-12 col-sm-3 control-label no-padding-right">店铺名称:</label>
         <div class="col-xs-12 col-sm-5">
             <span class="block input-icon input-icon-right">
                 <input type="hidden" id="id" name="id"  class="width-100" />
-                <input type="text" id="" name="deptName"  class="width-100" />
+                <input type="text" id="tStoreName" name="tStoreName"  class="width-100" />
             </span>
         </div>
     </div>
@@ -32,8 +32,7 @@
         <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="headPortrait">门店图片:</label>
         <div class="col-xs-12 col-sm-5" >
             <span class="block input-icon input-icon-right">
-                <!--<input type="text" id="portrait"  name="portrait" class="width-100" />-->
-                <input type="hidden" id="headPortrait" name="headPortrait"  class="width-100" />
+                <input type="hidden" id="headPortrait" name="tPicture"  class="width-100" />
                 <input type="file" id="uploadClick" name="file"  class="width-100" />
                 <img id="previewImg"
                      style="width:200px;height:auto;margin-left: 15px;margin-top: 15px;margin-bottom: 20px;"/>
@@ -49,34 +48,34 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="site">详细地址:</label>
+        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="tSite">详细地址:</label>
         <div class="col-xs-12 col-sm-5" >
             <span class="block input-icon input-icon-right">
-                <input type="text" id="site1"  name="site" class="width-100" />
+                <input type="text" id="tSite"  name="tSite" class="width-100" />
             </span>
         </div>
     </div>
     <div class="form-group">
-        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="remark">联系电话:</label>
+        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="tPhone">联系电话:</label>
         <div class="col-xs-12 col-sm-5" >
             <span class="block input-icon input-icon-right">
-                <input type="text" id="remark"  name="remark" class="width-100" />
+                <input type="text" id="tPhone"  name="tPhone" class="width-100" />
             </span>
         </div>
     </div>
     <div class="form-group">
-        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="remark">微信号:</label>
+        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="tWechat">微信号:</label>
         <div class="col-xs-12 col-sm-5" >
             <span class="block input-icon input-icon-right">
-                <input type="text" id="1"  name="remark" class="width-100" />
+                <input type="text" id="tWechat"  name="tWechat" class="width-100" />
             </span>
         </div>
     </div>
     <div class="form-group">
-        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="remark">店铺介绍:</label>
+        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="tExplain">店铺介绍:</label>
         <div class="col-xs-12 col-sm-5" >
             <span class="block input-icon input-icon-right">
-                <input type="text" id="2"  name="remark" class="width-100" />
+                <input type="text" id="tExplain"  name="tExplain" class="width-100" />
             </span>
         </div>
     </div>
