@@ -41,7 +41,7 @@
   <!-- 后端分页 -->
   <select id="selectInformation" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TInformationExample" >
     select
-    <include refid="informationData"/>
+    <include refid="tInformation"/>
     from t_information i
     LEFT JOIN t_personage p
     ON i.p_id = p.t_id
