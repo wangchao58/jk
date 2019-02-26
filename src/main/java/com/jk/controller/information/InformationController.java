@@ -6,6 +6,7 @@ import com.github.pagehelper.StringUtil;
 import com.jk.entity.reception.TInformation;
 import com.jk.service.activity.ActivityService;
 import com.jk.service.information.InformationService;
+import com.jk.util.EmojiFilter;
 import com.jk.util.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.UnsupportedEncodingException;
 import java.util.*;
 
 /**
@@ -21,6 +23,10 @@ import java.util.*;
 @Controller
 @RequestMapping("/information")
 public class InformationController {
+    private final Base64.Encoder encoder = Base64.getEncoder();
+    private final Base64.Decoder decoder = Base64.getDecoder();
+    private final String base64Pattern = "^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$";
+
     @Autowired
     InformationService informationService;
     @Autowired
@@ -48,7 +54,7 @@ public class InformationController {
      */
     @RequestMapping(value = "/listInformation")
     @ResponseBody
-    public String listInformation(TInformation tInformation, int rows) {
+    public String listInformation(TInformation tInformation, int rows) throws UnsupportedEncodingException {
         PageHelper.startPage(tInformation.getPage(), rows); //分页查询
         List<TInformation> tInformationList = informationService.selectInformation(tInformation);
         PageInfo<TInformation> pageInfo = new PageInfo<>(tInformationList);
@@ -92,9 +98,18 @@ public class InformationController {
      */
     @RequestMapping(value = "/addInformation")
     @ResponseBody
-    public int addInformation(TInformation tInformation) {
+    public int addInformation(TInformation tInformation) throws UnsupportedEncodingException {
         int i = 0;
         if (StringUtil.isEmpty(tInformation.gettId())) {
+            String tContent = tInformation.gettContent();
+            boolean b = EmojiFilter.containsEmoji(tContent);
+            if(b){
+                byte[] textByte = tContent.getBytes("UTF-8");
+                //编码
+                String encodedText = encoder.encodeToString(textByte);
+
+                tInformation.settContent(encodedText);
+            }
             i = informationService.insertInformation(tInformation);
         } else {
             i = informationService.updateInformation(tInformation);
@@ -111,20 +126,33 @@ public class InformationController {
     @ResponseBody
     public Map<String,Object> getInformationList(TInformation tInformation, int rows) {
         Map<String,Object> maps = new HashMap<>();
-            List<TInformation> tInformationList = new ArrayList<>();
-        PageHelper.startPage(tInformation.getPage(),rows);//分页查询
-        List<TInformation> tInformations = informationService.selectByExample(tInformation);
-        for (TInformation information : tInformations) {
-            information.settCreateTime(information.gettCreateTime().substring(5,16));
-            if(StringUtil.isNotEmpty(information.gettImg())){
-                List<String> listImg = Arrays.asList(information.gettImg().split(","));
-                information.setListImg(listImg);
+        List<TInformation> tInformationList = new ArrayList<>();
+        try {
+            PageHelper.startPage(tInformation.getPage(),rows);//分页查询
+            List<TInformation> tInformations = informationService.selectByExample(tInformation);
+            for (TInformation information : tInformations) {
+                information.settCreateTime(information.gettCreateTime().substring(5,16));
+                if(StringUtil.isNotEmpty(information.gettImg())){
+                    List<String> listImg = Arrays.asList(information.gettImg().split(","));
+                    information.setListImg(listImg);
+                }
+                // 发布内容
+                String tContent = information.gettContent();
+                // 判断时候Base64编码
+                Boolean isLegal = tContent.matches(base64Pattern);
+                if (isLegal) {
+                    //解码
+                    String tContentData = new String(decoder.decode(tContent), "UTF-8");
+                    information.settContent(tContentData);
+                }
+                tInformationList.add(information);
             }
-            tInformationList.add(information);
+            PageInfo<TInformation> pageInfo = new PageInfo<>(tInformations);
+            maps.put("tInformation", tInformationList);
+            maps.put("pages", pageInfo.getPages());
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
-        PageInfo<TInformation> pageInfo = new PageInfo<>(tInformations);
-        maps.put("tInformation", tInformationList);
-        maps.put("pages", pageInfo.getPages());
         return maps;
     }
 
@@ -138,19 +166,33 @@ public class InformationController {
     public Map<String,Object> getInformationListByUser(TInformation tInformation, int rows) {
         Map<String,Object> maps = new HashMap<>();
         List<TInformation> tInformationList = new ArrayList<>();
-        PageHelper.startPage(tInformation.getPage(),rows);//分页查询
-        List<TInformation> tInformations = informationService.getInformationListByUser(tInformation);
-        for (TInformation information : tInformations) {
-            information.settCreateTime(information.gettCreateTime().substring(5,16));
-            if(StringUtil.isNotEmpty(information.gettImg())){
-                List<String> listImg = Arrays.asList(information.gettImg().split(","));
-                information.setListImg(listImg);
+        try {
+            PageHelper.startPage(tInformation.getPage(),rows);//分页查询
+            List<TInformation> tInformations = informationService.getInformationListByUser(tInformation);
+            for (TInformation information : tInformations) {
+                information.settCreateTime(information.gettCreateTime().substring(5,16));
+                if(StringUtil.isNotEmpty(information.gettImg())){
+                    List<String> listImg = Arrays.asList(information.gettImg().split(","));
+                    information.setListImg(listImg);
+                }
+
+                // 发布内容
+                String tContent = information.gettContent();
+                // 判断时候Base64编码
+                Boolean isLegal = tContent.matches(base64Pattern);
+                if (isLegal) {
+                    //解码
+                    String tContentData = new String(decoder.decode(tContent), "UTF-8");
+                    information.settContent(tContentData);
+                }
+                tInformationList.add(information);
             }
-            tInformationList.add(information);
+            PageInfo<TInformation> pageInfo = new PageInfo<>(tInformations);
+            maps.put("tInformation", tInformationList);
+            maps.put("pages", pageInfo.getPages());
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
-        PageInfo<TInformation> pageInfo = new PageInfo<>(tInformations);
-        maps.put("tInformation", tInformationList);
-        maps.put("pages", pageInfo.getPages());
         return maps;
     }
 
