@@ -221,13 +221,23 @@ public class InformationController {
      */
     @RequestMapping("/getInformationByTid")
     @ResponseBody
-    public TInformation getInformationByTid(TInformation tInformation){
+    public TInformation getInformationByTid(TInformation tInformation) throws UnsupportedEncodingException {
         TInformation informationByTid = informationService.getInformationByTid(tInformation);
         if(StringUtil.isNotEmpty(informationByTid.gettImg())){
             List<String> listImg = Arrays.asList(informationByTid.gettImg().split(","));
             informationByTid.setListImg(listImg);
         }
         informationByTid.settCreateTime(informationByTid.gettCreateTime().substring(5,16));
+
+        // 发布内容
+        String tContent = informationByTid.gettContent();
+        // 判断时候Base64编码
+        Boolean isLegal = tContent.matches(base64Pattern);
+        if (isLegal) {
+            //解码
+            String tContentData = new String(decoder.decode(tContent), "UTF-8");
+            informationByTid.settContent(tContentData);
+        }
         return informationByTid;
     }
 
