@@ -104,5 +104,13 @@ public class InformationServiceImpl implements InformationService {
         return tInformationMapper.removeByPrimaryKey(tInformation);
     }
 
+    @Override
+    public List<TInformation> getInformationListByUser(TInformation tInformation) {
+        if(StringUtils.equals("undefined",tInformation.gettContent())){
+            tInformation.settContent("");
+        }
+        return tInformationMapper.getInformationListByUser(tInformation);
+    }
+
 
 }

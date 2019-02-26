@@ -27,4 +27,5 @@ public interface TInformationMapper {
 
     int removeByPrimaryKey(TInformation tInformation);
 
+    List<TInformation> getInformationListByUser(TInformation tInformation);
 }

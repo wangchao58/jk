@@ -129,6 +129,32 @@ public class InformationController {
     }
 
     /**
+     * 前端获取个人资讯列表数据（接口）
+     * @param tInformation
+     * @return
+     */
+    @RequestMapping(value = "/getInformationListByUser")
+    @ResponseBody
+    public Map<String,Object> getInformationListByUser(TInformation tInformation, int rows) {
+        Map<String,Object> maps = new HashMap<>();
+        List<TInformation> tInformationList = new ArrayList<>();
+        PageHelper.startPage(tInformation.getPage(),rows);//分页查询
+        List<TInformation> tInformations = informationService.getInformationListByUser(tInformation);
+        for (TInformation information : tInformations) {
+            information.settCreateTime(information.gettCreateTime().substring(5,16));
+            if(StringUtil.isNotEmpty(information.gettImg())){
+                List<String> listImg = Arrays.asList(information.gettImg().split(","));
+                information.setListImg(listImg);
+            }
+            tInformationList.add(information);
+        }
+        PageInfo<TInformation> pageInfo = new PageInfo<>(tInformations);
+        maps.put("tInformation", tInformationList);
+        maps.put("pages", pageInfo.getPages());
+        return maps;
+    }
+
+    /**
      * 前端查询咨询详情（接口）
      * @param tInformation
      * @return

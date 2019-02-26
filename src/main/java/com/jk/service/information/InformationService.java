@@ -20,4 +20,6 @@ public interface InformationService {
     TInformation getInformationByTid(TInformation tInformation);
 
     int removeInformation(TInformation tInformation);
+
+    List<TInformation> getInformationListByUser(TInformation tInformation);
 }

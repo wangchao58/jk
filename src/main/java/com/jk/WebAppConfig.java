@@ -37,6 +37,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
                         "/activity/removeActivity",
                         "/information/addInformation",
                         "/information/getInformationList",
+                        "/information/getInformationListByUser",
                         "/information/getInformationByTid",
                         "/information/removeInformation",
                         "/praise/addPraise",

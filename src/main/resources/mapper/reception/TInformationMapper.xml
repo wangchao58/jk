@@ -27,8 +27,9 @@
   </sql>
 
   <sql id="tInformation" >
-    i.t_id, i.t_content, i.t_img, i.t_coordinate, i.t_praise, i.t_evaluate, i.t_create_time,
-    i.t_views_num, i.t_collection_num, i.city, p.nickName as p_id, p.avatarUrl as avatar, pr.t_id as praiseId
+    i.t_id, i.t_content, i.t_img, i.t_coordinate, i.t_praise,
+    i.t_evaluate, i.t_create_time, i.t_views_num, i.t_collection_num, i.city,
+    p.nickName as p_id, p.avatarUrl as avatar
   </sql>
 
   <sql id="informationData" >
@@ -40,7 +41,7 @@
   <!-- 后端分页 -->
   <select id="selectInformation" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TInformationExample" >
     select
-    <include refid="tInformation"/>
+    <include refid="informationData"/>
     from t_information i
     LEFT JOIN t_personage p
     ON i.p_id = p.t_id
@@ -60,7 +61,7 @@
   <!-- 前端分页 -->
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TInformationExample" >
     select
-    <include refid="tInformation"/>
+    <include refid="informationData"/>
     from t_information i
     LEFT JOIN t_personage p
     ON i.p_id = p.t_id
@@ -251,4 +252,22 @@
     delete from t_information
     where t_id = #{tId,jdbcType=VARCHAR} and p_id = #{pId,jdbcType=VARCHAR}
   </delete>
+
+  <!-- 前端获取个人资讯列表数据（接口） -->
+  <select id="getInformationListByUser" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TInformationExample" >
+    select
+    <include refid="tInformation"/>
+    from t_information i
+    LEFT JOIN t_personage p
+    ON i.p_id = p.t_id
+    <where>
+      <if test="pId != null and pId !=''" >
+        and i.p_id = #{pId,jdbcType=VARCHAR}
+      </if>
+      <if test="tContent != null and pId !=''" >
+        and i.t_content like CONCAT('%',#{tContent,jdbcType=VARCHAR},'%')
+      </if>
+    </where>
+    order by i.t_create_time desc
+  </select>
 </mapper>
