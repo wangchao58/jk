@@ -61,6 +61,7 @@
         and province = #{province,jdbcType=VARCHAR}
       </if>
     </where>
+    order by t_create_time desc
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 

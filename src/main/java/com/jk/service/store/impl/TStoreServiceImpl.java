@@ -5,18 +5,24 @@ import com.jk.entity.reception.TStore;
 import com.jk.mapper.reception.TStoreMapper;
 import com.jk.service.store.TStoreService;
 import com.jk.util.DateUtil;
+import com.jk.util.EmojiFilter;
 import com.jk.util.Page;
 import com.jk.util.UUIDUtil;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
 @Service
 public class TStoreServiceImpl implements TStoreService {
+    private final Base64.Encoder encoder = Base64.getEncoder();
+    private final Base64.Decoder decoder = Base64.getDecoder();
+    private final String base64Pattern = "^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$";
 
     @Autowired
     TStoreMapper tStoreMapper;
@@ -31,12 +37,26 @@ public class TStoreServiceImpl implements TStoreService {
     @Override
     public int insertSelective(TStore record) {
         int i=0;
-        if(StringUtil.isEmpty(record.gettId())) {
-            record.settId(UUIDUtil.getUUID());
-            record.settCreateTime(DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss"));
-            i = tStoreMapper.insertSelective(record);
-        } else {
-            i = tStoreMapper.updateByPrimaryKeySelective(record);
+        try {
+            String tExplain = record.gettExplain();
+            //判断是否存在表情
+            boolean b = EmojiFilter.containsEmoji(tExplain);
+            if(b){
+                byte[] textByte = tExplain.getBytes("UTF-8");
+                //编码
+                String encodedText = encoder.encodeToString(textByte);
+                record.settExplain(encodedText);
+            }
+
+            if(StringUtil.isEmpty(record.gettId())) {
+                record.settId(UUIDUtil.getUUID());
+                record.settCreateTime(DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss"));
+                i = tStoreMapper.insertSelective(record);
+            } else {
+                i = tStoreMapper.updateByPrimaryKeySelective(record);
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
 
         return i;
@@ -78,6 +98,18 @@ public class TStoreServiceImpl implements TStoreService {
             tStoreMapper.insertNiewsNum(tId);
         }
         TStore tStore = tStoreMapper.selectByPrimaryKey(tId);
+        String tExplain = tStore.gettExplain();
+        // 判断时候Base64编码
+        try {
+            Boolean isLegal = tExplain.matches(base64Pattern);
+            if (isLegal) {
+                //解码
+                String tExplainData = new String(decoder.decode(tExplain), "UTF-8");
+                tStore.settExplain(tExplainData);
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         return tStore;
     }
 

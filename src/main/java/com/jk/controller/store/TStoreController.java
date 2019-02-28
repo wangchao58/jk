@@ -11,9 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.UnsupportedEncodingException;
+import java.util.*;
 
 /**
  * 店铺管理
@@ -22,7 +21,8 @@ import java.util.Map;
 @Controller
 @RequestMapping(value = "/store")
 public class TStoreController  {
-
+    private final Base64.Decoder decoder = Base64.getDecoder();
+    private final String base64Pattern = "^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$";
     @Autowired
     TStoreService tStoreService;
 
@@ -106,11 +106,28 @@ public class TStoreController  {
     @RequestMapping(value = "/selectByExampleByPort")
     @ResponseBody
     public Map<String,Object> selectByExampleByPort(TStore record, int rows) {
+        List<TStore> tStoreDataList = new ArrayList<>();
         Map<String,Object> maps = new HashMap<>();
-        PageHelper.startPage(record.getPage(),rows);//分页查询
-        List<TStore> tStoreList =  tStoreService.selectByExample(record);
-        PageInfo<TStore> pageInfo = new PageInfo<>(tStoreList);
-        maps.put("tStoreList",tStoreList);
+        PageInfo<TStore> pageInfo = null;
+        try {
+            PageHelper.startPage(record.getPage(),rows);//分页查询
+            List<TStore> tStoreList =  tStoreService.selectByExample(record);
+            pageInfo = new PageInfo<>(tStoreList);
+            for (TStore tStore : tStoreList) {
+                String tExplain = tStore.gettExplain();
+                // 判断时候Base64编码
+                Boolean isLegal = tExplain.matches(base64Pattern);
+                if (isLegal) {
+                    //解码
+                    String tExplainData = new String(decoder.decode(tExplain), "UTF-8");
+                    tStore.settExplain(tExplainData);
+                }
+                tStoreDataList.add(tStore);
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        maps.put("tStoreList",tStoreDataList);
         maps.put("pages",pageInfo.getPages());
         return maps;
     }

@@ -120,6 +120,7 @@ public class InformationController {
         int i = 0;
         if (StringUtil.isEmpty(tInformation.gettId())) {
             String tContent = tInformation.gettContent();
+            //判断是否存在表情
             boolean b = EmojiFilter.containsEmoji(tContent);
             if(b){
                 byte[] textByte = tContent.getBytes("UTF-8");
@@ -231,7 +232,7 @@ public class InformationController {
 
         // 发布内容
         String tContent = informationByTid.gettContent();
-        // 判断时候Base64编码
+        // 判断是否Base64编码
         Boolean isLegal = tContent.matches(base64Pattern);
         if (isLegal) {
             //解码

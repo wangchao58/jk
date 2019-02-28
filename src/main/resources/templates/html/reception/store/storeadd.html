@@ -8,6 +8,7 @@
     <div th:include="include/script"></div>
     <script th:src="@{/htmljs/store/store.js}"></script>
     <script th:src="@{/htmljs/authority/deptZtree.js}"></script>
+    <script th:src="@{/htmljs/util/address.js}"></script>
     <link rel="stylesheet" href="https://cache.amap.com/lbs/static/main1119.css"/>
     <script charset="utf-8" src="kindeditor/kindeditor-min.js"></script>
     <script charset="utf-8" src="kindeditor/lang/zh_CN.js"></script>
@@ -40,10 +41,13 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="site">所在省市:</label>
+        <label class="control-label col-xs-12 col-sm-3 no-padding-right">所在省市:</label>
         <div class="col-xs-12 col-sm-5" >
             <span class="block input-icon input-icon-right">
-                <input type="text" id="site"  name="site" class="width-100" />
+                <!--<input type="text" id="site"  name="site" class="width-100" />-->
+                <select id="cmbProvince" name="province"></select>
+                <select id="cmbCity" name="city"></select>
+                <select id="cmbArea" name="district"></select>
             </span>
         </div>
     </div>
@@ -170,6 +174,8 @@
             content : $(".gdMap")
         });
     }
+
+    addressInit('cmbProvince', 'cmbCity', 'cmbArea');
 </script>
 
 </html>
