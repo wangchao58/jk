@@ -70,7 +70,14 @@ public class InformationServiceImpl implements InformationService {
      */
     @Override
     public int deleteByPrimaryKey(List<String> idlist) {
-        return tInformationMapper.deleteByPrimaryKey(idlist);
+        int index = 0;
+        // 删除此刻数据
+        index = tInformationMapper.deleteByPrimaryKey(idlist);
+        // 删除此刻的点赞
+        tPraiseMapper.removeByHids(idlist);
+        // 删除此刻的评论
+        tEvaluateMapper.removeByHids(idlist);
+        return index;
     }
 
     @Override

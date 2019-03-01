@@ -176,4 +176,13 @@
     delete from t_evaluate
     where t_other_id = #{tOtherId,jdbcType=VARCHAR}
   </delete>
+
+  <!-- removeByHids -->
+  <delete id="removeByHids" parameterType="java.lang.String" >
+    delete from t_evaluate
+    where t_other_id in
+    <foreach collection="list" item="ids" open="(" close=")" separator=",">
+      '${ids}'
+    </foreach>
+  </delete>
 </mapper>

@@ -23,4 +23,6 @@ public interface TEvaluateMapper {
     int updateByPrimaryKey(TEvaluate record);
 
     int removeByPrimaryKey(String tOtherId);
+
+    int removeByHids(List<String> ids);
 }

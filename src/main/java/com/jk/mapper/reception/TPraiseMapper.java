@@ -25,4 +25,6 @@ public interface TPraiseMapper {
     TPraise selectPraise(TPraise tPraise);
 
     int removeByPrimaryKey(String hId);
+
+    int removeByHids(List<String> ids);
 }

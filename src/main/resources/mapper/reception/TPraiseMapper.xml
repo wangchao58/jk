@@ -138,9 +138,18 @@
     where h_id = #{hId,jdbcType=VARCHAR} and p_id = #{pId,jdbcType=VARCHAR} and t_type = '3'
   </select>
 
-  <!-- 删除此刻信息同时删除相关点赞信息 -->
+  <!-- 前端-删除此刻信息同时删除相关点赞信息 -->
   <delete id="removeByPrimaryKey" parameterType="java.lang.String" >
     delete from t_praise
     where h_id = #{hId,jdbcType=VARCHAR}
+  </delete>
+
+  <!-- 后端-删除此刻信息同时删除相关点赞信息 -->
+  <delete id="removeByHids" parameterType="java.lang.String" >
+    delete from t_praise
+    where h_id in
+    <foreach collection="list" item="ids" open="(" close=")" separator=",">
+      '${ids}'
+    </foreach>
   </delete>
 </mapper>
