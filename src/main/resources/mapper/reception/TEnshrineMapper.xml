@@ -162,4 +162,13 @@
     delete from t_enshrine
     where h_id = #{hId,jdbcType=VARCHAR}
   </delete>
+
+  <!-- 后端-删除活动和商铺时同时删除活动及店铺收藏 -->
+  <delete id="delByHid" parameterType="java.lang.String" >
+    delete from t_enshrine
+    where h_id in
+    <foreach collection="list" item="ids" open="(" close=")" separator=",">
+      '${ids}'
+    </foreach>
+  </delete>
 </mapper>

@@ -28,4 +28,6 @@ public interface TEnshrineMapper {
     TEnshrine selEnshrineBytype(TEnshrine tEnshrine);
 
     int removeByPrimaryKey(String hId);
+
+    int delByHid(List<String> ids);
 }

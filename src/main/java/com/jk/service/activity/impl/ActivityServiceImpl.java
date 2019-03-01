@@ -82,7 +82,9 @@ public class ActivityServiceImpl implements ActivityService {
      */
     @Override
     public int deleteByPrimaryKey(List<String> idlist) {
-        return tActivityMapper.deleteByPrimaryKey(idlist);
+        int index = tActivityMapper.deleteByPrimaryKey(idlist);
+        tEnshrineMapper.delByHid(idlist);
+        return index;
     }
 
     /**
