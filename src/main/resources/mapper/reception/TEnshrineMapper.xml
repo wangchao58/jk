@@ -157,4 +157,9 @@
     where h_id = #{hId,jdbcType=VARCHAR} and p_id = #{pId,jdbcType=VARCHAR} and t_type = #{tType,jdbcType=VARCHAR}
   </select>
 
+  <!-- 删除活动和商铺时同时删除活动及店铺收藏 -->
+  <delete id="removeByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_enshrine
+    where h_id = #{hId,jdbcType=VARCHAR}
+  </delete>
 </mapper>

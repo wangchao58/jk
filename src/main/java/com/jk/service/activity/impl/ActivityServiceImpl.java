@@ -226,6 +226,11 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Override
     public int removeInformation(TActivity tActivity) {
-        return tActivityMapper.removeInformation(tActivity);
+        int index = 0;
+        // 删除活动
+        index = tActivityMapper.removeInformation(tActivity);
+        // 删除活动收藏
+        tEnshrineMapper.removeByPrimaryKey(tActivity.gettId());
+        return index;
     }
 }

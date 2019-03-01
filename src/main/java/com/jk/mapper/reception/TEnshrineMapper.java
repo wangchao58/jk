@@ -26,4 +26,6 @@ public interface TEnshrineMapper {
     TEnshrine selEnshrine(TEnshrine tEnshrine);
 
     TEnshrine selEnshrineBytype(TEnshrine tEnshrine);
+
+    int removeByPrimaryKey(String hId);
 }
