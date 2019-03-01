@@ -2,6 +2,7 @@ package com.jk.service.store.impl;
 
 import com.github.pagehelper.StringUtil;
 import com.jk.entity.reception.TStore;
+import com.jk.mapper.reception.TEnshrineMapper;
 import com.jk.mapper.reception.TStoreMapper;
 import com.jk.service.store.TStoreService;
 import com.jk.util.DateUtil;
@@ -26,11 +27,16 @@ public class TStoreServiceImpl implements TStoreService {
 
     @Autowired
     TStoreMapper tStoreMapper;
+    @Autowired
+    TEnshrineMapper tEnshrineMapper;
 
     @Override
     public int deleteByPrimaryKey(String ids) {
         List<String> stringList = Arrays.asList(ids.split(","));
+        // 删除商铺
         int i = tStoreMapper.deleteByPrimaryKey(stringList);
+        // 删除商铺及相关收藏
+        tEnshrineMapper.delByHid(stringList);
         return i;
     }
 
