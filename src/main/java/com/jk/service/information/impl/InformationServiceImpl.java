@@ -2,8 +2,10 @@ package com.jk.service.information.impl;
 
 import com.jk.entity.reception.TInformation;
 import com.jk.entity.reception.TPersonage;
+import com.jk.mapper.reception.TEvaluateMapper;
 import com.jk.mapper.reception.TInformationMapper;
 import com.jk.mapper.reception.TPersonageMapper;
+import com.jk.mapper.reception.TPraiseMapper;
 import com.jk.service.information.InformationService;
 import com.jk.util.DateUtil;
 import com.jk.util.UUIDUtil;
@@ -20,6 +22,10 @@ public class InformationServiceImpl implements InformationService {
     TInformationMapper tInformationMapper;
     @Autowired
     TPersonageMapper tPersonageMapper;
+    @Autowired
+    TPraiseMapper tPraiseMapper;
+    @Autowired
+    TEvaluateMapper tEvaluateMapper;
 
     /**
      * 资讯列表数据查询（后端）
@@ -101,7 +107,14 @@ public class InformationServiceImpl implements InformationService {
      */
     @Override
     public int removeInformation(TInformation tInformation) {
-        return tInformationMapper.removeByPrimaryKey(tInformation);
+        int index = 0;
+        // 删除此刻数据
+        index = tInformationMapper.removeByPrimaryKey(tInformation);
+        // 删除此刻的点赞
+        tPraiseMapper.removeByPrimaryKey(tInformation.gettId());
+        // 删除此刻的评论
+        tEvaluateMapper.removeByPrimaryKey(tInformation.gettId());
+        return index;
     }
 
     @Override

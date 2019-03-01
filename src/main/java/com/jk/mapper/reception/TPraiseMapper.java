@@ -23,4 +23,6 @@ public interface TPraiseMapper {
     int updateByPrimaryKey(TPraise record);
 
     TPraise selectPraise(TPraise tPraise);
+
+    int removeByPrimaryKey(String hId);
 }

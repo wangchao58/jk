@@ -170,4 +170,10 @@
       t_type = #{tType,jdbcType=VARCHAR}
     where t_id = #{tId,jdbcType=VARCHAR}
   </update>
+
+  <!-- 删除此刻信息同时删除相关评论信息 -->
+  <delete id="removeByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_evaluate
+    where t_other_id = #{tOtherId,jdbcType=VARCHAR}
+  </delete>
 </mapper>

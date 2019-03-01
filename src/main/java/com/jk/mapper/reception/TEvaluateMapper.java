@@ -21,4 +21,6 @@ public interface TEvaluateMapper {
     int updateByPrimaryKeySelective(TEvaluate record);
 
     int updateByPrimaryKey(TEvaluate record);
+
+    int removeByPrimaryKey(String tOtherId);
 }
