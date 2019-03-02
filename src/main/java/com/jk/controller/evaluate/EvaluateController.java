@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.jk.entity.reception.TEvaluate;
 import com.jk.service.evaluate.EvaluateServicr;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,12 +58,14 @@ public class EvaluateController {
         PageInfo<Map<String,Object>> pageInfo = new PageInfo<>(listEvaluate);
         for (Map<String, Object> stringObjectMap : listEvaluate) {
             String tContent = (String) stringObjectMap.get("t_content");
-            // 判断时候Base64编码
-            Boolean isLegal = tContent.matches(base64Pattern);
-            if (isLegal) {
-                //解码
-                String tContentData = new String(decoder.decode(tContent), "UTF-8");
-                stringObjectMap.put("t_content", tContentData);
+            if(StringUtils.isNotBlank(tContent)){
+                // 判断时候Base64编码
+                Boolean isLegal = tContent.matches(base64Pattern);
+                if (isLegal) {
+                    //解码
+                    String tContentData = new String(decoder.decode(tContent), "UTF-8");
+                    stringObjectMap.put("t_content", tContentData);
+                }
             }
             evaluates.add(stringObjectMap);
         }
