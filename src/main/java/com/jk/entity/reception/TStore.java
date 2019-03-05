@@ -45,6 +45,8 @@ public class TStore extends Page {
 
     private String enshrineId; //收藏主键id
 
+    private double distance; // 距离
+
     public String gettId() {
         return tId;
     }
@@ -227,5 +229,13 @@ public class TStore extends Page {
 
     public void setEnshrineId(String enshrineId) {
         this.enshrineId = enshrineId;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
     }
 }

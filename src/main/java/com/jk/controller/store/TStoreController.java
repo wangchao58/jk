@@ -4,7 +4,10 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.jk.entity.reception.TStore;
 import com.jk.service.store.TStoreService;
+import com.jk.util.ItemSortUtil;
 import com.jk.util.JsonUtil;
+import com.jk.util.MapHelper;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -127,7 +130,16 @@ public class TStoreController  {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        maps.put("tStoreList",tStoreDataList);
+
+        //用户所在位置坐标（纬度，经度）
+        String coordinate = record.getLatitude()+","+record.getLongitude();
+//        String coordinate = "40.085034"+","+"116.228339";
+
+        //根据地址坐标计算距离
+        List<TStore> tStoreList = computeDistance(coordinate, tStoreDataList);
+        //根据距离排序
+        List<TStore> distanceAndResidueSeat = ItemSortUtil.getDistanceAndResidueSeat(tStoreList);
+        maps.put("tStoreList",distanceAndResidueSeat);
         maps.put("pages",pageInfo.getPages());
         return maps;
     }
@@ -169,5 +181,27 @@ public class TStoreController  {
     public int addTStore(TStore record) {
         record.settPicture("https://i.bjjkkj.com/file/download?fileName="+record.gettPicture());
         return tStoreService.insertSelective(record);
+    }
+
+    /**
+     * 根据地址坐标计算距离
+     * @return
+     */
+    public List<TStore> computeDistance(String coordinate, List<TStore> tStoreList){
+        List<TStore> tStores = new ArrayList<>();
+        if(tStoreList.size()>0){
+            for (TStore tStore : tStoreList) {
+                String longitude = tStore.getLongitude();
+                String latitude = tStore.getLatitude();
+                if(StringUtils.isNotBlank(longitude) && StringUtils.isNotBlank(latitude) && StringUtils.isNotBlank(coordinate)){
+                    String distanceData = latitude+","+longitude;
+                    double distance = MapHelper.GetPointDistance(coordinate, distanceData);
+                    Double format = Double.parseDouble(String.format("%.1f", distance));
+                    tStore.setDistance(format);
+                    tStores.add(tStore);
+                }
+            }
+        }
+        return tStores;
     }
 }
