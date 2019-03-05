@@ -133,13 +133,13 @@ public class TStoreController  {
 
         //用户所在位置坐标（纬度，经度）
         String coordinate = record.getLatitude()+","+record.getLongitude();
-//        String coordinate = "40.085034"+","+"116.228339";
-
-        //根据地址坐标计算距离
-        List<TStore> tStoreList = computeDistance(coordinate, tStoreDataList);
-        //根据距离排序
-        List<TStore> distanceAndResidueSeat = ItemSortUtil.getDistanceAndResidueSeat(tStoreList);
-        maps.put("tStoreList",distanceAndResidueSeat);
+        if(StringUtils.isNotBlank(record.getLatitude()) && StringUtils.isNotBlank(record.getLongitude())){
+            //根据地址坐标计算距离
+            List<TStore> tStoreList = computeDistance(coordinate, tStoreDataList);
+            //根据距离排序
+            tStoreDataList = ItemSortUtil.getDistanceAndResidueSeat(tStoreList);
+        }
+        maps.put("tStoreList",tStoreDataList);
         maps.put("pages",pageInfo.getPages());
         return maps;
     }

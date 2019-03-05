@@ -62,7 +62,8 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
                         "/appointment/getAppointmentList",
                         "/appointment/addAppointment",
                         "/complain/addtComplain",
-                        "/store/selectByPrimaryKey"
+                        "/store/selectByPrimaryKey",
+                        "/WxPhone/deciphering"
                         );
 
     }

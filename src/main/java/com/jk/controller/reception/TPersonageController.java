@@ -63,6 +63,7 @@ public class TPersonageController extends BaseController {
     public Map<String,Object> addPersonage(TPersonage personage,String code) {
         String dateNow = DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss");
         Map<String,Object> m = HttpUtil.sendGet(code);
+        String session_key = m.get("session_key").toString();
         personage.setOpenid(m.get("openid").toString());
 
         personage.settCreateTime(dateNow);
@@ -74,6 +75,7 @@ public class TPersonageController extends BaseController {
         }
         String id  = tPersonageService.insertSelective(personage);
         map.put("id",id);
+        map.put("session_key",session_key);
         return map;
     }
 
