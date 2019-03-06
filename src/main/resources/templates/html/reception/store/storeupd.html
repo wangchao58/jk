@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <head th:replace="include/style :: acestyle" />
+    <div th:include="include/script"></div>
+    <script th:src="@{/htmljs/store/store.js}"></script>
+    <script th:src="@{/htmljs/authority/deptZtree.js}"></script>
+    <script th:src="@{/htmljs/util/address.js}"></script>
+    <link rel="stylesheet" href="https://cache.amap.com/lbs/static/main1119.css"/>
+    <script charset="utf-8" src="kindeditor/kindeditor-min.js"></script>
+    <script charset="utf-8" src="kindeditor/lang/zh_CN.js"></script>
+    <link rel="stylesheet" href="https://cache.amap.com/lbs/static/main1119.css"/>
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.9&key='9e1d9c358dabbf185022c2c8cddaba94'&plugin=AMap.Autocomplete"></script>
+</head>
+<body>
+
+<br>
+<form class="form-horizontal" id="store">
+    <div class="form-group">
+        <label class="col-xs-12 col-sm-3 control-label no-padding-right">店铺名称:</label>
+        <div class="col-xs-12 col-sm-5">
+            <span class="block input-icon input-icon-right">
+                <input type="hidden" id="tId" name="tId" th:value="${tStore.tId}" class="width-100" />
+                <input type="text" id="tStoreName" name="tStoreName" th:value="${tStore.tStoreName}" class="width-100" />
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="headPortrait">门店图片:</label>
+        <div class="col-xs-12 col-sm-5" >
+            <span class="block input-icon input-icon-right">
+                <input type="hidden" name="tPicture" th:value="${tStore.tPicture}" class="width-100" />
+                <input type="hidden" id="headPortrait" name="headPortrait" th:value="${tStore.tPicture}" class="width-100" />
+                <input type="file" id="uploadClick" name="file"  class="width-100" />
+                <img id="previewImg"
+                     style="width:200px;height:auto;margin-left: 15px;margin-top: 15px;margin-bottom: 20px;"/>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-3 no-padding-right">所在省市:</label>
+        <div class="col-xs-12 col-sm-5" >
+            <span class="block input-icon input-icon-right">
+                <!--<input type="text" id="site"  name="site" class="width-100" />-->
+                <select id="cmbProvince" name="province"></select>
+                <select id="cmbCity" name="city"></select>
+                <select id="cmbArea" name="district"></select>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="tSite">详细地址:</label>
+        <div class="col-xs-12 col-sm-5" >
+            <span class="block input-icon input-icon-right">
+                <input type="text" id="tSite"  name="tSite" th:value="${tStore.tSite}" class="width-100" />
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="tPhone">联系电话:</label>
+        <div class="col-xs-12 col-sm-5" >
+            <span class="block input-icon input-icon-right">
+                <input type="text" id="tPhone"  name="tPhone" th:value="${tStore.tPhone}" class="width-100" />
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="tExplain">店铺介绍:</label>
+        <div class="col-xs-12 col-sm-5" >
+            <span class="block input-icon input-icon-right">
+                <input type="hidden" id="tExplainHidden" th:value="${tStore.tExplain}" class="width-100" />
+                <textarea id="tExplain" style="height: 100px" name="tExplain" class="width-100"></textarea>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="longitude"></label>
+        <div class="col-xs-12 col-sm-5" >
+             <span class="block input-icon input-icon-right">
+                 <input type="button"  value="获取地图地址" onclick="getMap();" class="width-100" />
+             </span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="longitude">经度:</label>
+        <div class="col-xs-12 col-sm-5" >
+             <span class="block input-icon input-icon-right">
+                 <input type="text" id="longitude"  name="longitude" th:value="${tStore.longitude}" class="width-100" />
+             </span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="latitude">纬度:</label>
+        <div class="col-xs-12 col-sm-5" >
+             <span class="block input-icon input-icon-right">
+                 <input type="text" id="latitude"  name="latitude" th:value="${tStore.latitude}" class="width-100" />
+             </span>
+        </div>
+    </div>
+</form>
+</body>
+
+<div class="gdMap" style="display: none;">
+    <div id="container"></div>
+    <div id="myPageTop">
+        <table>
+            <tr>
+                <!-- <td>
+                    <label>按关键字搜索：</label>
+                </td> -->
+                <td class="column2">
+                    <label>左击获取经纬度：</label>
+                </td>
+            </tr>
+            <tr>
+                <!--  <td>
+                      <input type="text" placeholder="请输入关键字进行搜索" id="tipinput">
+                  </td>-->
+                <td class="column2">
+                    <input type="text" readonly="true" id="lnglat">
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $('.form_datetime').datetimepicker({
+        format: 'hh:ii',
+        autoclose: true,
+        todayBtn: true,
+        startView: 'day',
+        language:'zh-CN',
+        pickerPosition:"bottom-left"
+    });
+    //编辑展示图片
+    $("#previewImg").attr('src', $("#headPortrait").val());
+    // textarea中val展示
+    $("#tExplain").val($("#tExplainHidden").val());
+
+    var map = new AMap.Map("container", {
+        resizeEnable: true
+    });
+    //为地图注册click事件获取鼠标点击出的经纬度坐标
+    var clickEventListener = map.on('click', function(e) {
+        document.getElementById("lnglat").value = e.lnglat.getLng() + ',' + e.lnglat.getLat();
+        $("#longitude").val(e.lnglat.getLng());
+        $("#latitude").val(e.lnglat.getLat());
+    });
+    var auto = new AMap.Autocomplete({
+        input: "tipinput"
+    });
+    AMap.event.addListener(auto, "select", select);//注册监听，当选中某条记录时会触发
+    function select(e) {
+        if (e.poi && e.poi.location) {
+            map.setZoom(15);
+            map.setCenter(e.poi.location);
+        }
+    }
+
+    //自定页
+    function getMap() {
+        layer.open({
+            type : 1,
+            skin : 'layui-layer-rim', // 加上边框
+            area : [ '500px', '400px' ], // 宽高
+            content : $(".gdMap")
+        });
+    }
+
+    addressInit('cmbProvince', 'cmbCity', 'cmbArea');
+</script>
+
+</html>

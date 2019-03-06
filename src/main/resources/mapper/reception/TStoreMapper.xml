@@ -330,4 +330,13 @@
       latitude = #{latitude,jdbcType=INTEGER}
     where t_id = #{tId,jdbcType=VARCHAR}
   </update>
+
+  <!-- 后台编辑商铺信息查询数据 -->
+  <select id="getTStore" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from t_store
+    where t_id = #{tId,jdbcType=VARCHAR}
+  </select>
+
 </mapper>

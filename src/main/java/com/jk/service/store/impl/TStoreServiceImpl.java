@@ -55,6 +55,7 @@ public class TStoreServiceImpl implements TStoreService {
             }
 
             if(StringUtil.isEmpty(record.gettId())) {
+                record.settPicture("https://i.bjjkkj.com/file/download?fileName="+record.gettPicture());
                 record.settId(UUIDUtil.getUUID());
                 record.settCreateTime(DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss"));
                 i = tStoreMapper.insertSelective(record);
@@ -123,5 +124,16 @@ public class TStoreServiceImpl implements TStoreService {
     public int updateByPrimaryKeySelective(TStore record) {
         int i = tStoreMapper.updateByPrimaryKeySelective(record);
         return i;
+    }
+
+    /**
+     * 后台编辑商铺信息查询数据
+     * @param tId
+     * @return
+     */
+    @Override
+    public TStore getTStore(String tId) {
+        TStore tStore = tStoreMapper.getTStore(tId);
+        return tStore;
     }
 }

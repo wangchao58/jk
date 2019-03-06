@@ -24,4 +24,6 @@ public interface TStoreMapper {
     int updateByPrimaryKeySelective(TStore record);
 
     int updateByPrimaryKey(TStore record);
+
+    TStore getTStore(String tId);
 }

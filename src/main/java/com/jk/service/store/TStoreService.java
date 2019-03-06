@@ -15,4 +15,5 @@ public interface TStoreService {
 
     int updateByPrimaryKeySelective(TStore record);
 
+    TStore getTStore(String tId);
 }

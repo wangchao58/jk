@@ -179,7 +179,6 @@ public class TStoreController  {
     @RequestMapping(value = "/addTStore")
     @ResponseBody
     public int addTStore(TStore record) {
-        record.settPicture("https://i.bjjkkj.com/file/download?fileName="+record.gettPicture());
         return tStoreService.insertSelective(record);
     }
 
@@ -203,5 +202,17 @@ public class TStoreController  {
             }
         }
         return tStores;
+    }
+
+    /**
+     * 后台编辑商铺信息查询数据
+     * @param tId
+     * @return
+     */
+    @RequestMapping("/getTStore")
+    public String getTStore(String tId, Model model){
+        TStore tStore = tStoreService.getTStore(tId);
+        model.addAttribute("tStore",tStore);
+        return "html/reception/store/storeupd";
     }
 }

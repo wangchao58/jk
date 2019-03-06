@@ -14,8 +14,9 @@ jQuery(function($) {
             {label:'入驻时间',name:'tCreateTime',  editable: true},
             {label:'增加时间',name:'tCreateTime', editable: true},
             {label:'到期时间',name:'tEndTime', editable: true},
-            {label:'浏览次数',name:'tViewsNum', editable: true},
-            {label:'收藏次数',name:'tCollectionNum', editable: true}
+            {label:'浏览次数',name:'tViewsNum', editable: true, width:70},
+            {label:'收藏次数',name:'tCollectionNum', editable: true, width:70},
+            {label:'操作',name:'operate', editable: true ,formatter: operation}
         ],
         viewrecords : true,//定义是否要显示总记录数
         rowNum:10,//每页显示的条数
@@ -39,7 +40,7 @@ jQuery(function($) {
     function operation(cellvalue, options, rowObject) {
         var htmlstr = "<div class='visible-md visible-lg hidden-sm hidden-xs btn-group'>"
             + "<button class='btn btn-xs btn-info' onclick=openEditDiag('"
-            + rowObject.id
+            + rowObject.tId
             + "')><i class='icon-edit bigger-120'></i>编辑</button></div>";
         return htmlstr;
     }
@@ -130,7 +131,7 @@ function openEditDiag(uuid) {
         area: ['70%', '80%'],
         fixed: false, //不固定
         maxmin: true,
-        content: '/dept/updDeptView?id='+uuid,
+        content: '/store/getTStore?tId='+uuid,
         btn:['确定','取消'],
         yes: function (layero, index) {
             var iframeWin = window[index.find('iframe')[0]['name']]; //得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
