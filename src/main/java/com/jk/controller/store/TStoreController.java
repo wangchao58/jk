@@ -2,6 +2,7 @@ package com.jk.controller.store;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.jk.entity.jurisdiction.TUser;
 import com.jk.entity.reception.TStore;
 import com.jk.service.store.TStoreService;
 import com.jk.util.ItemSortUtil;
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.util.*;
 
@@ -65,7 +67,7 @@ public class TStoreController  {
     }
 
     /**
-     * 增加店铺管理发布的信息
+     * 增加店铺管理发布的信息(接口)
      * @param record
      * @return
      */
@@ -196,7 +198,9 @@ public class TStoreController  {
      */
     @RequestMapping(value = "/addTStore")
     @ResponseBody
-    public int addTStore(TStore record) {
+    public int addTStore(TStore record, HttpServletRequest request) {
+        TUser user = (TUser) request.getSession().getAttribute("user");
+        record.settIssuer(user.getUserId());
         return tStoreService.insertSelective(record);
     }
 

@@ -76,7 +76,8 @@ function selText() {
             'tStoreName' : $("#tStoreName").val(),
             'province' : $("#cmbProvince").val(),
             'city' : $("#cmbCity").val(),
-            'district' : $("#cmbArea").val()
+            'district' : $("#cmbArea").val(),
+            'tIssuer' : $("#tIssuer").val()
         }
     }).trigger("reloadGrid"); //重新载入
 }

@@ -120,7 +120,7 @@ public class TStoreServiceImpl implements TStoreService {
         if(StringUtils.equals("请选择区县",example.getDistrict())){
             example.setDistrict("");
         }
-        List<TStore> tStoreList = tStoreMapper.selectByExample(example);
+        List<TStore> tStoreList = tStoreMapper.selTStoreList(example);
         return tStoreList;
     }
 

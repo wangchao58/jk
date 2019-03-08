@@ -40,6 +40,8 @@
     s.t_explain, s.t_issuer, s.t_payment, s.t_money, s.t_views_num, s.t_collection_num,s.t_wechat,t_picture,
     s.nation,s.province,s.city,s.district,s.longitude,s.latitude, e.t_id as enshrineId
   </sql>
+
+  <!-- 手机端商铺数据查询 -->
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TStore" >
     select
     <include refid="Base_Column_List" />
@@ -50,6 +52,31 @@
       </if>
       <if test="tIssuer != null and tIssuer!=''">
         and t_issuer = #{tIssuer,jdbcType=VARCHAR}
+      </if>
+      <if test="district != null and district!=''">
+        and district = #{district,jdbcType=VARCHAR}
+      </if>
+      <if test="city != null and city!=''">
+        and city = #{city,jdbcType=VARCHAR}
+      </if>
+      <if test="province != null and province!=''">
+        and province = #{province,jdbcType=VARCHAR}
+      </if>
+    </where>
+    order by t_create_time desc
+  </select>
+
+  <!-- 后台商铺数据查询 -->
+  <select id="selTStoreList" resultMap="BaseResultMap" parameterType="com.jk.entity.reception.TStore" >
+    select
+    <include refid="Base_Column_List" />
+    from t_store
+    <where>
+      <if test="tStoreName != null and tStoreName!=''">
+        and t_store_name like  concat('%',#{tStoreName,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="tIssuer != null and tIssuer!=''">
+        and t_issuer = (select user_id from t_user where user_name = #{tIssuer,jdbcType=VARCHAR})
       </if>
       <if test="district != null and district!=''">
         and district = #{district,jdbcType=VARCHAR}
