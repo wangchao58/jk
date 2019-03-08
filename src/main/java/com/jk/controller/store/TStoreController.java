@@ -89,11 +89,29 @@ public class TStoreController  {
     @RequestMapping(value = "/selectByExample")
     @ResponseBody
     public String selectByExample(TStore record, int rows) {
-        PageHelper.startPage(record.getPage(),rows);//分页查询
-        List<TStore> tStoreList =  tStoreService.selectByExample(record);
-        PageInfo<TStore> pageInfo = new PageInfo<>(tStoreList);
+        List<TStore> tStoreDataList = new ArrayList<>();
+        List<TStore> tStoreList = null;
+        PageInfo<TStore> pageInfo = null;
+        try {
+            PageHelper.startPage(record.getPage(),rows);//分页查询
+            tStoreList = tStoreService.selTStoreList(record);
+            pageInfo = new PageInfo<>(tStoreList);
+            for (TStore tStore : tStoreList) {
+                String tExplain = tStore.gettExplain();
+                // 判断时候Base64编码
+                Boolean isLegal = tExplain.matches(base64Pattern);
+                if (isLegal) {
+                    //解码
+                    String tExplainData = new String(decoder.decode(tExplain), "UTF-8");
+                    tStore.settExplain(tExplainData);
+                }
+                tStoreDataList.add(tStore);
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         record.setPageSize(rows);
-        record.setRows(tStoreList);
+        record.setRows(tStoreDataList);
         record.setPage(record.getPage());
         record.setTotal(pageInfo.getPages());
         return JsonUtil.toJsonString(record);

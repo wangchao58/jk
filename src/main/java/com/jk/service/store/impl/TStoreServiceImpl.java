@@ -69,6 +69,11 @@ public class TStoreServiceImpl implements TStoreService {
         return i;
     }
 
+    /**
+     * 手机端店铺查询
+     * @param example
+     * @return
+     */
     @Override
     public List<TStore> selectByExample(TStore example) {
 
@@ -96,6 +101,26 @@ public class TStoreServiceImpl implements TStoreService {
             example.setProvince("");
             tStoreList = tStoreMapper.selectByExample(example);
         }
+        return tStoreList;
+    }
+
+    /**
+     * 后台店铺查询
+     * @param example
+     * @return
+     */
+    @Override
+    public List<TStore> selTStoreList(TStore example) {
+        if(StringUtils.equals("请选择省份",example.getProvince())){
+            example.setProvince("");
+        }
+        if(StringUtils.equals("请选择城市",example.getCity())){
+            example.setCity("");
+        }
+        if(StringUtils.equals("请选择区县",example.getDistrict())){
+            example.setDistrict("");
+        }
+        List<TStore> tStoreList = tStoreMapper.selectByExample(example);
         return tStoreList;
     }
 

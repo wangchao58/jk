@@ -73,7 +73,10 @@ function selText() {
     // 使用jqgrid中的方法
     $("#grid-table").jqGrid('setGridParam',{
         postData:{
-            'tStoreName' : $("#tStoreName").val()
+            'tStoreName' : $("#tStoreName").val(),
+            'province' : $("#cmbProvince").val(),
+            'city' : $("#cmbCity").val(),
+            'district' : $("#cmbArea").val()
         }
     }).trigger("reloadGrid"); //重新载入
 }

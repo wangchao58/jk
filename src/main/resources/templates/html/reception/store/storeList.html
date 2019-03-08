@@ -6,6 +6,7 @@
     <title>小鲸通-后台管理</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <head th:replace="include/style :: acestyle" />
+
 </head>
 <body>
 <div class="navbar navbar-default" id="navbar"  th:include="include/header :: header">
@@ -30,42 +31,58 @@
 
         <div class="main-content">
             <div class="breadcrumbs" id="breadcrumbs">
-
-
                 <ul class="breadcrumb">
                     <li>
                         <i class="icon-home home-icon"></i>
                         <a href="#">系统管理</a>
                     </li>
-
                     <li>
                         <a href="#">店铺管理</a>
                     </li>
                     <li class="active">店铺列表</li>
                 </ul>
-
-
             </div>
 
             <div class="page-content">
-
                 <div class="row">
                     <div class="col-xs-12">
+                        <div class="alert alert-info" style="width: 100%;">
+                            <form class="form-search">
+                                <div style="float: left">
+                                    <div style="float: left; margin: 0 10px 0 20px;line-height: 30px;">店铺名称：</div>
+                                    <div class="span2" style="float: left;">
+                                        <input id="tStoreName" name="tStoreName" style="width: 120px"/>
+                                    </div>
+                                </div>
+                                <div style="float: left">
+                                    <div style="float: left; margin: 0 10px 0 20px;line-height: 30px;">录入人：</div>
+                                    <div class="span2" style="float: left;">
+                                        <input id="ren" name="ren" style="width: 120px"/>
+                                    </div>
+                                </div>
+                                <div style="float: left">
+                                    <div style="float: left; margin: 0 10px 0 20px;line-height: 30px;">所在省市：</div>
+                                    <div class="span2" style="float: left;">
+                                        <select id="cmbProvince" name="province"></select>
+                                        <select id="cmbCity" name="city"></select>
+                                        <select id="cmbArea" name="district"></select>
+                                    </div>
+                                </div>
+                                <div style="float: left; margin-left: 20px; line-height: 30px;">
+                                    <a href='javascript:void(0)' onclick="selText();">查询</a>
+                                </div>
+                                <div style="clear: both;"></div>
+                            </form>
+                        </div>
+
                         <div class="alert alert-info">
                             <i class='icon-save'></i> <a href='javascript:void(0)' onclick="openAddDiag();">新增</a> |
                             <i class='icon-trash'> </i> <a href='javascript:void(0)' onclick="deletes();">删除</a> |
-                            <i class='icon-refresh'> </i> <a href='javascript:void(0)' onclick="refresh();" >刷新</a>
+                            <i class='icon-refresh'> </i> <a href='javascript:void(0)' onclick="refresh();">刷新</a>
                         </div>
-                        <div class="nav-search" id="nav-search">
-                            <form class="form-search">
-                                <span class="input-icon">
-                                    <input type="text" placeholder="店铺名称" class="nav-search-input" id="tStoreName" autocomplete="off" />
-                                    <i class="icon-search nav-search-icon" onclick="selText();"></i>
-                                </span>
-                            </form>
-                        </div>
+
                         <table id="grid-table"></table>
-                        <div id="grid-pager" ></div>
+                        <div id="grid-pager"></div>
                     </div>
                 </div>
             </div>
@@ -75,12 +92,15 @@
 <input type="hidden" id="open" th:value="${pid}">
 <input type="hidden" id="active" th:value="${id}">
 <div th:include="include/script"></div>
-
+<script th:src="@{/htmljs/util/address.js}"></script>
 <script type="text/javascript">
-    setTimeout(function(){
-        $("#"+$("#open").val()).addClass("active open");
-        $("#"+$("#active").val()).addClass("active");
-    },200);
+    setTimeout(function () {
+        $("#" + $("#open").val()).addClass("active open");
+        $("#" + $("#active").val()).addClass("active");
+    }, 200);
+
+    // 省市县
+    addressInit('cmbProvince', 'cmbCity', 'cmbArea');
 </script>
 
 <!-- page specific plugin scripts -->
@@ -90,5 +110,7 @@
 <script th:src="@{/assets/js/jqGrid/i18n/grid.locale-en.js}"></script>
 <!-- inline scripts related to this page -->
 <script th:src="@{/htmljs/store/store.js}"></script>
+
+
 </body>
 </html>
