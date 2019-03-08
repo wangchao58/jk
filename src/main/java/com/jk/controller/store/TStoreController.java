@@ -199,6 +199,7 @@ public class TStoreController  {
     @RequestMapping(value = "/addTStore")
     @ResponseBody
     public int addTStore(TStore record, HttpServletRequest request) {
+        record.settPicture("https://i.bjjkkj.com/file/download?fileName="+record.gettPicture());
         TUser user = (TUser) request.getSession().getAttribute("user");
         record.settIssuer(user.getUserId());
         return tStoreService.insertSelective(record);

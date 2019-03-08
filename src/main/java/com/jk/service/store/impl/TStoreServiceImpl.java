@@ -55,7 +55,6 @@ public class TStoreServiceImpl implements TStoreService {
             }
 
             if(StringUtil.isEmpty(record.gettId())) {
-                record.settPicture("https://i.bjjkkj.com/file/download?fileName="+record.gettPicture());
                 record.settId(UUIDUtil.getUUID());
                 record.settCreateTime(DateUtil.formatDate(new Date(),"yyyy-MM-dd HH:mm:ss"));
                 i = tStoreMapper.insertSelective(record);
