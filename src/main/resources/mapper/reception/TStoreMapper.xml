@@ -85,7 +85,7 @@
         and city = #{city,jdbcType=VARCHAR}
       </if>
       <if test="province != null and province!=''">
-        and province = #{province,jdbcType=VARCHAR}
+        and province like  concat('%',#{province,jdbcType=VARCHAR},'%')
       </if>
     </where>
     order by t_create_time desc

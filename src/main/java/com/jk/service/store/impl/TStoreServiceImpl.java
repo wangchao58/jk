@@ -113,10 +113,10 @@ public class TStoreServiceImpl implements TStoreService {
         if(StringUtils.equals("请选择省份",example.getProvince())){
             example.setProvince("");
         }
-        if(StringUtils.equals("请选择城市",example.getCity())){
+        if(StringUtils.equals("请选择城市",example.getCity()) || StringUtils.equals("市辖区",example.getCity())){
             example.setCity("");
         }
-        if(StringUtils.equals("请选择区县",example.getDistrict())){
+        if(StringUtils.equals("请选择区县",example.getDistrict())||StringUtils.equals("市辖区",example.getDistrict())){
             example.setDistrict("");
         }
         List<TStore> tStoreList = tStoreMapper.selTStoreList(example);

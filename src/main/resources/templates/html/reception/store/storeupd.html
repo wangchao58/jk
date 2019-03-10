@@ -32,8 +32,8 @@
         <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="headPortrait">门店图片:</label>
         <div class="col-xs-12 col-sm-5" >
             <span class="block input-icon input-icon-right">
-                <input type="hidden" name="tPicture" th:value="${tStore.tPicture}" class="width-100" />
-                <input type="hidden" id="headPortrait" name="headPortrait" th:value="${tStore.tPicture}" class="width-100" />
+                <input type="hidden" id="tPictureId" th:value="${tStore.tPicture}" />
+                <input type="hidden" id="headPortrait" name="tPicture" class="width-100" />
                 <input type="file" id="uploadClick" name="file"  class="width-100" />
                 <img id="previewImg"
                      style="width:200px;height:auto;margin-left: 15px;margin-top: 15px;margin-bottom: 20px;"/>
@@ -138,7 +138,7 @@
         pickerPosition:"bottom-left"
     });
     //编辑展示图片
-    $("#previewImg").attr('src', $("#headPortrait").val());
+    $("#previewImg").attr('src', $("#tPictureId").val());
     // textarea中val展示
     $("#tExplain").val($("#tExplainHidden").val());
 
