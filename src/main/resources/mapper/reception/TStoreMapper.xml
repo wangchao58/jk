@@ -90,13 +90,20 @@
     </where>
     order by t_create_time desc
   </select>
+  <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >-->
+    <!--select -->
+    <!--<include refid="TStore_Data" />-->
+    <!--from t_store s-->
+    <!--LEFT JOIN t_enshrine e-->
+    <!--ON s.t_id = e.h_id-->
+    <!--where s.t_id = #{tId,jdbcType=VARCHAR}-->
+  <!--</select>-->
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
-    <include refid="TStore_Data" />
-    from t_store s
-    LEFT JOIN t_enshrine e
-    ON s.t_id = e.h_id
-    where s.t_id = #{tId,jdbcType=VARCHAR}
+    select
+    <include refid="Base_Column_List" />
+    from t_store
+    where t_id = #{tId,jdbcType=VARCHAR}
   </select>
 
   <!-- 手机端商铺查询（多人收藏之后，商铺信息查询出错问题调整添加次sql） -->
