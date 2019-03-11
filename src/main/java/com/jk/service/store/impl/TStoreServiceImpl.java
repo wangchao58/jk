@@ -160,4 +160,25 @@ public class TStoreServiceImpl implements TStoreService {
         TStore tStore = tStoreMapper.getTStore(tId);
         return tStore;
     }
+
+    @Override
+    public TStore selTStore(TStore record, String enshrineViews) {
+        if(!StringUtils.equals("true", enshrineViews)){
+            tStoreMapper.insertNiewsNum(record.gettId());
+        }
+        TStore tStore = tStoreMapper.selTStore(record);
+        String tExplain = tStore.gettExplain();
+        // 判断时候Base64编码
+        try {
+            Boolean isLegal = tExplain.matches(base64Pattern);
+            if (isLegal) {
+                //解码
+                String tExplainData = new String(decoder.decode(tExplain), "UTF-8");
+                tStore.settExplain(tExplainData);
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return tStore;
+    }
 }

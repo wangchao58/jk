@@ -167,14 +167,14 @@ public class TStoreController  {
     /**
      * 功能：查询一条
      * 作者：transcend
-     * @param tId
+     * @param record
      * @param enshrineViews 浏览次数计数标识“true”不增加计数
      * @return
      */
     @RequestMapping(value = "/selectByPrimaryKey")
     @ResponseBody
-    public TStore selectByPimaryKey(String tId, String enshrineViews) {
-        TStore tStore = tStoreService.selectByPrimaryKey(tId, enshrineViews);
+    public TStore selectByPimaryKey(TStore record, String enshrineViews) {
+        TStore tStore = tStoreService.selTStore(record, enshrineViews);
         return tStore;
     }
 

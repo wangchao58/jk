@@ -18,4 +18,6 @@ public interface TStoreService {
     TStore getTStore(String tId);
 
     List<TStore> selTStoreList(TStore record);
+
+    TStore selTStore(TStore record, String enshrineViews);
 }

@@ -28,4 +28,6 @@ public interface TStoreMapper {
     TStore getTStore(String tId);
 
     List<TStore> selTStoreList(TStore example);
+
+    TStore selTStore(TStore record);
 }

@@ -47,6 +47,8 @@ public class TStore extends Page {
 
     private double distance; // 距离
 
+    private String personId; // 浏览商铺人
+
     public String gettId() {
         return tId;
     }
@@ -237,5 +239,13 @@ public class TStore extends Page {
 
     public void setDistance(double distance) {
         this.distance = distance;
+    }
+
+    public String getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(String personId) {
+        this.personId = personId;
     }
 }
