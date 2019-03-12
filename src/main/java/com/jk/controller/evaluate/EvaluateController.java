@@ -58,6 +58,18 @@ public class EvaluateController {
         PageInfo<Map<String,Object>> pageInfo = new PageInfo<>(listEvaluate);
         for (Map<String, Object> stringObjectMap : listEvaluate) {
             String tContent = (String) stringObjectMap.get("t_content");
+            String nickName = (String) stringObjectMap.get("nickName");
+            // 微信名称
+            if(StringUtils.isNotBlank(nickName)){
+                // 判断微信名称是否Base64编码
+                Boolean isLegal = nickName.matches(base64Pattern);
+                if (isLegal) {
+                    //解码
+                    String nicknameData = new String(decoder.decode(nickName), "UTF-8");
+                    stringObjectMap.put("nickName", nicknameData);
+                }
+            }
+
             if(StringUtils.isNotBlank(tContent)){
                 // 判断时候Base64编码
                 Boolean isLegal = tContent.matches(base64Pattern);

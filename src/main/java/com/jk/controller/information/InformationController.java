@@ -8,6 +8,7 @@ import com.jk.service.activity.ActivityService;
 import com.jk.service.information.InformationService;
 import com.jk.util.EmojiFilter;
 import com.jk.util.JsonUtil;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -155,9 +156,21 @@ public class InformationController {
                     List<String> listImg = Arrays.asList(information.gettImg().split(","));
                     information.setListImg(listImg);
                 }
+
+                // 微信名称
+                String nickname = information.getpId();
+                if(StringUtils.isNotBlank(nickname)){
+                    // 判断微信名称是否Base64编码
+                    Boolean isLegal = nickname.matches(base64Pattern);
+                    if (isLegal) {
+                        //解码
+                        String nicknameData = new String(decoder.decode(nickname), "UTF-8");
+                        information.setpId(nicknameData);
+                    }
+                }
                 // 发布内容
                 String tContent = information.gettContent();
-                // 判断时候Base64编码
+                // 判断发布内容是否Base64编码
                 Boolean isLegal = tContent.matches(base64Pattern);
                 if (isLegal) {
                     //解码
@@ -194,7 +207,17 @@ public class InformationController {
                     List<String> listImg = Arrays.asList(information.gettImg().split(","));
                     information.setListImg(listImg);
                 }
-
+                // 微信名称
+                String nickname = information.getpId();
+                if(StringUtils.isNotBlank(nickname)){
+                    // 判断微信名称是否Base64编码
+                    Boolean isLegal = nickname.matches(base64Pattern);
+                    if (isLegal) {
+                        //解码
+                        String nicknameData = new String(decoder.decode(nickname), "UTF-8");
+                        information.setpId(nicknameData);
+                    }
+                }
                 // 发布内容
                 String tContent = information.gettContent();
                 // 判断时候Base64编码
@@ -229,7 +252,17 @@ public class InformationController {
             informationByTid.setListImg(listImg);
         }
         informationByTid.settCreateTime(informationByTid.gettCreateTime().substring(5,16));
-
+        // 微信名称
+        String nickname = informationByTid.getpId();
+        if(StringUtils.isNotBlank(nickname)){
+            // 判断微信名称是否Base64编码
+            Boolean isLegal = nickname.matches(base64Pattern);
+            if (isLegal) {
+                //解码
+                String nicknameData = new String(decoder.decode(nickname), "UTF-8");
+                informationByTid.setpId(nicknameData);
+            }
+        }
         // 发布内容
         String tContent = informationByTid.gettContent();
         // 判断是否Base64编码

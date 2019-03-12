@@ -9,17 +9,17 @@ import com.jk.mapper.reception.TStoreMapper;
 import com.jk.service.evaluate.EvaluateServicr;
 import com.jk.util.DateUtil;
 import com.jk.util.UUIDUtil;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.io.UnsupportedEncodingException;
+import java.util.*;
 
 @Service
 public class EvaluateServicrImpl implements EvaluateServicr {
-
+    private final Base64.Decoder decoder = Base64.getDecoder();
+    private final String base64Pattern = "^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$";
     @Autowired
     TEvaluateMapper tEvaluateMapper;
     @Autowired
@@ -84,11 +84,27 @@ public class EvaluateServicrImpl implements EvaluateServicr {
     @Override
     public List<TEvaluate> selTEvaluateList(TEvaluate tEvaluate) {
         List<TEvaluate> evaluateList = new ArrayList<>();
-        List<TEvaluate> tEvaluates = tEvaluateMapper.selectByExample(tEvaluate);
-        for (TEvaluate evaluate : tEvaluates) {
-            String createTime = evaluate.getCreateTime().substring(0,16);
-            evaluate.setCreateTime(createTime);
-            evaluateList.add(evaluate);
+        try {
+            List<TEvaluate> tEvaluates = tEvaluateMapper.selectByExample(tEvaluate);
+            for (TEvaluate evaluate : tEvaluates) {
+                String createTime = evaluate.getCreateTime().substring(0,16);
+                evaluate.setCreateTime(createTime);
+
+                // 微信名称
+                String nickname = evaluate.getNickName();
+                if(StringUtils.isNotBlank(nickname)){
+                    // 判断微信名称是否Base64编码
+                    Boolean isLegal = nickname.matches(base64Pattern);
+                    if (isLegal) {
+                        //解码
+                        String nicknameData = new String(decoder.decode(nickname), "UTF-8");
+                        evaluate.setNickName(nicknameData);
+                    }
+                }
+                evaluateList.add(evaluate);
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
         return evaluateList;
     }

@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.jk.entity.reception.TActivity;
 import com.jk.entity.reception.TPraise;
 import com.jk.service.praise.PraiseService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,12 +48,25 @@ public class PraiseController {
 
         for (Map<String, Object> stringObjectMap : tPraiseList) {
             String tContent = (String) stringObjectMap.get("t_content");
-            // 判断时候Base64编码
-            Boolean isLegal = tContent.matches(base64Pattern);
-            if (isLegal) {
-                //解码
-                String tContentData = new String(decoder.decode(tContent), "UTF-8");
-                stringObjectMap.put("t_content", tContentData);
+            String nickName = (String) stringObjectMap.get("nickName");
+            // 微信名称
+            if(StringUtils.isNotBlank(nickName)){
+                // 判断微信名称是否Base64编码
+                Boolean isLegal = nickName.matches(base64Pattern);
+                if (isLegal) {
+                    //解码
+                    String nicknameData = new String(decoder.decode(nickName), "UTF-8");
+                    stringObjectMap.put("nickName", nicknameData);
+                }
+            }
+            if(StringUtils.isNotBlank(tContent)){
+                // 判断时候Base64编码
+                Boolean isLegal = tContent.matches(base64Pattern);
+                if (isLegal) {
+                    //解码
+                    String tContentData = new String(decoder.decode(tContent), "UTF-8");
+                    stringObjectMap.put("t_content", tContentData);
+                }
             }
             tPraises.add(stringObjectMap);
         }
