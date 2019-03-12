@@ -4,17 +4,19 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.jk.entity.reception.TPersonage;
 import com.jk.service.reception.TPersonageService;
-import com.jk.util.*;
+import com.jk.util.BaseController;
+import com.jk.util.DateUtil;
+import com.jk.util.HttpUtil;
+import com.jk.util.JsonUtil;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.UnsupportedEncodingException;
+import java.util.*;
 
 /**
  * 关注用户管理
@@ -22,6 +24,8 @@ import java.util.Map;
 @Controller
 @RequestMapping(value = "/personage")
 public class TPersonageController extends BaseController {
+    private final Base64.Decoder decoder = Base64.getDecoder();
+    private final String base64Pattern = "^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$";
     @Autowired
     TPersonageService tPersonageService;
 
@@ -44,13 +48,31 @@ public class TPersonageController extends BaseController {
     @RequestMapping(value = "/listPersonage")
     @ResponseBody
     public String listPersonage(TPersonage personage, int rows) {
-        PageHelper.startPage(personage.getPage(),rows);//分页查询
-        List<TPersonage> tTPersonageList = tPersonageService.selectByExample(personage);
-        PageInfo<TPersonage> pageInfo = new PageInfo<>(tTPersonageList);
-        personage.setPageSize(rows);
-        personage.setRows(tTPersonageList);
-        personage.setPage(personage.getPage());
-        personage.setTotal(pageInfo.getPages());
+        List<TPersonage> tPersonageDataList = new ArrayList<>();
+        try {
+            PageHelper.startPage(personage.getPage(),rows);//分页查询
+            List<TPersonage> tTPersonageList = tPersonageService.selectByExample(personage);
+            for (TPersonage tPersonage : tTPersonageList) {
+                String nickName = tPersonage.getNickname();
+                if(StringUtils.isNotBlank(nickName)){
+                    // 判断时候Base64编码
+                    Boolean isLegal = nickName.matches(base64Pattern);
+                    if (isLegal) {
+                        //解码
+                        String nickNamenData = new String(decoder.decode(nickName), "UTF-8");
+                        tPersonage.setNickname(nickNamenData);
+                    }
+                }
+                tPersonageDataList.add(tPersonage);
+            }
+            PageInfo<TPersonage> pageInfo = new PageInfo<>(tTPersonageList);
+            personage.setPageSize(rows);
+            personage.setRows(tPersonageDataList);
+            personage.setPage(personage.getPage());
+            personage.setTotal(pageInfo.getPages());
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         return JsonUtil.toJsonString(personage);
     }
 
