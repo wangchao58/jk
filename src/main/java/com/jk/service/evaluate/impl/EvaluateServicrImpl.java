@@ -8,6 +8,7 @@ import com.jk.mapper.reception.TInformationMapper;
 import com.jk.mapper.reception.TStoreMapper;
 import com.jk.service.evaluate.EvaluateServicr;
 import com.jk.util.DateUtil;
+import com.jk.util.EmojiFilter;
 import com.jk.util.UUIDUtil;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import java.util.*;
 
 @Service
 public class EvaluateServicrImpl implements EvaluateServicr {
+    private final Base64.Encoder encoder = Base64.getEncoder();
     private final Base64.Decoder decoder = Base64.getDecoder();
     private final String base64Pattern = "^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$";
     @Autowired
@@ -35,10 +37,25 @@ public class EvaluateServicrImpl implements EvaluateServicr {
     @Override
     public int addEvaluate(TEvaluate tEvaluate) {
         int i = 0;
-        if(tEvaluate.gettType().equals("3")) {
-            i = getInformation(tEvaluate);
-        } else if(tEvaluate.gettType().equals("1")) {
-            i = gettStore(tEvaluate);
+        try {
+            String tContent = tEvaluate.gettContent();
+            if(StringUtils.isNotBlank(tContent)){
+                //判断是否存在表情
+                boolean b = EmojiFilter.containsEmoji(tContent);
+                if(b){
+                    byte[] textByte = tContent.getBytes("UTF-8");
+                    //编码
+                    String encodedText = encoder.encodeToString(textByte);
+                    tEvaluate.settContent(encodedText);
+                }
+            }
+            if(tEvaluate.gettType().equals("3")) {
+                i = getInformation(tEvaluate);
+            } else if(tEvaluate.gettType().equals("1")) {
+                i = gettStore(tEvaluate);
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
 
         return i;
@@ -99,6 +116,17 @@ public class EvaluateServicrImpl implements EvaluateServicr {
                         //解码
                         String nicknameData = new String(decoder.decode(nickname), "UTF-8");
                         evaluate.setNickName(nicknameData);
+                    }
+                }
+                // 评论内容
+                String tContent = evaluate.gettContent();
+                if(StringUtils.isNotBlank(tContent)){
+                    // 判断微信名称是否Base64编码
+                    Boolean isLegal = tContent.matches(base64Pattern);
+                    if (isLegal) {
+                        //解码
+                        String tContentData = new String(decoder.decode(tContent), "UTF-8");
+                        evaluate.settContent(tContentData);
                     }
                 }
                 evaluateList.add(evaluate);
