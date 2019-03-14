@@ -92,7 +92,7 @@ public class InformationController {
     public String updInformationView(String id,Model model) {
         if(StringUtil.isNotEmpty(id)) {
             TInformation tInformation = informationService.selectByPrimaryKey(id);
-            tInformation.setUrl("/file/download?fileName="+tInformation.gettImg());
+            tInformation.setUrl(tInformation.gettImg());
             model.addAttribute("tInformation",tInformation);
         }
         return "html/reception/information/informationupd";

@@ -189,7 +189,7 @@
       <if test="tContent != null" >
         t_content = #{tContent,jdbcType=VARCHAR},
       </if>
-      <if test="tImg != null" >
+      <if test="tImg != null and tImg !=''" >
         t_img = #{tImg,jdbcType=VARCHAR},
       </if>
       <if test="tCoordinate != null" >
@@ -201,7 +201,7 @@
       <if test="tEvaluate != null" >
         t_evaluate = #{tEvaluate,jdbcType=INTEGER},
       </if>
-      <if test="pId != null" >
+      <if test="pId != null and pId !=''" >
         p_id = #{pId,jdbcType=VARCHAR},
       </if>
       <if test="tCreateTime != null" >
