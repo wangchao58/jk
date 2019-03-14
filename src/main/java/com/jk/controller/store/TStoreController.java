@@ -131,11 +131,11 @@ public class TStoreController  {
     public Map<String,Object> selectByExampleByPort(TStore record, int rows) {
         List<TStore> tStoreDataList = new ArrayList<>();
         Map<String,Object> maps = new HashMap<>();
-        PageInfo<TStore> pageInfo = null;
+//        PageInfo<TStore> pageInfo = null;
         try {
-            PageHelper.startPage(record.getPage(),rows);//分页查询
+//            PageHelper.startPage(record.getPage(),rows);//分页查询
             List<TStore> tStoreList =  tStoreService.selectByExample(record);
-            pageInfo = new PageInfo<>(tStoreList);
+//            pageInfo = new PageInfo<>(tStoreList);
             for (TStore tStore : tStoreList) {
                 String tExplain = tStore.gettExplain();
                 // 判断时候Base64编码
@@ -160,7 +160,7 @@ public class TStoreController  {
             tStoreDataList = ItemSortUtil.getDistanceAndResidueSeat(tStoreList);
         }
         maps.put("tStoreList",tStoreDataList);
-        maps.put("pages",pageInfo.getPages());
+//        maps.put("pages",pageInfo.getPages());
         return maps;
     }
 
