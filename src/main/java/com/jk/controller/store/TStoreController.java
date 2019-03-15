@@ -90,11 +90,17 @@ public class TStoreController  {
      */
     @RequestMapping(value = "/selectByExample")
     @ResponseBody
-    public String selectByExample(TStore record, int rows) {
+    public String selectByExample(TStore record, int rows, HttpServletRequest request) {
         List<TStore> tStoreDataList = new ArrayList<>();
         List<TStore> tStoreList = null;
         PageInfo<TStore> pageInfo = null;
         try {
+            // 子账号查询自己录入的商铺
+            TUser user = (TUser) request.getSession().getAttribute("user");
+            if(null != user && !StringUtils.equals("admin", user.getUserName())){
+                record.settEntry(user.getUserId());
+            }
+
             PageHelper.startPage(record.getPage(),rows);//分页查询
             tStoreList = tStoreService.selTStoreList(record);
             pageInfo = new PageInfo<>(tStoreList);
@@ -204,6 +210,7 @@ public class TStoreController  {
         record.settPicture("https://i.bjjkkj.com/file/download?fileName="+record.gettPicture());
         TUser user = (TUser) request.getSession().getAttribute("user");
         record.settIssuer(user.getUserId());
+        record.settEntry(user.getUserId());
         return tStoreService.insertSelective(record);
     }
 

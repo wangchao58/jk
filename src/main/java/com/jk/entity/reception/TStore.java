@@ -49,6 +49,8 @@ public class TStore extends Page {
 
     private String personId; // 浏览商铺人
 
+    private String tEntry; // 后台商铺录入人
+
     public String gettId() {
         return tId;
     }
@@ -247,5 +249,13 @@ public class TStore extends Page {
 
     public void setPersonId(String personId) {
         this.personId = personId;
+    }
+
+    public String gettEntry() {
+        return tEntry;
+    }
+
+    public void settEntry(String tEntry) {
+        this.tEntry = tEntry;
     }
 }
