@@ -138,12 +138,14 @@ public class TStoreController  {
 //            pageInfo = new PageInfo<>(tStoreList);
             for (TStore tStore : tStoreList) {
                 String tExplain = tStore.gettExplain();
-                // 判断时候Base64编码
-                Boolean isLegal = tExplain.matches(base64Pattern);
-                if (isLegal) {
-                    //解码
-                    String tExplainData = new String(decoder.decode(tExplain), "UTF-8");
-                    tStore.settExplain(tExplainData);
+                if(StringUtils.isNotBlank(tExplain)){
+                    // 判断时候Base64编码
+                    Boolean isLegal = tExplain.matches(base64Pattern);
+                    if (isLegal) {
+                        //解码
+                        String tExplainData = new String(decoder.decode(tExplain), "UTF-8");
+                        tStore.settExplain(tExplainData);
+                    }
                 }
                 tStoreDataList.add(tStore);
             }
